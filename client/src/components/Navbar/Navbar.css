@@ -1,0 +1,24 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 80px;
+}
+
+.logo img {
+  width: 180px;
+  height: 100px;
+}
+
+.search img {
+  height: 17px;
+  width: 17px;
+  left: 20px;
+  top: 4px;
+  position: relative;
+}
+
+input {
+  padding-left: 30px;
+}
