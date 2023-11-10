@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Calendar.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useState, useEffect } from "react";
 
-function Calendar() {
-  const [startDate, setStartDate] = useState(new Date());
-  const handleCalendarClose = () => {console.log("lol")
+function Calendar({ onSelectDate }) {
+  const [startDate, setStartDate] = useState(null);
 
+  const handleCalendarClose = () => {
+    onSelectDate(startDate);
+    console.log(startDate);
   };
 
   return (
@@ -15,7 +16,10 @@ function Calendar() {
       <DatePicker
         showIcon
         selected={startDate}
-        onChange={(date) => setStartDate(date)}
+        onChange={(date) => {
+          setStartDate(date);
+          onSelectDate(date);
+        }}
         maxDate={new Date()}
         placeholderText="Select a past date!"
         onCalendarClose={handleCalendarClose}

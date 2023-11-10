@@ -1,27 +1,82 @@
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import DiaryList from "./components/DiaryList/DiaryList";
-import AddButton from "./components/AddButton/AddButton";
-import { useState, useEffect } from "react";
+import Diary from "./components/Diary/Diary";
 import Calendar from "./components/Calendar/Calendar";
+import Popup from "./components/Popup/Popup";
+import { getAllDiaryEntries, getDiaryEntryByDate } from "./ApiService";
+import NewDiaryEntry from "./components/NewDiaryEntry/NewDiaryEntry";
 
 function App() {
   const [diaries, setDiaries] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [diaryEntry, setDiaryEntry] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
+  const [recentDiaries, setRecentDiaries] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:3000/recent")
-      .then((res) => res.json())
-      .then((data) => setDiaries(data));
+    getAllDiaryEntries()
+      .then((data) => {
+        const sortedEntries = data.sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        );
+
+        const recentEntries = sortedEntries.slice(0, 3);
+
+        setRecentDiaries(recentEntries);
+        setDiaries(sortedEntries);
+      })
+      .catch((error) => console.error(error));
   }, []);
 
-  // console.log(diaries);
+  useEffect(() => {
+    if (selectedDate) {
+      const formattedDate = selectedDate.toISOString().split("T")[0];
+
+      const foundEntry = diaries.find(
+        (entry) => entry.date.split("T")[0] === formattedDate
+      );
+
+      setDiaryEntry(foundEntry);
+
+      if (!foundEntry) {
+        setShowPopup(true);
+      }
+    }
+  }, [selectedDate, diaries]);
+
+  const handleCreateNewEntry = () => {
+    setIsModalOpen(true);
+    setShowPopup(false);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div>
       <Navbar />
-      <DiaryList diaries={diaries} />
-      <Calendar/>
-      <AddButton/>
+      <DiaryList recentDiaries={recentDiaries} />
+      <Calendar onSelectDate={setSelectedDate} />
+      {diaryEntry ? <Diary {...diaryEntry} /> : null}
+      {showPopup && (
+        <Popup
+          message="No entry for the selected date. Create a new one?"
+          onClose={() => setShowPopup(false)}
+          onNewEntryClick={handleCreateNewEntry}
+        />
+      )}
+      <NewDiaryEntry
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onSubmit={handleCreateNewEntry}
+        selectedDate={selectedDate}
+        setDiaries={setDiaries}
+        diaries={diaries}
+      />
     </div>
   );
 }
