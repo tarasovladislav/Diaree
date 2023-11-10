@@ -67,7 +67,29 @@ button:hover {
   background-color: #0056b3;
 }
 
+button[disabled] {
+  background-color: #ccc; 
+  cursor: not-allowed; 
+  opacity: 0.6;
+}
+
 .formattedDate {
   font-weight: bold;
   color: #007bff;
+}
+
+@keyframes spinner {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spinner 1s linear infinite;
+  margin-right: 10px;
+  display: inline-block;
 }

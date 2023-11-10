@@ -7,7 +7,10 @@ function NewDiaryEntry({ isOpen, onClose, selectedDate, setDiaries, diaries }) {
     title: "",
     text: "",
     date: "",
+    imageUrl: "",
   });
+
+  const [isUploading, setIsUploading] = useState(false);
 
   React.useEffect(() => {
     if (selectedDate) {
@@ -64,6 +67,8 @@ function NewDiaryEntry({ isOpen, onClose, selectedDate, setDiaries, diaries }) {
     const formData = new FormData();
     formData.append("image", file);
 
+    setIsUploading(true);
+
     fetch(`${BASE_URL}/upload-image`, {
       method: "POST",
       body: formData,
@@ -76,6 +81,11 @@ function NewDiaryEntry({ isOpen, onClose, selectedDate, setDiaries, diaries }) {
       })
       .then((data) => {
         console.log("Image uploaded successfully:", data);
+
+        // Enable the button and hide the spinner when you receive the URL
+        setIsUploading(false);
+
+        setNewDiaryEntry({ ...newDiaryEntry, imageUrl: data.imageUrl });
       })
       .catch((error) => {
         console.error("Error uploading image:", error);
@@ -121,15 +131,19 @@ function NewDiaryEntry({ isOpen, onClose, selectedDate, setDiaries, diaries }) {
               Date:
               <input type="text" value={newDiaryEntry.date} readOnly />
             </label>
-            <button type="submit">Save</button>
             <label>
               Image:
               <input
                 type="file"
                 accept="image/*"
                 onChange={(e) => handleImageUpload(e)}
+                disabled={isUploading}
               />
+              {isUploading && <div className="spinner"></div>}
             </label>
+            <button type="submit" disabled={isUploading}>
+              {isUploading ? "Uploading..." : "Save"}
+            </button>
           </form>
         </div>
       </div>
