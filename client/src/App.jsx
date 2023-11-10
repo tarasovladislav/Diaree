@@ -5,7 +5,7 @@ import DiaryList from "./components/DiaryList/DiaryList";
 import Diary from "./components/Diary/Diary";
 import Calendar from "./components/Calendar/Calendar";
 import Popup from "./components/Popup/Popup";
-import { getAllDiaryEntries, getDiaryEntryByDate } from "./ApiService";
+import { getAllDiaryEntries } from "./ApiService";
 import NewDiaryEntry from "./components/NewDiaryEntry/NewDiaryEntry";
 
 function App() {
@@ -47,11 +47,6 @@ function App() {
     }
   }, [selectedDate, diaries]);
 
-  const handleCreateNewEntry = () => {
-    setIsModalOpen(true);
-    setShowPopup(false);
-  };
-
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
@@ -62,21 +57,24 @@ function App() {
       <DiaryList recentDiaries={recentDiaries} />
       <Calendar onSelectDate={setSelectedDate} />
       {diaryEntry ? <Diary {...diaryEntry} /> : null}
-      {showPopup && (
+      {showPopup && !isModalOpen ? (
         <Popup
           message="No entry for the selected date. Create a new one?"
           onClose={() => setShowPopup(false)}
-          onNewEntryClick={handleCreateNewEntry}
+          onNewEntryClick={() => {
+            setShowPopup(false);
+            setIsModalOpen(true);
+          }} // Open the NewDiaryEntry component
+        />
+      ) : (
+        <NewDiaryEntry
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          selectedDate={selectedDate}
+          setDiaries={setDiaries}
+          diaries={diaries}
         />
       )}
-      <NewDiaryEntry
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        onSubmit={handleCreateNewEntry}
-        selectedDate={selectedDate}
-        setDiaries={setDiaries}
-        diaries={diaries}
-      />
     </div>
   );
 }

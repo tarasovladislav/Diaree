@@ -57,6 +57,31 @@ function NewDiaryEntry({ isOpen, onClose, selectedDate, setDiaries, diaries }) {
     }
   };
 
+  const BASE_URL = "http://localhost:3000";
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+
+    fetch(`${BASE_URL}/upload-image`, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Image upload failed: " + response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Image uploaded successfully:", data);
+      })
+      .catch((error) => {
+        console.error("Error uploading image:", error);
+      });
+  };
+
   return (
     isOpen && (
       <div className="modal-overlay">
@@ -97,6 +122,14 @@ function NewDiaryEntry({ isOpen, onClose, selectedDate, setDiaries, diaries }) {
               <input type="text" value={newDiaryEntry.date} readOnly />
             </label>
             <button type="submit">Save</button>
+            <label>
+              Image:
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => handleImageUpload(e)}
+              />
+            </label>
           </form>
         </div>
       </div>

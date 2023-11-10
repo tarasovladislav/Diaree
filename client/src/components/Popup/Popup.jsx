@@ -8,7 +8,14 @@ function Popup({ message, onClose, onNewEntryClick }) {
         <p>{message}</p>
         <div className="popup-buttons">
           <button onClick={onClose}>No</button>
-          <button onClick={onNewEntryClick}>Yes</button>
+          <button
+            onClick={() => {
+              onClose();
+              onNewEntryClick();
+            }}
+          >
+            Yes
+          </button>
         </div>
       </div>
     </div>

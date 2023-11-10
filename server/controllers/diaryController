@@ -1,5 +1,10 @@
 "use strict";
 
+const multer = require("multer");
+const upload = multer({ dest: 'uploads/' })
+const cloudinary = require("cloudinary").v2;
+require("dotenv").config();
+
 const Diary = require("../models/diary");
 
 async function getAllDiaryEntries(req, res) {
@@ -7,15 +12,16 @@ async function getAllDiaryEntries(req, res) {
     const allDiaryEntries = await Diary.find();
     res.status(200).json(allDiaryEntries);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(500).json({ error: "Internal server error" });
   }
 }
+
 async function getRecentDiaryEntries(req, res) {
   try {
     const recentDiaryEntries = await Diary.find({}).sort({ date: -1 }).limit(3);
 
-    res.status(200).send(recentDiaryEntries);
+    res.status(200).json(recentDiaryEntries);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
@@ -31,7 +37,25 @@ async function getOneDiaryEntry(req, res) {
       return res.status(404).json({ message: "Diary entry not found" });
     }
 
-    res.status(200).send(oneDiaryEntry);
+    res.status(200).json(oneDiaryEntry);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+async function getDiaryEntryByDate(req, res) {
+  try {
+    const { date } = req.params;
+    const foundDiaryEntry = await Diary.findOne({ date }).exec();
+
+    if (!foundDiaryEntry) {
+      return res
+        .status(404)
+        .json({ message: "No diary entry found for the date" });
+    }
+
+    res.status(200).json(foundDiaryEntry);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
@@ -43,8 +67,35 @@ async function addDiaryEntry(req, res) {
     const diaryEntryToAdd = await Diary.create(req.body);
     res.status(201).json(diaryEntryToAdd);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+async function uploadImage(req, res) {
+  try {
+
+    console.log("Received image upload request");
+
+    console.log(req.file)
+    if (!req.file) {
+      return res.status(400).json({ error: "No image uploaded" });
+    }
+
+    const result = await cloudinary.uploader.upload(req.file.path);
+
+    // result.url contains the URL of the uploaded image on Cloudinary
+    const imageUrl = result.url;
+    res.json({ imageUrl });
+  } catch (error) {
+    console.error("Error uploading image to Cloudinary:", error);
+    res.status(500).json({ error: "Failed to upload image" });
   }
 }
 
@@ -77,7 +128,7 @@ async function deleteDiaryEntry(req, res) {
       return res.status(404).json({ message: "Diary entry not found" });
     }
 
-    res.status(200).send(`Deleted the following entry: ${deletedEntry}`);
+    res.status(200).json({ message: "Diary entry deleted successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
@@ -88,7 +139,9 @@ module.exports = {
   getAllDiaryEntries,
   getRecentDiaryEntries,
   getOneDiaryEntry,
+  getDiaryEntryByDate,
   addDiaryEntry,
+  uploadImage,
   editDiaryEntry,
   deleteDiaryEntry,
 };

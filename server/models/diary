@@ -25,6 +25,10 @@ const diarySchema = new mongoose.Schema({
     type: Date,
     default: () => new Date(Date.now() + 60 * 60 * 1000), // Set it one hour ahead
   },
+  image:{
+    type: String,
+    required: false
+  },
   tag: {
     type: String,
     required: false,
