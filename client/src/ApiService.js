@@ -8,10 +8,6 @@ export const deleteDiaryEntry = async (_id) => {
   try {
     const response = await fetch(`${BASE_URL}/delete/${_id}`, {
       method: "DELETE",
-      // headers: {
-      //   "Content-Type": "application/json",
-      // },
-      // body: JSON.stringify(newEntryData),
     });
     if (!response.ok) {
       throw new Error(`Request failed with status ${response.status}`);

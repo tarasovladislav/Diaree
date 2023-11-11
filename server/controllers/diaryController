@@ -1,7 +1,7 @@
 "use strict";
 
 const multer = require("multer");
-const upload = multer({ dest: 'uploads/' })
+const upload = multer({ dest: "uploads/" });
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 
@@ -73,24 +73,29 @@ async function addDiaryEntry(req, res) {
 }
 
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAMEEEEE, //correct this!!!!
-  api_key: process.env.CLOUDINARY_API_KEYYYY,
-  api_secret: process.env.CLOUDINARY_API_SECRETTTTTTTT,
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 async function uploadImage(req, res) {
   try {
-
     console.log("Received image upload request");
 
-    console.log(req.file)
+    console.log(req.file);
     if (!req.file) {
       return res.status(400).json({ error: "No image uploaded" });
     }
 
-    const result = await cloudinary.uploader.upload(req.file.path);
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      width: 500,
+      height: 500,
+      crop: "fit",
+      gravity: "center",
+      quality: "auto",
+      fetch_format: "auto",
+    });
 
-    // result.url contains the URL of the uploaded image on Cloudinary
     const imageUrl = result.url;
     res.json({ imageUrl });
   } catch (error) {

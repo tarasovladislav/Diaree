@@ -3,8 +3,6 @@ import "./DiaryList.css";
 import Diary from "../Diary/Diary";
 
 function DiaryList({ recentDiaries, onDelete }) {
-  console.log("DiaryList is rendering");
-
   return (
     <div className="diarylist-section">
       <div className="recent-diaries">

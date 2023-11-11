@@ -7,6 +7,7 @@ import Calendar from "./components/Calendar/Calendar";
 import Popup from "./components/Popup/Popup";
 import { getAllDiaryEntries, deleteDiaryEntry } from "./ApiService";
 import NewDiaryEntry from "./components/NewDiaryEntry/NewDiaryEntry";
+import SearchDiaries from "./components/SearchDiaries/SearchDiaries";
 
 function App() {
   const [diaries, setDiaries] = useState([]);
@@ -58,8 +59,8 @@ function App() {
           prevDiaries.filter((entry) => entry._id !== _id)
         );
         setRecentDiaries((prevRecentDiaries) =>
-        prevRecentDiaries.filter((entry) => entry._id !== _id)
-      );
+          prevRecentDiaries.filter((entry) => entry._id !== _id)
+        );
         console.log("Deleted entry from db");
       })
       .catch((error) => {
@@ -70,6 +71,7 @@ function App() {
   return (
     <div>
       <Navbar />
+      <SearchDiaries diaries={diaries} />
       <DiaryList recentDiaries={recentDiaries} onDelete={handleDelete} />
       <Calendar onSelectDate={setSelectedDate} />
       {diaryEntry ? <Diary {...diaryEntry} onDelete={handleDelete} /> : null}

@@ -10,10 +10,10 @@ function Diary({ _id, title, text, date, onDelete }) {
     .format(new Date(date))
     .replace(/\//g, " – ");
 
-  console.log("Diary is rendering with _id:", _id); 
+  // console.log("Diary is rendering with _id:", _id); 
 
   const handleDeleteClick = () => {
-    console.log("Delete button clicked for _id:", _id); 
+    // console.log("Delete button clicked for _id:", _id); 
     onDelete(_id);
   };
 

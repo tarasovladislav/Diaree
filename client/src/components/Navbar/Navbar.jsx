@@ -10,10 +10,10 @@ function Navbar() {
       <div className="logo">
         <img src={logo} />
       </div>
-      <div className="search">
+      {/* <div className="search">
         <img src={search} />
         <input type="text" name="input" id="input" />
-      </div>
+      </div> */}
     </div>
   );
 }
