@@ -15,7 +15,7 @@ function Calendar({ onSelectDate }) {
     <div className="date-picker">
       <DatePicker
         showIcon
-        selected={startDate}
+        // selected={startDate}
         onChange={(date) => {
           setStartDate(date);
           onSelectDate(date);

@@ -1,8 +1,7 @@
 import React from "react";
 import "./Diary.css";
 
-function Diary({ id, title, text, date }) {
-  //formats the date and removes time
+function Diary({ _id, title, text, date, onDelete }) { 
   const formattedDate = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "2-digit",
@@ -10,6 +9,13 @@ function Diary({ id, title, text, date }) {
   })
     .format(new Date(date))
     .replace(/\//g, " – ");
+
+  console.log("Diary is rendering with _id:", _id); 
+
+  const handleDeleteClick = () => {
+    console.log("Delete button clicked for _id:", _id); 
+    onDelete(_id);
+  };
 
   return (
     <div className="diary">
@@ -22,6 +28,7 @@ function Diary({ id, title, text, date }) {
         <span className="diary-date">Date: </span>
         {formattedDate}
       </p>
+      <button onClick={handleDeleteClick}>Delete</button>
     </div>
   );
 }

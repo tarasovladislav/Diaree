@@ -2,7 +2,9 @@ import React from "react";
 import "./DiaryList.css";
 import Diary from "../Diary/Diary";
 
-function DiaryList({ recentDiaries }) {
+function DiaryList({ recentDiaries, onDelete }) {
+  console.log("DiaryList is rendering");
+
   return (
     <div className="diarylist-section">
       <div className="recent-diaries">
@@ -10,10 +12,11 @@ function DiaryList({ recentDiaries }) {
           return (
             <Diary
               key={diary._id}
-              id={diary._id}
+              _id={diary._id}
               title={diary.title}
               text={diary.text}
               date={diary.date}
+              onDelete={onDelete}
             />
           );
         })}

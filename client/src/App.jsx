@@ -5,7 +5,7 @@ import DiaryList from "./components/DiaryList/DiaryList";
 import Diary from "./components/Diary/Diary";
 import Calendar from "./components/Calendar/Calendar";
 import Popup from "./components/Popup/Popup";
-import { getAllDiaryEntries } from "./ApiService";
+import { getAllDiaryEntries, deleteDiaryEntry } from "./ApiService";
 import NewDiaryEntry from "./components/NewDiaryEntry/NewDiaryEntry";
 
 function App() {
@@ -51,12 +51,28 @@ function App() {
     setIsModalOpen(false);
   };
 
+  const handleDelete = (_id) => {
+    deleteDiaryEntry(_id)
+      .then(() => {
+        setDiaries((prevDiaries) =>
+          prevDiaries.filter((entry) => entry._id !== _id)
+        );
+        setRecentDiaries((prevRecentDiaries) =>
+        prevRecentDiaries.filter((entry) => entry._id !== _id)
+      );
+        console.log("Deleted entry from db");
+      })
+      .catch((error) => {
+        console.error("Error deleting diary entry:", error);
+      });
+  };
+
   return (
     <div>
       <Navbar />
-      <DiaryList recentDiaries={recentDiaries} />
+      <DiaryList recentDiaries={recentDiaries} onDelete={handleDelete} />
       <Calendar onSelectDate={setSelectedDate} />
-      {diaryEntry ? <Diary {...diaryEntry} /> : null}
+      {diaryEntry ? <Diary {...diaryEntry} onDelete={handleDelete} /> : null}
       {showPopup && !isModalOpen ? (
         <Popup
           message="No entry for the selected date. Create a new one?"
@@ -64,7 +80,7 @@ function App() {
           onNewEntryClick={() => {
             setShowPopup(false);
             setIsModalOpen(true);
-          }} // Open the NewDiaryEntry component
+          }}
         />
       ) : (
         <NewDiaryEntry
