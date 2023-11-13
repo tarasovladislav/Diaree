@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./SearchDiaries.css";
 import Fuse from "fuse.js";
 
@@ -26,8 +26,11 @@ function SearchDiaries({ diaries }) {
 
   const handleSearch = (query) => {
     setSearchQuery(query);
-
-    if (query.length >= 3) {
+  
+    if (query === "/all") {
+      setSearchResults(diaries);
+      setPopupVisible(true);
+    } else if (query.length >= 3) {
       const results = fuse.search(query);
       setSearchResults(results.map((result) => result.item));
       setPopupVisible(true);
@@ -35,21 +38,39 @@ function SearchDiaries({ diaries }) {
       setSearchResults([]);
     }
   };
+  
 
   const handleClosePopup = () => {
     setPopupVisible(false);
     setSearchQuery("");
+    setSearchResults([]);
   };
 
   const handleSearchBarClick = () => {
     setPopupVisible(true);
   };
 
+  const handleEscKey = (event) => {
+    if (event.key === "Escape") {
+      setPopupVisible(false);
+      setSearchQuery("");
+      setSearchResults([]);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleEscKey);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscKey);
+    };
+  }, []);
+
   return (
     <div>
       <input
         type="text"
-        placeholder="Search Diaries"
+        placeholder="Enter at least 3 characters to search. Enter '/all' to show all entries."
         value={searchQuery}
         onClick={handleSearchBarClick}
         onChange={(e) => handleSearch(e.target.value)}

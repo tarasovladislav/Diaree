@@ -1,5 +1,21 @@
-.date-picker {
+/* .datePicker {
+    width: 20%;
     display: flex;
     justify-content: flex-end;
-    margin-right: 50px;
+  } */
+
+.date-picker {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  position: absolute;
+  right: 0;
+  top: 40%;
+  width: 100px;
+  height: 40px;
+}
+
+.custom-datepicker-input {
+  width: 100px;
 }

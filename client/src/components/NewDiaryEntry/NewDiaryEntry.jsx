@@ -82,7 +82,6 @@ function NewDiaryEntry({ isOpen, onClose, selectedDate, setDiaries, diaries }) {
       .then((data) => {
         console.log("Image uploaded successfully:", data);
 
-        // Enable the button and hide the spinner when you receive the URL
         setIsUploading(false);
 
         setNewDiaryEntry({ ...newDiaryEntry, imageUrl: data.imageUrl });

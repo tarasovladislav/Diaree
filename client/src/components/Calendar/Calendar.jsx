@@ -7,13 +7,25 @@ function Calendar({ onSelectDate }) {
   const [startDate, setStartDate] = useState(null);
 
   const handleCalendarClose = () => {
-    onSelectDate(startDate);
-    console.log(startDate);
+    if (startDate) {
+      const selectedDateUTC = new Date(
+        Date.UTC(
+          startDate.getFullYear(),
+          startDate.getMonth(),
+          startDate.getDate()
+        )
+      );
+      onSelectDate(selectedDateUTC);
+      console.log(selectedDateUTC);
+    }
   };
+  
 
   return (
     <div className="date-picker">
       <DatePicker
+        wrapperClassName="datePicker"
+        className="custom-datepicker-input"
         showIcon
         // selected={startDate}
         onChange={(date) => {
@@ -21,8 +33,9 @@ function Calendar({ onSelectDate }) {
           onSelectDate(date);
         }}
         maxDate={new Date()}
-        placeholderText="Select a past date!"
+        placeholderText="__Select a past date!"
         onCalendarClose={handleCalendarClose}
+        isClearable
       />
     </div>
   );

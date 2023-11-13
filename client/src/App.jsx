@@ -8,6 +8,7 @@ import Popup from "./components/Popup/Popup";
 import { getAllDiaryEntries, deleteDiaryEntry } from "./ApiService";
 import NewDiaryEntry from "./components/NewDiaryEntry/NewDiaryEntry";
 import SearchDiaries from "./components/SearchDiaries/SearchDiaries";
+import FoundEntry from "./components/FoundEntry/FoundEntry";
 
 function App() {
   const [diaries, setDiaries] = useState([]);
@@ -34,19 +35,30 @@ function App() {
 
   useEffect(() => {
     if (selectedDate) {
-      const formattedDate = selectedDate.toISOString().split("T")[0];
-
+      const selectedDateUTC = new Date(
+        Date.UTC(
+          selectedDate.getFullYear(),
+          selectedDate.getMonth(),
+          selectedDate.getDate()
+        )
+      );
+  
+      const formattedDate = selectedDateUTC.toISOString().split("T")[0];
+  
       const foundEntry = diaries.find(
         (entry) => entry.date.split("T")[0] === formattedDate
       );
-
+  
       setDiaryEntry(foundEntry);
-
+  
       if (!foundEntry) {
         setShowPopup(true);
+      } else {
+        setShowPopup(false);
       }
     }
   }, [selectedDate, diaries]);
+  
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -74,7 +86,10 @@ function App() {
       <SearchDiaries diaries={diaries} />
       <DiaryList recentDiaries={recentDiaries} onDelete={handleDelete} />
       <Calendar onSelectDate={setSelectedDate} />
-      {diaryEntry ? <Diary {...diaryEntry} onDelete={handleDelete} /> : null}
+      {/* {diaryEntry ? <Diary {...diaryEntry} onDelete={handleDelete} /> : null} */}
+      {diaryEntry && (
+        <FoundEntry entry={diaryEntry} onClose={() => setDiaryEntry(null)} />
+      )}
       {showPopup && !isModalOpen ? (
         <Popup
           message="No entry for the selected date. Create a new one?"
