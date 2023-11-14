@@ -38,6 +38,53 @@ export const addDiaryEntry = async (newEntryData) => {
   }
 };
 
+export const getTags = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/tags`);
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching tags:", error);
+    throw error;
+  }
+};
+
+export const addTag = async (tagName) => {
+  try {
+    const response = await fetch(`${BASE_URL}/tags`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name: tagName }),
+    });
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error adding tag:", error);
+    throw error;
+  }
+};
+
+export const deleteTag = async (tagId) => {
+  try {
+    const response = await fetch(`${BASE_URL}/tags/${tagId}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error deleting tag:", error);
+    throw error;
+  }
+};
+
 const fetchRequest = async (url) => {
   try {
     const res = await fetch(`${BASE_URL}${url}`);

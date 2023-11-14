@@ -9,11 +9,9 @@ function Popup({ message, onClose, onNewEntryClick }) {
     }
   };
 
-  // Add an event listener when the component mounts
   useEffect(() => {
     document.addEventListener("keydown", handleEscKey);
 
-    // Cleanup by removing the event listener when the component unmounts
     return () => {
       document.removeEventListener("keydown", handleEscKey);
     };

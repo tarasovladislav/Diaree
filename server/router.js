@@ -1,8 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 const multer = require("multer");
-const upload = multer({ dest: 'uploads/' })
-
+const upload = multer({ dest: "uploads/" });
 
 const {
   getRecentDiaryEntries,
@@ -15,13 +14,25 @@ const {
   deleteDiaryEntry,
 } = require("./controllers/diaryController");
 
-router.get("/recent", getRecentDiaryEntries);
+const {
+  getAllTags,
+  addTag,
+  deleteTag,
+} = require("./controllers/tagController");
+
 router.get("/all", getAllDiaryEntries);
-router.get("/:id", getOneDiaryEntry);
+router.get("/recent", getRecentDiaryEntries);
+router.get("/tags", getAllTags);
+router.post("/tags", addTag);
+router.delete("/tags/:id", deleteTag);
 router.get("/date/:date", getDiaryEntryByDate);
 router.post("/add", addDiaryEntry);
 router.post("/upload-image", upload.single("image"), uploadImage);
 router.put("/edit/:id", editDiaryEntry);
 router.delete("/delete/:id", deleteDiaryEntry);
+router.get("/:id", getOneDiaryEntry);
+
+
+
 
 module.exports = router;

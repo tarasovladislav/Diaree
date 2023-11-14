@@ -64,7 +64,16 @@ async function getDiaryEntryByDate(req, res) {
 
 async function addDiaryEntry(req, res) {
   try {
-    const diaryEntryToAdd = await Diary.create(req.body);
+    const { title, text, date, imageUrl, tags } = req.body;
+
+    const diaryEntryToAdd = await Diary.create({
+      title,
+      text,
+      date,
+      imageUrl,
+      tags,
+    });
+
     res.status(201).json(diaryEntryToAdd);
   } catch (error) {
     console.error(error);
@@ -107,11 +116,21 @@ async function uploadImage(req, res) {
 async function editDiaryEntry(req, res) {
   try {
     const { id } = req.params;
-    const updatedData = req.body;
+    const { title, text, date, imageUrl, tags } = req.body; // Include tags
 
-    const updatedDiaryEntry = await Diary.findByIdAndUpdate(id, updatedData, {
-      new: true,
-    });
+    const updatedDiaryEntry = await Diary.findByIdAndUpdate(
+      id,
+      {
+        title,
+        text,
+        date,
+        imageUrl,
+        tags,
+      },
+      {
+        new: true,
+      }
+    );
 
     if (!updatedDiaryEntry) {
       return res.status(404).json({ message: "Diary entry not found" });

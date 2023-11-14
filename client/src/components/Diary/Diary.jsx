@@ -1,7 +1,10 @@
+// Diary.jsx
 import React from "react";
 import "./Diary.css";
 
-function Diary({ _id, title, text, date, onDelete }) { 
+function Diary({ _id, title, text, date, tags, onDelete }) {
+  // console.log("Tags prop:", tags); // Add this line for debugging
+
   const formattedDate = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "2-digit",
@@ -10,10 +13,7 @@ function Diary({ _id, title, text, date, onDelete }) {
     .format(new Date(date))
     .replace(/\//g, " – ");
 
-  // console.log("Diary is rendering with _id:", _id); 
-
   const handleDeleteClick = () => {
-    // console.log("Delete button clicked for _id:", _id); 
     onDelete(_id);
   };
 
@@ -28,6 +28,12 @@ function Diary({ _id, title, text, date, onDelete }) {
         <span className="diary-date">Date: </span>
         {formattedDate}
       </p>
+      {tags && tags.length > 0 ? (
+        <p>
+          <span className="diary-tags">Tags: </span>
+          {tags.map((tag) => (tag ? tag : "")).join(", ")}
+        </p>
+      ) : null}
       <button onClick={handleDeleteClick}>Delete</button>
     </div>
   );

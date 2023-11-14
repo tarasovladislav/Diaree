@@ -7,13 +7,12 @@ const diarySchema = new mongoose.Schema({
   },
   text: {
     type: String,
-    require: false,
+    required: false,
   },
   date: {
     type: Date,
     required: true,
     set: (value) => {
-      // Set the time component to midnight (00:00:00)
       if (value instanceof Date) {
         value.setHours(0, 0, 0, 0);
         return value;
@@ -23,31 +22,24 @@ const diarySchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: () => new Date(Date.now() + 60 * 60 * 1000), // Set it one hour ahead
+    default: () => new Date(Date.now() + 60 * 60 * 1000),
   },
-  imageUrl:{
-    type: String,
-    required: false
-  },
-  tag: {
+  imageUrl: {
     type: String,
     required: false,
   },
+  tags: [
+    {
+      type: String,
+    },
+  ],
 });
 
-// Pre-save middleware to update the 'updatedAt' field before saving
 diarySchema.pre("save", function (next) {
   this.updatedAt = Date.now();
   next();
 });
 
 const Diary = mongoose.model("Diary", diarySchema);
-
-async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/diary");
-  console.log("Connected to db ✅");
-}
-
-main().catch((error) => console.log(error));
 
 module.exports = Diary;

@@ -3,17 +3,14 @@ import "./FoundEntry.css";
 
 function FoundEntry({ entry, onClose }) {
   useEffect(() => {
-    // Add an event listener for the ESC key
     const handleEscKeyPress = (event) => {
       if (event.key === "Escape") {
         onClose();
       }
     };
 
-    // Attach the event listener when the component mounts
     window.addEventListener("keydown", handleEscKeyPress);
 
-    // Remove the event listener when the component unmounts
     return () => {
       window.removeEventListener("keydown", handleEscKeyPress);
     };
@@ -30,6 +27,12 @@ function FoundEntry({ entry, onClose }) {
           <h3>{entry.title}</h3>
           <p>{entry.text}</p>
           <p>Date: {new Date(entry.date).toLocaleDateString()}</p>
+          {entry.tags && entry.tags.length > 0 ? (
+            <p>
+              <span className="found-entry-label">Tags: </span>
+              {entry.tags.map((tag) => (tag ? tag : "")).join(", ")}
+            </p>
+          ) : null}
         </div>
       </div>
     </div>

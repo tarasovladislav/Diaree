@@ -102,6 +102,12 @@ function SearchDiaries({ diaries }) {
                     <span className="diary-date">Date: </span>
                     {formatDate(result.date)}
                   </p>
+                  {result.tags && result.tags.length > 0 && (
+                    <p>
+                      <span className="diary-tags">Tags: </span>
+                      {result.tags.map((tag) => (tag ? tag : "")).join(", ")}
+                    </p>
+                  )}
                 </li>
               ))}
             </ul>

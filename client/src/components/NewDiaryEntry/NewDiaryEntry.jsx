@@ -1,18 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { addDiaryEntry } from "../../ApiService";
 import "./NewDiaryEntry.css";
 
-function NewDiaryEntry({ isOpen, onClose, selectedDate, setDiaries, diaries }) {
+function NewDiaryEntry({
+  isOpen,
+  onClose,
+  selectedDate,
+  setDiaries,
+  diaries,
+  tags,
+}) {
   const [newDiaryEntry, setNewDiaryEntry] = useState({
     title: "",
     text: "",
     date: "",
     imageUrl: "",
+    tags: [],
   });
 
+  const [selectedTags, setSelectedTags] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
 
-  React.useEffect(() => {
+  // Function to update selected tags
+  const handleTagChange = (tagId, isSelected) => {
+    if (isSelected) {
+      const tagObj = tags.find((tag) => tag._id === tagId);
+      if (tagObj) {
+        setSelectedTags([...selectedTags, tagObj]);
+      }
+    } else {
+      setSelectedTags(selectedTags.filter((tag) => tag._id !== tagId));
+    }
+  };
+  
+  
+
+  useEffect(() => {
     if (selectedDate) {
       const formattedDate = selectedDate.toLocaleDateString("en-US", {
         weekday: "short",
@@ -44,6 +67,7 @@ function NewDiaryEntry({ isOpen, onClose, selectedDate, setDiaries, diaries }) {
       const newEntryData = {
         ...newDiaryEntry,
         date: adjustedDate.toISOString(),
+        tags: selectedTags.map((tag) => tag.name),
       };
 
       addDiaryEntry(newEntryData)
@@ -90,7 +114,6 @@ function NewDiaryEntry({ isOpen, onClose, selectedDate, setDiaries, diaries }) {
         console.error("Error uploading image:", error);
       });
   };
-
   return (
     isOpen && (
       <div className="modal-overlay">
@@ -130,6 +153,28 @@ function NewDiaryEntry({ isOpen, onClose, selectedDate, setDiaries, diaries }) {
               Date:
               <input type="text" value={newDiaryEntry.date} readOnly />
             </label>
+            {/* Display available tags and allow selecting/deselecting */}
+            <div className="tags-container">
+              <p>TAGS</p>
+              {tags.map((tag) => {
+                console.log(tag); // Console log the tag here
+                return (
+                  <label key={tag._id}>
+                    <input
+                      type="checkbox"
+                      value={tag._id} // Use a unique identifier for the value
+                      checked={selectedTags.includes(tag._id)} // Use a unique identifier for comparison
+                      onChange={(e) =>
+                        handleTagChange(tag._id, e.target.checked)
+                      } // Use a unique identifier for the function
+                    />
+                    {tag.name}{" "}
+                    {/* Assuming 'name' is the property that holds the tag name */}
+                  </label>
+                );
+              })}
+            </div>
+
             <label>
               Image:
               <input

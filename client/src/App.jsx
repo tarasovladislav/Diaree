@@ -9,6 +9,8 @@ import { getAllDiaryEntries, deleteDiaryEntry } from "./ApiService";
 import NewDiaryEntry from "./components/NewDiaryEntry/NewDiaryEntry";
 import SearchDiaries from "./components/SearchDiaries/SearchDiaries";
 import FoundEntry from "./components/FoundEntry/FoundEntry";
+import Tag from "./components/Tag/Tag";
+import TagManagement from "./components/TagManagement/TagManagement";
 
 function App() {
   const [diaries, setDiaries] = useState([]);
@@ -17,6 +19,7 @@ function App() {
   const [showPopup, setShowPopup] = useState(false);
   const [recentDiaries, setRecentDiaries] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [tags, setTags] = useState([]);
 
   useEffect(() => {
     getAllDiaryEntries()
@@ -42,15 +45,15 @@ function App() {
           selectedDate.getDate()
         )
       );
-  
+
       const formattedDate = selectedDateUTC.toISOString().split("T")[0];
-  
+
       const foundEntry = diaries.find(
         (entry) => entry.date.split("T")[0] === formattedDate
       );
-  
+
       setDiaryEntry(foundEntry);
-  
+
       if (!foundEntry) {
         setShowPopup(true);
       } else {
@@ -58,7 +61,6 @@ function App() {
       }
     }
   }, [selectedDate, diaries]);
-  
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -80,13 +82,24 @@ function App() {
       });
   };
 
+  const addTag = (tag) => {
+    setTags([...tags, tag]);
+  };
+
+  const removeTag = (tagToRemove) => {
+    const updatedTags = tags.filter((tag) => tag !== tagToRemove);
+    setTags(updatedTags);
+  };
+
   return (
     <div>
       <Navbar />
       <SearchDiaries diaries={diaries} />
-      <DiaryList recentDiaries={recentDiaries} onDelete={handleDelete} />
+      <div className="tags-container">
+        <TagManagement tags={tags} setTags={setTags}/>
+      </div>
+      <DiaryList recentDiaries={recentDiaries} onDelete={handleDelete} tags={tags}/>
       <Calendar onSelectDate={setSelectedDate} />
-      {/* {diaryEntry ? <Diary {...diaryEntry} onDelete={handleDelete} /> : null} */}
       {diaryEntry && (
         <FoundEntry entry={diaryEntry} onClose={() => setDiaryEntry(null)} />
       )}
@@ -106,6 +119,7 @@ function App() {
           selectedDate={selectedDate}
           setDiaries={setDiaries}
           diaries={diaries}
+          tags={tags}
         />
       )}
     </div>

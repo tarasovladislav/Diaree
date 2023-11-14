@@ -40,3 +40,17 @@
 .read-the-docs {
   color: #888;
 } */
+
+.tags-container {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.tags-container input {
+  flex-grow: 1;
+  padding: 4px;
+  margin-right: 8px;
+  border: 1px solid #ccc;
+}
