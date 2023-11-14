@@ -1,3 +1,4 @@
+// FoundEntry.jsx
 import React, { useEffect } from "react";
 import "./FoundEntry.css";
 
@@ -20,20 +21,17 @@ function FoundEntry({ entry, onClose }) {
     <div className="found-entry-container">
       <div className="found-entry">
         <button className="close-button" onClick={onClose}>
-          X
+          &times;
         </button>
-        <h2>Found Entry:</h2>
-        <div>
-          <h3>{entry.title}</h3>
-          <p>{entry.text}</p>
-          <p>Date: {new Date(entry.date).toLocaleDateString()}</p>
-          {entry.tags && entry.tags.length > 0 ? (
-            <p>
-              <span className="found-entry-label">Tags: </span>
-              {entry.tags.map((tag) => (tag ? tag : "")).join(", ")}
-            </p>
-          ) : null}
-        </div>
+        <h2>{entry.title}</h2>
+        <p className="entry-text">{entry.text}</p>
+        <p><span className="date">Date: </span>{new Date(entry.date).toLocaleDateString()}</p>
+        {entry.tags && entry.tags.length > 0 && (
+          <p>
+            <span className="found-entry-label">Tags:</span>{" "}
+            {entry.tags.map((tag) => (tag ? tag : "")).join(", ")}
+          </p>
+        )}
       </div>
     </div>
   );

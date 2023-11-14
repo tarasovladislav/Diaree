@@ -15,7 +15,7 @@ function DiaryList({ recentDiaries, onDelete }) {
               text={diary.text}
               date={diary.date}
               onDelete={onDelete}
-              tags={diary.tags} // Pass the entire array of tag objects
+              tags={diary.tags} 
             />
           );
         })}

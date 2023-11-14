@@ -42,10 +42,11 @@
 } */
 
 .tags-container {
-  margin-top: 20px;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  gap: 0px; /* Adjust the gap as needed */
+  align-items: flex-start; /* Align tags to the left */
+  width: 75%; /* Remove fixed width to allow dynamic width */
+  margin-right: 10px; /* Adjust the margin as needed */
 }
 
 .tags-container input {
@@ -53,4 +54,13 @@
   padding: 4px;
   margin-right: 8px;
   border: 1px solid #ccc;
+}
+
+.calendar-container input{
+  width: 250px !important;
+  margin-right: 20px;
+}
+
+body{
+  background-color: blanchedalmond;
 }

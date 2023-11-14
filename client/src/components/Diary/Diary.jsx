@@ -3,8 +3,6 @@ import React from "react";
 import "./Diary.css";
 
 function Diary({ _id, title, text, date, tags, onDelete }) {
-  // console.log("Tags prop:", tags); // Add this line for debugging
-
   const formattedDate = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "2-digit",
@@ -19,22 +17,19 @@ function Diary({ _id, title, text, date, tags, onDelete }) {
 
   return (
     <div className="diary">
-      <h3>{title}</h3>
-      <p>
-        <span className="diary-entry">Diary Entry: </span>
-        {text}
-      </p>
-      <p>
-        <span className="diary-date">Date: </span>
-        {formattedDate}
-      </p>
-      {tags && tags.length > 0 ? (
-        <p>
-          <span className="diary-tags">Tags: </span>
-          {tags.map((tag) => (tag ? tag : "")).join(", ")}
+      <div className="diary-header">
+        <h3 className="diary-title">{title}</h3>
+        <button className="delete-button" onClick={handleDeleteClick}>
+          Delete
+        </button>
+      </div>
+      <p className="diary-entry">{text}</p>
+      <p className="diary-date">{formattedDate}</p>
+      {tags && tags.length > 0 && (
+        <p className="diary-tags">
+          Tags: {tags.map((tag) => (tag ? tag : "")).join(", ")}
         </p>
-      ) : null}
-      <button onClick={handleDeleteClick}>Delete</button>
+      )}
     </div>
   );
 }

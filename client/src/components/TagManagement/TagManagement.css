@@ -1,0 +1,59 @@
+/* TagManagement.css */
+.tag-management-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align tags to the left */
+  width: 200px;
+  margin-top: 30px;
+}
+
+.tag-management-input {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.tag-management-input input {
+  width: 150px; /* Set the input width */
+  margin-right: 10px;
+  padding: 5px; /* Add some padding for input */
+  border: 1px solid #ccc; /* Add a border to input */
+  border-radius: 5px; /* Rounded corners */
+  height: 30px;
+}
+
+.tag-management-input button {
+  background-color: #007bff; /* Blue button background color */
+  color: #fff; /* White button text color */
+  border: none;
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer;
+  padding: 5px 10px; /* Add padding to the button */
+}
+
+.tag-management-input button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.tag-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align tags to the left */
+  width: 100%;
+}
+
+.tag {
+  background-color: #007bff; /* Blue tag background color */
+  color: #fff; /* White tag text color */
+  border: none;
+  border-radius: 20px; /* Rounded corners */
+  padding: 5px 10px; /* Add padding to the tag */
+  margin-bottom: 5px; /* Spacing between tags */
+}
+
+.tag:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  cursor: pointer;
+}

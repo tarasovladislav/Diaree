@@ -96,10 +96,16 @@ function App() {
       <Navbar />
       <SearchDiaries diaries={diaries} />
       <div className="tags-container">
-        <TagManagement tags={tags} setTags={setTags}/>
+        <TagManagement tags={tags} setTags={setTags} />
+        <DiaryList
+          recentDiaries={recentDiaries}
+          onDelete={handleDelete}
+          tags={tags}
+        />
       </div>
-      <DiaryList recentDiaries={recentDiaries} onDelete={handleDelete} tags={tags}/>
-      <Calendar onSelectDate={setSelectedDate} />
+      <div className="calendar-container">
+        <Calendar onSelectDate={setSelectedDate} />
+      </div>
       {diaryEntry && (
         <FoundEntry entry={diaryEntry} onClose={() => setDiaryEntry(null)} />
       )}

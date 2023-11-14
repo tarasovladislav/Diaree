@@ -5,7 +5,7 @@ function Tag({ tag, onDelete }) {
   return (
     <div className="tag">
       <span>{tag.name}</span>
-      <button onClick={() => onDelete(tag.name)}>X</button> 
+      <button onClick={() => onDelete(tag)}>X</button> 
     </div>
   );
 }

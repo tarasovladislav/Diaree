@@ -1,7 +1,46 @@
+/* Diary.css */
+.diary {
+  border: 2px solid #3498db; /* Cool blue border */
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px;
+  background-color: #f0f0f0; /* Light gray background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.diary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.diary-title {
+  color: #3498db; /* Blue title text color */
+}
+
+.delete-button {
+  background-color: transparent;
+  border: none;
+  color: #e74c3c; /* Red delete button color */
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  color: #c0392b; /* Darker red on hover */
+}
+
 .diary-entry {
-    color: blue;
-  }
-  
-  .diary-date {
-    color: red;
-  }
+  font-size: 16px;
+  color: #333; /* Dark text color */
+}
+
+.diary-date {
+  font-size: 14px;
+  color: #777; /* Lighter text color */
+}
+
+.diary-tags {
+  font-size: 14px;
+  color: #27ae60; /* Green tag text color */
+}

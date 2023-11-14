@@ -82,7 +82,7 @@ function SearchDiaries({ diaries }) {
             <button onClick={handleClosePopup} className="close-button">
               X
             </button>
-            <h2>Search Results</h2>
+            <h2>Fuzzy Search Results:</h2>
             <input
               type="text"
               placeholder="Enter search query"
