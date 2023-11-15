@@ -1,11 +1,9 @@
-
-
 .tags-container {
   display: flex;
-  gap: 0px; /* Adjust the gap as needed */
-  align-items: flex-start; /* Align tags to the left */
-  width: 75%; /* Remove fixed width to allow dynamic width */
-  margin-right: 10px; /* Adjust the margin as needed */
+  gap: 0px;
+  align-items: flex-start;
+  width: 75%;
+  margin-right: 10px;
 }
 
 .tags-container input {
@@ -15,12 +13,11 @@
   border: 1px solid #ccc;
 }
 
-.calendar-container input{
+.calendar-container input {
   width: 250px !important;
   margin-right: 20px;
 }
 
-body{
+body {
   background-color: blanchedalmond;
 }
-

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import DiaryList from "./components/DiaryList/DiaryList";
-import Diary from "./components/Diary/Diary";
 import Calendar from "./components/Calendar/Calendar";
 import Popup from "./components/Popup/Popup";
 import { getAllDiaryEntries, deleteDiaryEntry } from "./ApiService";
@@ -97,8 +96,8 @@ function App() {
       <div className="tags-container">
         <TagManagement tags={tags} setTags={setTags} />
         <DiaryList
-          diaries={diaries} 
-          onDelete={handleDelete} 
+          diaries={diaries}
+          onDelete={handleDelete}
           tags={tags}
           recentDiaries={recentDiaries}
         />
