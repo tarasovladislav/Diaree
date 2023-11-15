@@ -1,9 +1,3 @@
-/* .datePicker {
-    width: 20%;
-    display: flex;
-    justify-content: flex-end;
-  } */
-
 .date-picker {
   display: flex;
   justify-content: flex-end;

@@ -3,7 +3,7 @@ const router = require("./router.js");
 const cors = require("cors");
 require("dotenv").config();
 const cloudinary = require("cloudinary").v2;
-const db = require('./models/db.js')
+const db = require("./models/db.js");
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,

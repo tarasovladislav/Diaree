@@ -19,7 +19,6 @@ function Calendar({ onSelectDate }) {
       console.log(selectedDateUTC);
     }
   };
-  
 
   return (
     <div className="date-picker">
@@ -27,7 +26,6 @@ function Calendar({ onSelectDate }) {
         wrapperClassName="datePicker"
         className="custom-datepicker-input"
         showIcon
-        // selected={startDate}
         onChange={(date) => {
           setStartDate(date);
           onSelectDate(date);
@@ -42,5 +40,3 @@ function Calendar({ onSelectDate }) {
 }
 
 export default Calendar;
-
-//Date Mon Oct 16 2023 15:56:15 GMT+0200 (Mitteleuropäische Sommerzeit)

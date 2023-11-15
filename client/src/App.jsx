@@ -9,7 +9,6 @@ import { getAllDiaryEntries, deleteDiaryEntry } from "./ApiService";
 import NewDiaryEntry from "./components/NewDiaryEntry/NewDiaryEntry";
 import SearchDiaries from "./components/SearchDiaries/SearchDiaries";
 import FoundEntry from "./components/FoundEntry/FoundEntry";
-import Tag from "./components/Tag/Tag";
 import TagManagement from "./components/TagManagement/TagManagement";
 
 function App() {
@@ -94,20 +93,25 @@ function App() {
   return (
     <div>
       <Navbar />
-      <SearchDiaries diaries={diaries} />
+      <SearchDiaries diaries={diaries} onDelete={handleDelete} />
       <div className="tags-container">
         <TagManagement tags={tags} setTags={setTags} />
         <DiaryList
-          recentDiaries={recentDiaries}
-          onDelete={handleDelete}
+          diaries={diaries} 
+          onDelete={handleDelete} 
           tags={tags}
+          recentDiaries={recentDiaries}
         />
       </div>
       <div className="calendar-container">
         <Calendar onSelectDate={setSelectedDate} />
       </div>
       {diaryEntry && (
-        <FoundEntry entry={diaryEntry} onClose={() => setDiaryEntry(null)} />
+        <FoundEntry
+          entry={diaryEntry}
+          onDelete={handleDelete}
+          onClose={() => setDiaryEntry(null)}
+        />
       )}
       {showPopup && !isModalOpen ? (
         <Popup

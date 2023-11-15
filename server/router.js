@@ -32,7 +32,4 @@ router.put("/edit/:id", editDiaryEntry);
 router.delete("/delete/:id", deleteDiaryEntry);
 router.get("/:id", getOneDiaryEntry);
 
-
-
-
 module.exports = router;

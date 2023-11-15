@@ -14,6 +14,7 @@ function DiaryList({ recentDiaries, onDelete }) {
               title={diary.title}
               text={diary.text}
               date={diary.date}
+              imageUrl={diary.imageUrl} 
               onDelete={onDelete}
               tags={diary.tags} 
             />

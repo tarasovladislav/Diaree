@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./SearchDiaries.css";
 import Fuse from "fuse.js";
+import Diary from "../Diary/Diary";
 
-function SearchDiaries({ diaries }) {
+function SearchDiaries({ diaries, onDelete }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isPopupVisible, setPopupVisible] = useState(false);
@@ -26,7 +27,7 @@ function SearchDiaries({ diaries }) {
 
   const handleSearch = (query) => {
     setSearchQuery(query);
-  
+
     if (query === "/all") {
       setSearchResults(diaries);
       setPopupVisible(true);
@@ -38,7 +39,6 @@ function SearchDiaries({ diaries }) {
       setSearchResults([]);
     }
   };
-  
 
   const handleClosePopup = () => {
     setPopupVisible(false);
@@ -92,23 +92,14 @@ function SearchDiaries({ diaries }) {
             />
             <ul className="results-container">
               {searchResults.map((result) => (
-                <li key={result._id}>
-                  <h3>{result.title}</h3>
-                  <p>
-                    <span className="diary-entry">Diary Entry: </span>
-                    {result.text}
-                  </p>
-                  <p>
-                    <span className="diary-date">Date: </span>
-                    {formatDate(result.date)}
-                  </p>
-                  {result.tags && result.tags.length > 0 && (
-                    <p>
-                      <span className="diary-tags">Tags: </span>
-                      {result.tags.map((tag) => (tag ? tag : "")).join(", ")}
-                    </p>
-                  )}
-                </li>
+                <Diary
+                  key={result._id}
+                  onDelete={() => {
+                    onDelete(result._id);
+                    setSearchResults([]);
+                  }}
+                  {...result}
+                />
               ))}
             </ul>
           </div>

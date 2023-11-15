@@ -1,8 +1,7 @@
-/* TagManagement.css */
 .tag-management-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Align tags to the left */
+  align-items: flex-start;
   width: 200px;
   margin-top: 30px;
 }
@@ -16,44 +15,44 @@
 }
 
 .tag-management-input input {
-  width: 150px; /* Set the input width */
+  width: 150px;
   margin-right: 10px;
-  padding: 5px; /* Add some padding for input */
-  border: 1px solid #ccc; /* Add a border to input */
-  border-radius: 5px; /* Rounded corners */
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   height: 30px;
 }
 
 .tag-management-input button {
-  background-color: #007bff; /* Blue button background color */
-  color: #fff; /* White button text color */
+  background-color: #007bff;
+  color: #fff;
   border: none;
-  border-radius: 5px; /* Rounded corners */
+  border-radius: 5px;
   cursor: pointer;
-  padding: 5px 10px; /* Add padding to the button */
+  padding: 5px 10px;
 }
 
 .tag-management-input button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3;
 }
 
 .tag-list-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Align tags to the left */
+  align-items: flex-start;
   width: 100%;
 }
 
 .tag {
-  background-color: #007bff; /* Blue tag background color */
-  color: #fff; /* White tag text color */
+  background-color: #007bff;
+  color: #fff;
   border: none;
-  border-radius: 20px; /* Rounded corners */
-  padding: 5px 10px; /* Add padding to the tag */
-  margin-bottom: 5px; /* Spacing between tags */
+  border-radius: 20px;
+  padding: 5px 10px;
+  margin-bottom: 5px;
 }
 
 .tag:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3;
   cursor: pointer;
 }

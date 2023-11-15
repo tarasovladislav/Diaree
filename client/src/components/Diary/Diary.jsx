@@ -1,8 +1,7 @@
-// Diary.jsx
 import React from "react";
 import "./Diary.css";
 
-function Diary({ _id, title, text, date, tags, onDelete }) {
+function Diary({ _id, title, text, date, tags, imageUrl, onDelete }) {
   const formattedDate = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "2-digit",
@@ -23,6 +22,7 @@ function Diary({ _id, title, text, date, tags, onDelete }) {
           Delete
         </button>
       </div>
+      {imageUrl && <img src={imageUrl} alt={title} className="diary-image" />}
       <p className="diary-entry">{text}</p>
       <p className="diary-date">{formattedDate}</p>
       {tags && tags.length > 0 && (

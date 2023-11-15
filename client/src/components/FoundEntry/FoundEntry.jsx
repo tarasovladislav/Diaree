@@ -1,8 +1,8 @@
-// FoundEntry.jsx
 import React, { useEffect } from "react";
 import "./FoundEntry.css";
+import Diary from "../Diary/Diary";
 
-function FoundEntry({ entry, onClose }) {
+function FoundEntry({ entry, onClose, onDelete }) {
   useEffect(() => {
     const handleEscKeyPress = (event) => {
       if (event.key === "Escape") {
@@ -23,15 +23,14 @@ function FoundEntry({ entry, onClose }) {
         <button className="close-button" onClick={onClose}>
           &times;
         </button>
-        <h2>{entry.title}</h2>
-        <p className="entry-text">{entry.text}</p>
-        <p><span className="date">Date: </span>{new Date(entry.date).toLocaleDateString()}</p>
-        {entry.tags && entry.tags.length > 0 && (
-          <p>
-            <span className="found-entry-label">Tags:</span>{" "}
-            {entry.tags.map((tag) => (tag ? tag : "")).join(", ")}
-          </p>
-        )}
+        <Diary
+          _id={entry._id}
+          title={entry.title}
+          text={entry.text}
+          date={entry.date}
+          tags={entry.tags}
+          onDelete={() => onDelete(entry._id)}
+        />
       </div>
     </div>
   );

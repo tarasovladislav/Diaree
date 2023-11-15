@@ -21,7 +21,6 @@ function NewDiaryEntry({
   const [selectedTags, setSelectedTags] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
 
-  // Function to update selected tags
   const handleTagChange = (tagId, isSelected) => {
     if (isSelected) {
       const tagObj = tags.find((tag) => tag._id === tagId);
@@ -32,8 +31,6 @@ function NewDiaryEntry({
       setSelectedTags(selectedTags.filter((tag) => tag._id !== tagId));
     }
   };
-  
-  
 
   useEffect(() => {
     if (selectedDate) {
@@ -153,23 +150,21 @@ function NewDiaryEntry({
               Date:
               <input type="text" value={newDiaryEntry.date} readOnly />
             </label>
-            {/* Display available tags and allow selecting/deselecting */}
             <div className="tags-container">
               <p>TAGS</p>
               {tags.map((tag) => {
-                console.log(tag); // Console log the tag here
+                console.log(tag);
                 return (
                   <label key={tag._id}>
                     <input
                       type="checkbox"
-                      value={tag._id} // Use a unique identifier for the value
-                      checked={selectedTags.includes(tag._id)} // Use a unique identifier for comparison
+                      value={tag._id}
+                      checked={selectedTags.includes(tag)}
                       onChange={(e) =>
                         handleTagChange(tag._id, e.target.checked)
-                      } // Use a unique identifier for the function
+                      }
                     />
                     {tag.name}{" "}
-                    {/* Assuming 'name' is the property that holds the tag name */}
                   </label>
                 );
               })}

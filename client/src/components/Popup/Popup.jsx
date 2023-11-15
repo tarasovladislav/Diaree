@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import "./Popup.css";
 
 function Popup({ message, onClose, onNewEntryClick }) {
-  // Define a function to handle ESC key press
   const handleEscKey = (event) => {
     if (event.key === "Escape") {
       onClose();

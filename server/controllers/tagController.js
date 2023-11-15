@@ -12,7 +12,6 @@ async function getAllTags(req, res) {
   }
 }
 
-
 async function addTag(req, res) {
   try {
     const { name } = req.body;
@@ -40,7 +39,5 @@ async function deleteTag(req, res) {
     res.status(500).json({ error: "Internal server error" });
   }
 }
-
-
 
 module.exports = { getAllTags, addTag, deleteTag };
