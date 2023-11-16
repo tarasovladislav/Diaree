@@ -19,7 +19,7 @@ const getAllDiaryEntries = async (): Promise<[Diary]> => {
     }
 }
 
-const getRecentDiaryEntries = async () => {
+const getRecentDiaryEntries = async (): Promise<[Diary]> => {
     try {
         const response = await fetch(`${BASE_URL}/diary/entries/recent`);
         checkResponse(response);
@@ -30,7 +30,7 @@ const getRecentDiaryEntries = async () => {
     }
 }
 
-const getDiaryEntryById = async (_id: String) => {
+const getDiaryEntryById = async (_id: String): Promise<Diary> => {
     try {
         const response = await fetch(`${BASE_URL}/diary/entries/${_id}`);
         checkResponse(response);
@@ -41,7 +41,7 @@ const getDiaryEntryById = async (_id: String) => {
     }
 }
 
-const deleteDiaryEntry = async (_id: String) => {
+const deleteDiaryEntry = async (_id: String): Promise<{ message: string }> => {
     try {
         const response = await fetch(`${BASE_URL}/diary/entries/${_id}`, {
             method: 'DELETE'
@@ -54,7 +54,7 @@ const deleteDiaryEntry = async (_id: String) => {
     }
 }
 
-const postDiaryEntry = async (data: any) => { //TODO: FIX any
+const postDiaryEntry = async (data: Diary):Promise<Diary> => { //TODO: FIX any
     try {
         const response = await fetch(`${BASE_URL}/diary/entries`, {
             method: 'POST',
@@ -72,7 +72,7 @@ const postDiaryEntry = async (data: any) => { //TODO: FIX any
 }
 
 //TODO: Do we need this function?
-const putDiaryEntry = async (data: any) => { //TODO: Fix any
+const putDiaryEntry = async (data: Diary):Promise<Diary> => { //TODO: Fix any
     try {
         const response = await fetch(`${BASE_URL}/diary/entries/${data._id}`, { //TODO: Is this right?
             method: 'PUT',
@@ -89,7 +89,7 @@ const putDiaryEntry = async (data: any) => { //TODO: Fix any
     }
 }
 
-const getAllTags = async () => {
+const getAllTags = async ():Promise<[Tag]> => {
     try {
         const response = await fetch(`${BASE_URL}/diary/tags`);
         checkResponse(response);
@@ -100,7 +100,7 @@ const getAllTags = async () => {
     }
 }
 
-const postTag = async (name: String) => {
+const postTag = async (name: String):Promise<Tag> => {
     console.log(name);
     try {
         const response = await fetch(`${BASE_URL}/diary/tags`, {
@@ -114,10 +114,11 @@ const postTag = async (name: String) => {
         return await response.json();
     } catch (error) {
         console.error(error);
+        throw error;
     }
 }
 
-const deleteTag = async (_id: String) => {
+const deleteTag = async (_id: String):Promise<{ message: string }> => {
     try {
         const response = await fetch(`${BASE_URL}/diary/tags/${_id}`, {
             method: "DELETE",
@@ -126,6 +127,7 @@ const deleteTag = async (_id: String) => {
         return await response.json();
     } catch (error) {
         console.error(error);
+        throw error;
     }
 }
 

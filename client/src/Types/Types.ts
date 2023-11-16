@@ -1,4 +1,5 @@
-type Diary = {
+export type Diary = {
+    _id:string,
     title: string,
     text?: string,
     // date
@@ -9,9 +10,8 @@ type Diary = {
 
 
 
-type Tag = {
+export type Tag = {
     name: string
 }
 
 
-export {Diary, Tag}

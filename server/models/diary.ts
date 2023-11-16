@@ -22,6 +22,7 @@ const diarySchema = new mongoose.Schema({
     },
     createdAt: {
         type: Date,
+        default: () => Date.now()
         // default: () => new Date(Date.now() + 60 * 60 * 1000),
     },
     imageUrl: {
