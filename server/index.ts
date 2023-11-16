@@ -27,3 +27,5 @@ db().catch((error) => console.log(error));
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
 });
+
+export default app
