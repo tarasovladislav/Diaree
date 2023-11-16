@@ -2,7 +2,7 @@ const { Router } = require("express");
 const router = Router();
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
-
+//TODO refactor router 
 const {
   getRecentDiaryEntries,
   getAllDiaryEntries,
