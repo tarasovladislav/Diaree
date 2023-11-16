@@ -1,6 +1,5 @@
-import React from "react";
 import "./DiaryList.css";
-import Diary from "../Diary/Diary";
+import Diary from "../Diary/Diary.js";
 
 function DiaryList({ recentDiaries, onDelete }) {
   return (

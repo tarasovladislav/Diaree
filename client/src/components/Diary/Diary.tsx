@@ -1,4 +1,3 @@
-import React from "react";
 import "./Diary.css";
 
 function Diary({ _id, title, text, date, tags, imageUrl, onDelete }) {

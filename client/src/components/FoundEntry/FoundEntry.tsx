@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./FoundEntry.css";
-import Diary from "../Diary/Diary";
+import Diary from "../Diary/Diary.js";
 
 function FoundEntry({ entry, onClose, onDelete }) {
   useEffect(() => {
@@ -29,6 +29,7 @@ function FoundEntry({ entry, onClose, onDelete }) {
           text={entry.text}
           date={entry.date}
           tags={entry.tags}
+          imageUrl={entry.imageUrl}
           onDelete={() => onDelete(entry._id)}
         />
       </div>
