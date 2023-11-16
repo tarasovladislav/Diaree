@@ -25,4 +25,4 @@ router.post('/diary/image/upload', upload.single('image'), diaryController.uploa
 
 //TODO: Add user => router.post('/user/login', ...)
 
-module.exports = router;
+export default router;
