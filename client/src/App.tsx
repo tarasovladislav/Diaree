@@ -8,9 +8,14 @@ import { getAllDiaryEntries, deleteDiaryEntry } from "./ApiService";
 import NewDiaryEntry from "./components/NewDiaryEntry/NewDiaryEntry";
 import SearchDiaries from "./components/SearchDiaries/SearchDiaries";
 import FoundEntry from "./components/FoundEntry/FoundEntry";
-import TagManagement from "./components/TagManagement/TagManagement";
+import TagManagement from "./components/TagManagement/TagManagement"
 
-function App() {
+type AppProps = {
+
+}
+
+
+function App():React.FC{
   const [diaries, setDiaries] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [diaryEntry, setDiaryEntry] = useState(null);
