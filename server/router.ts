@@ -9,14 +9,14 @@ import tagController from './controllers/tagController';
 
 //Diary
 router.get('/diary/entries', diaryController.getAllDiaryEntries);
-//router.get('/diary/entries/:id', diaryController.getDiaryEntryById); //getOneDiaryEntry
-//router.post('/diary/entries', diaryController.postDiaryEntry); //addDiaryEntry
-//router.put('/diary/entries/:id', diaryController.putDiaryEntrie); //INFO: edits the diary entry
+router.get('/diary/entries/:id', diaryController.getDiaryEntryById);
+router.post('/diary/entries', diaryController.postDiaryEntry);
+router.put('/diary/entries/:id', diaryController.putDiaryEntry); //INFO: edits the diary entry
 router.delete('/diary/entries/:id', diaryController.deleteDiaryEntry);
 router.get('/diary/entries/recent', diaryController.getRecentDiaryEntries);
 //Tags
 router.get('/diary/tags', tagController.getAllTags);
-//router.post('/diary/tags', tagController.postTag); //addTag
+router.post('/diary/tags', tagController.postTag);
 router.delete('/diary/tags/:id', tagController.deleteTag);
 //Date
 router.get('/diary/entries/:date', diaryController.getDiaryEntryByDate);

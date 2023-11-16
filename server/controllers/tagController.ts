@@ -12,7 +12,7 @@ async function getAllTags(req, res) {
     }
 }
 
-async function addTag(req, res) {
+async function postTag(req, res) {
     try {
         const { name } = req.body;
         const newTag = new Tag({ name });
@@ -40,4 +40,4 @@ async function deleteTag(req, res) {
     }
 }
 
-export default module.exports = { getAllTags, addTag, deleteTag };
+export default module.exports = { getAllTags, postTag, deleteTag };

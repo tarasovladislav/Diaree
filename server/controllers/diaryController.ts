@@ -29,7 +29,7 @@ async function getRecentDiaryEntries(req: Request, res: Response): Promise<void>
     }
 }
 
-async function getOneDiaryEntry(req: Request, res: Response): Promise<void> {
+async function getDiaryEntryById(req: Request, res: Response): Promise<void> {
     try {
         const { id } = req.params;
         const oneDiaryEntry = await Diary.findById(id);
@@ -63,7 +63,7 @@ async function getDiaryEntryByDate(req: Request, res: Response) {
     }
 }
 
-async function addDiaryEntry(req: Request, res: Response): Promise<void> {
+async function postDiaryEntry(req: Request, res: Response): Promise<void> {
     try {
         const { title, text, date, imageUrl, tags } = req.body;
 
@@ -114,7 +114,7 @@ async function uploadImage(req: Request, res: Response): Promise<void> {
     }
 }
 
-async function editDiaryEntry(req: Request, res: Response): Promise<void> {
+async function putDiaryEntry(req: Request, res: Response): Promise<void> {
     try {
         const { id } = req.params;
         const { title, text, date, imageUrl, tags } = req.body; // Include tags
@@ -163,10 +163,10 @@ async function deleteDiaryEntry(req: Request, res: Response): Promise<void> {
 export default module.exports = {
     getAllDiaryEntries,
     getRecentDiaryEntries,
-    getOneDiaryEntry,
+    getDiaryEntryById,
     getDiaryEntryByDate,
-    addDiaryEntry,
+    postDiaryEntry,
     uploadImage,
-    editDiaryEntry,
+    putDiaryEntry,
     deleteDiaryEntry,
 };
