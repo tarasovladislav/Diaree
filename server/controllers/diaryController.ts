@@ -4,10 +4,11 @@ const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
+import { Request, Response } from 'express';
 
-const Diary = require("../models/diary");
+const Diary = require("../models/diary.js");
 
-async function getAllDiaryEntries(req, res) {
+async function getAllDiaryEntries(req: Request, res: Response): Promise<void> {
     try {
         const allDiaryEntries = await Diary.find();
         res.status(200).json(allDiaryEntries);
@@ -17,7 +18,7 @@ async function getAllDiaryEntries(req, res) {
     }
 }
 
-async function getRecentDiaryEntries(req, res) {
+async function getRecentDiaryEntries(req: Request, res: Response): Promise<void> {
     try {
         const recentDiaryEntries = await Diary.find({}).sort({ date: -1 }).limit(3);
 
@@ -28,13 +29,13 @@ async function getRecentDiaryEntries(req, res) {
     }
 }
 
-async function getOneDiaryEntry(req, res) {
+async function getOneDiaryEntry(req: Request, res: Response): Promise<void> {
     try {
         const { id } = req.params;
         const oneDiaryEntry = await Diary.findById(id);
 
         if (!oneDiaryEntry) {
-            return res.status(404).json({ message: "Diary entry not found" });
+            res.status(404).json({ message: "Diary entry not found" });
         }
 
         res.status(200).json(oneDiaryEntry);
@@ -44,7 +45,7 @@ async function getOneDiaryEntry(req, res) {
     }
 }
 
-async function getDiaryEntryByDate(req, res) {
+async function getDiaryEntryByDate(req: Request, res: Response) {
     try {
         const { date } = req.params;
         const foundDiaryEntry = await Diary.findOne({ date }).exec();
@@ -62,7 +63,7 @@ async function getDiaryEntryByDate(req, res) {
     }
 }
 
-async function addDiaryEntry(req, res) {
+async function addDiaryEntry(req: Request, res: Response): Promise<void> {
     try {
         const { title, text, date, imageUrl, tags } = req.body;
 
@@ -87,13 +88,13 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-async function uploadImage(req, res) {
+async function uploadImage(req: Request, res: Response): Promise<void> {
     try {
         console.log("Received image upload request");
 
         console.log(req.file);
         if (!req.file) {
-            return res.status(400).json({ error: "No image uploaded" });
+            res.status(400).json({ error: "No image uploaded" });
         }
 
         const result = await cloudinary.uploader.upload(req.file.path, {
@@ -113,7 +114,7 @@ async function uploadImage(req, res) {
     }
 }
 
-async function editDiaryEntry(req, res) {
+async function editDiaryEntry(req: Request, res: Response): Promise<void> {
     try {
         const { id } = req.params;
         const { title, text, date, imageUrl, tags } = req.body; // Include tags
@@ -133,7 +134,7 @@ async function editDiaryEntry(req, res) {
         );
 
         if (!updatedDiaryEntry) {
-            return res.status(404).json({ message: "Diary entry not found" });
+            res.status(404).json({ message: "Diary entry not found" });
         }
 
         res.status(200).json(updatedDiaryEntry);
@@ -143,13 +144,13 @@ async function editDiaryEntry(req, res) {
     }
 }
 
-async function deleteDiaryEntry(req, res) {
+async function deleteDiaryEntry(req: Request, res: Response): Promise<void> {
     try {
         const { id } = req.params;
         const deletedEntry = await Diary.findByIdAndDelete(id);
 
         if (!deletedEntry) {
-            return res.status(404).json({ message: "Diary entry not found" });
+            res.status(404).json({ message: "Diary entry not found" });
         }
 
         res.status(200).json({ message: "Diary entry deleted successfully" });
