@@ -12,7 +12,7 @@ const diarySchema = new mongoose.Schema({
     date: {
         type: Date,
         required: true,
-        set: (value) => {
+        set: (value: Date) => {
             if (value instanceof Date) {
                 value.setHours(0, 0, 0, 0);
                 return value;

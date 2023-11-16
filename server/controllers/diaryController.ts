@@ -1,7 +1,6 @@
 "use strict";
 //TODO remove unused libraries redundant
 import multer from 'multer'
-// const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 import { v2 as cloudinary } from 'cloudinary'
 import dotenv from "dotenv";

@@ -1,6 +1,9 @@
-const Tag = require("../models/tag");
+import Tag from '../models/tag'
+import { Request, Response } from 'express';
 
-async function getAllTags(req, res) {
+
+
+async function getAllTags(req: Request, res: Response): Promise<void> {
     try {
         console.log("Fetching tags...");
         const allTags = await Tag.find();
@@ -12,7 +15,7 @@ async function getAllTags(req, res) {
     }
 }
 
-async function postTag(req, res) {
+async function postTag(req: Request, res: Response): Promise<void> {
     try {
         const { name } = req.body;
         const newTag = new Tag({ name });
@@ -24,13 +27,13 @@ async function postTag(req, res) {
     }
 }
 
-async function deleteTag(req, res) {
+async function deleteTag(req: Request, res: Response): Promise<void> {
     try {
         const { id } = req.params;
         const deletedTag = await Tag.findByIdAndDelete(id);
 
         if (!deletedTag) {
-            return res.status(404).json({ message: "Tag not found" });
+            res.status(404).json({ message: "Tag not found" });
         }
 
         res.status(200).json({ message: "Tag deleted successfully" });

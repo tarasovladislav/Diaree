@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 //TODO remove unused libraries redundant
 import multer from 'multer';
-// const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 import { v2 as cloudinary } from 'cloudinary';
 import dotenv from "dotenv";
