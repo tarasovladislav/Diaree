@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 const diarySchema = new mongoose.Schema({
     title: {
         type: String,
@@ -40,4 +40,4 @@ const diarySchema = new mongoose.Schema({
 //     next();
 // });
 const Diary = mongoose.model("Diary", diarySchema);
-export default module.exports = Diary;
+export default Diary;

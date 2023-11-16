@@ -7,11 +7,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         yield mongoose.connect("mongodb://127.0.0.1:27017/diary");
         console.log("Connected to db ✅");
     });
 }
-export default module.exports = main;
+export default main;

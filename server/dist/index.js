@@ -1,10 +1,10 @@
 import express from "express";
 import cors from 'cors';
-import router from './router';
+import router from './router.js';
 import dotenv from "dotenv";
 dotenv.config();
 import { v2 as cloudinary } from 'cloudinary';
-import db from './models/db';
+import db from './models/db.js';
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -19,3 +19,4 @@ db().catch((error) => console.log(error));
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
 });
+export default app;

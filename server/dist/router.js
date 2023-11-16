@@ -2,8 +2,8 @@ import { Router } from "express";
 const router = Router();
 import multer from "multer";
 const upload = multer({ dest: "uploads/" });
-import diaryController from './controllers/diaryController';
-import tagController from './controllers/tagController';
+import diaryController from './controllers/diaryController.js';
+import tagController from './controllers/tagController.js';
 //TODO: Change controller names
 //Diary
 router.get('/diary/entries', diaryController.getAllDiaryEntries);

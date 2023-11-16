@@ -1,4 +1,4 @@
-import Tag from '../models/tag'
+import Tag from '../models/tag.js'
 import { Request, Response } from 'express';
 
 
@@ -43,4 +43,4 @@ async function deleteTag(req: Request, res: Response): Promise<void> {
     }
 }
 
-export default module.exports = { getAllTags, postTag, deleteTag };
+export default { getAllTags, postTag, deleteTag };

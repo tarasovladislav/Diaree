@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import Tag from '../models/tag';
+import Tag from '../models/tag.js';
 function getAllTags(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -52,4 +52,4 @@ function deleteTag(req, res) {
         }
     });
 }
-export default module.exports = { getAllTags, postTag, deleteTag };
+export default { getAllTags, postTag, deleteTag };

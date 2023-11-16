@@ -1,12 +1,12 @@
 import express from "express";
 import cors from 'cors';
-import router from './router';
+import router from './router.js';
 import dotenv from "dotenv";
 dotenv.config();
 import { v2 as cloudinary } from 'cloudinary'
 
 
-import db from './models/db';
+import db from './models/db.js';
 
 
 cloudinary.config({

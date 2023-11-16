@@ -14,7 +14,7 @@ const upload = multer({ dest: "uploads/" });
 import { v2 as cloudinary } from 'cloudinary';
 import dotenv from "dotenv";
 dotenv.config();
-const Diary = require("../models/diary.js");
+import Diary from "../models/diary.js";
 function getAllDiaryEntries(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -164,7 +164,7 @@ function deleteDiaryEntry(req, res) {
         }
     });
 }
-export default module.exports = {
+export default {
     getAllDiaryEntries,
     getRecentDiaryEntries,
     getDiaryEntryById,

@@ -7,7 +7,8 @@ import dotenv from "dotenv";
 dotenv.config();
 import { Request, Response } from 'express';
 
-const Diary = require("../models/diary.js");
+import Diary from "../models/diary.js"
+
 
 async function getAllDiaryEntries(req: Request, res: Response): Promise<void> {
     try {
@@ -161,7 +162,7 @@ async function deleteDiaryEntry(req: Request, res: Response): Promise<void> {
     }
 }
 
-export default module.exports = {
+export default {
     getAllDiaryEntries,
     getRecentDiaryEntries,
     getDiaryEntryById,
