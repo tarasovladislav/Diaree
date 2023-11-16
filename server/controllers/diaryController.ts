@@ -1,9 +1,11 @@
 "use strict";
 //TODO remove unused libraries redundant
-const multer = require("multer");
+import multer from 'multer'
+// const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
-const cloudinary = require("cloudinary").v2;
-require("dotenv").config();
+import { v2 as cloudinary } from 'cloudinary'
+import dotenv from "dotenv";
+dotenv.config();
 import { Request, Response } from 'express';
 
 const Diary = require("../models/diary.js");
@@ -92,22 +94,22 @@ async function uploadImage(req: Request, res: Response): Promise<void> {
     try {
         console.log("Received image upload request");
 
-        console.log(req.file);
+
         if (!req.file) {
             res.status(400).json({ error: "No image uploaded" });
+        } else {
+            const result = await cloudinary.uploader.upload(req.file.path, {
+                width: 500,
+                height: 500,
+                crop: "fit",
+                gravity: "center",
+                quality: "auto",
+                fetch_format: "auto",
+            })
+            const imageUrl = result.url;
+            res.json({ imageUrl });
         }
 
-        const result = await cloudinary.uploader.upload(req.file.path, {
-            width: 500,
-            height: 500,
-            crop: "fit",
-            gravity: "center",
-            quality: "auto",
-            fetch_format: "auto",
-        });
-
-        const imageUrl = result.url;
-        res.json({ imageUrl });
     } catch (error) {
         console.error("Error uploading image to Cloudinary:", error);
         res.status(500).json({ error: "Failed to upload image" });
