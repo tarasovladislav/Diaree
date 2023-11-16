@@ -160,7 +160,7 @@ async function deleteDiaryEntry(req: Request, res: Response): Promise<void> {
     }
 }
 
-module.exports = {
+export default module.exports = {
     getAllDiaryEntries,
     getRecentDiaryEntries,
     getOneDiaryEntry,

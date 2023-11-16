@@ -40,4 +40,4 @@ async function deleteTag(req, res) {
     }
 }
 
-module.exports = { getAllTags, addTag, deleteTag };
+export default module.exports = { getAllTags, addTag, deleteTag };

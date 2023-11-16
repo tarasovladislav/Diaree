@@ -5,4 +5,4 @@ async function main() {
     console.log("Connected to db ✅");
 }
 
-module.exports = main;
+export default module.exports = main;
