@@ -2,10 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test2": "tsc tests/server.test.ts --noEmit && jest dist/tests/server.test.js",
+    "test": "jest dist/tests/server.test.js"
   },
   "keywords": [],
   "author": "",
