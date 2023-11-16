@@ -12,3 +12,6 @@ type Diary = {
 type Tag = {
     name: string
 }
+
+
+export {Diary, Tag}
