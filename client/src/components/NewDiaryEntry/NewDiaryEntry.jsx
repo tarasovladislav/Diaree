@@ -94,7 +94,7 @@ function NewDiaryEntry({
 
         setIsUploading(true);
 
-        fetch(`${BASE_URL}/upload-image`, {
+        fetch(`${BASE_URL}/diary/image/upload`, {
             method: "POST",
             body: formData,
         })

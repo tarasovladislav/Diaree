@@ -9,7 +9,9 @@ type Props = {
     currentMonth: number,
     diaries: DiaryType[],
     setSelectedDate: any,
-    setIsOpenNew: any
+    setIsOpenNew: any,
+    setCurrentMonth: any,
+    setCurrentYear: any,
 }
 
 type EventData = {
@@ -22,7 +24,6 @@ const MonthComponent = (props: Props) => {
     const [events, setEvents] = useState<EventData[]>([])
     useEffect(() => {
         getAllDiaryEntries().then(data => setEvents(data))
-        console.log(events)
     }, [])
 
 
@@ -72,47 +73,51 @@ const MonthComponent = (props: Props) => {
         props.setIsOpenNew(true)
     }
     return (
-        <div className="month-view">
-            {grid.map((day, index) => {
-                // Determine the correct year, month, and day for the dateKey
-                let year = props.currentYear;
-                let month = props.currentMonth;
-                // Adjust for leading days
-                if (index < leadingDays.length) {
-                    month -= 1;
-                    if (month < 0) {
-                        year -= 1;
-                        month = 11; // December of the previous year
+        <>
+            <button onClick={() => props.setCurrentMonth(prev => prev + 1)}>Next Month</button>
+            <div className="month-view">
+                {grid.map((day, index) => {
+                    // Determine the correct year, month, and day for the dateKey
+                    let year = props.currentYear;
+                    let month = props.currentMonth;
+                    // Adjust for leading days
+                    if (index < leadingDays.length) {
+                        month -= 1;
+                        if (month < 0) {
+                            year -= 1;
+                            month = 11; // December of the previous year
+                        }
+                        day = daysInPreviousMonth - leadingDays.length + index + 1;
                     }
-                    day = daysInPreviousMonth - leadingDays.length + index + 1;
-                }
-                // Adjust for trailing days
-                else if (index >= leadingDays.length + daysInMonth) {
-                    month += 1;
-                    if (month > 11) {
-                        year += 1;
-                        month = 0; // January of the next year
+                    // Adjust for trailing days
+                    else if (index >= leadingDays.length + daysInMonth) {
+                        month += 1;
+                        if (month > 11) {
+                            year += 1;
+                            month = 0; // January of the next year
+                        }
+                        day = index - (leadingDays.length + daysInMonth) + 1;
                     }
-                    day = index - (leadingDays.length + daysInMonth) + 1;
-                }
-                const dateKey = formatDateKey(year, month, day);
-                const dayEvents = eventsMap.get(dateKey);
-                return (
-                    <div onClick={()=>handleDayClick(dateKey)} key={index} className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
-                        <span>
-                            {day}
-                        </span>
+                    const dateKey = formatDateKey(year, month, day);
+                    const dayEvents = eventsMap.get(dateKey);
+                    return (
+                        <div onClick={() => handleDayClick(dateKey)} key={index} className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
+                            <span>
+                                {day}
+                            </span>
 
-                        {dayEvents && (
-                            <div style={{ overflow: "scroll", width: "100%", }}>
-                                <DayComponent title={dayEvents.title} description={dayEvents.text} date={dayEvents.date} image={dayEvents.imageUrl} />
+                            {dayEvents && (
+                                <div style={{ overflow: "scroll", width: "100%", }}>
+                                    <DayComponent title={dayEvents.title} description={dayEvents.text} date={dayEvents.date} image={dayEvents.imageUrl} />
 
-                            </div>
-                        )}
-                    </div>
-                );
-            })}
-        </div>
+                                </div>
+                            )}
+                        </div>
+                    );
+                })}
+            </div>
+        </>
+
     )
 }
 
