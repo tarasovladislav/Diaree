@@ -132,6 +132,22 @@ const deleteTag = async (_id: String):Promise<{ message: string }> => {
     }
 }
 
+const getUser = async (token: String) => {
+    try {
+        const response = await fetch(`${BASE_URL}/user/account`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `${token}`
+            }
+        });
+        checkResponse(response);
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
 
 export {
     getAllDiaryEntries,
@@ -142,5 +158,6 @@ export {
     putDiaryEntry,
     getAllTags,
     postTag,
-    deleteTag
+    deleteTag,
+    getUser
 }
