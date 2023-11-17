@@ -3,9 +3,9 @@ import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import jwt from 'jsonwebtoken';
 import { Request, Response } from 'express';
+import { validateUser } from '../utils/userUtils.js';
 import dotenv from "dotenv";
 dotenv.config({ path: '../.env' });
-//TODO: Move to .env
 const SECRET_KEY = process.env.SECRET_KEY!;
 
 const postRegister = async (req: Request, res: Response): Promise<any> => {
@@ -67,59 +67,28 @@ const getUser = async (req: Request, res: Response): Promise<any> => {
 
 const putUpdate = async (req: Request, res: Response): Promise<any> => { //TODO: fix
     try {
-        const { password } = req.body;
-        const validatedUser = await validateUser(req, res); 
+        const { username, password } = req.body;
+        const validatedUser = await validateUser(req, res);
         if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: "Invalid user" });
         const { user_id, user } = validatedUser;
+        const updatedUsername = username || user.username;
+        const updatedPassword = await bcrypt.hash(password, 10) || password;
 
-        await User.findOneAndUpdate(
+        await User.updateOne(
             { user_id },
             {
                 $set: {
-                    password: password ? await bcrypt.hash(password, 10) : user.password //If password is provided update it otherwise just skip TODO: refactor
+                    username: updatedUsername,
+                    password: updatedPassword
                 }
             },
-            { returnDocument: 'after' }
+            // { returnDocument: 'after' } //Testing purposes only (returns updated version) needs findOneAndUpdate
         );
 
         res.status(200).send('Successfully updated credentials');
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });
-    }
-}
-
-async function validateUser(req: Request, res: Response): Promise<{ user_id: string; user: any } | undefined> {
-    try {
-        const { authorization } = req.headers;
-        if (!authorization) {
-            res.status(401).json({ error: "No token provided" });
-            return undefined;
-        }
-        const user_id = tokenToUserId(authorization);
-        if (!user_id) {
-            res.status(401).json({ error: "Could not verify signature" });
-            return undefined;
-        }
-        const user = await User.findOne({ user_id });
-        if (!user) {
-            res.status(404).json({ error: "User does not exist" });
-            return undefined;
-        }
-        return { user_id, user };
-    } catch (error) {
-        throw error;
-    }
-}
-
-
-function tokenToUserId(token: string) {
-    try {
-        const decodedToken = jwt.verify(token, SECRET_KEY) as { user_id: string }; //Verify the token with the secret key
-        return decodedToken.user_id; //Return the user_id from the token payload
-    } catch (error) {
-        console.error(error);
-        return false;
     }
 }
 
