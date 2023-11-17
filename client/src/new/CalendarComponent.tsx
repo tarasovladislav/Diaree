@@ -3,7 +3,9 @@ import MonthComponent from './MonthComponent'
 import { DiaryType } from '../Types/Types'
 
 type Props = {
-    diaries: DiaryType[]
+    diaries: DiaryType[],
+    setSelectedDate: any,
+    setIsOpenNew: any
 }
 
 const CalendarComponent = (props: Props) => {
@@ -13,7 +15,7 @@ const CalendarComponent = (props: Props) => {
 
     return (
         <div>
-            <MonthComponent currentYear={2023} currentMonth={10} diaries={props.diaries} />
+            <MonthComponent currentYear={2023} currentMonth={10} diaries={props.diaries} setSelectedDate={props.setSelectedDate} setIsOpenNew={props.setIsOpenNew} />
             {/* month 0 january */}
         </div>
     )

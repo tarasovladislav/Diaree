@@ -7,7 +7,9 @@ import { DiaryType } from '../Types/Types'
 type Props = {
     currentYear: number,
     currentMonth: number,
-    diaries: DiaryType[]
+    diaries: DiaryType[],
+    setSelectedDate: any,
+    setIsOpenNew: any
 }
 
 type EventData = {
@@ -64,7 +66,11 @@ const MonthComponent = (props: Props) => {
         // Return the date string
         return `${year}-${paddedMonth}-${paddedDay}`;
     };
-
+    const handleDayClick = (dateKey) => {
+        console.log(dateKey);
+        props.setSelectedDate(dateKey)
+        props.setIsOpenNew(true)
+    }
     return (
         <div className="month-view">
             {grid.map((day, index) => {
@@ -92,10 +98,11 @@ const MonthComponent = (props: Props) => {
                 const dateKey = formatDateKey(year, month, day);
                 const dayEvents = eventsMap.get(dateKey);
                 return (
-                    <div key={index} className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
+                    <div onClick={()=>handleDayClick(dateKey)} key={index} className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
                         <span>
                             {day}
                         </span>
+
                         {dayEvents && (
                             <div style={{ overflow: "scroll", width: "100%", }}>
                                 <DayComponent title={dayEvents.title} description={dayEvents.text} date={dayEvents.date} image={dayEvents.imageUrl} />

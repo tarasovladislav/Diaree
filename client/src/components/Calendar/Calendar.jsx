@@ -3,7 +3,7 @@ import "./Calendar.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-function Calendar({ onSelectDate }) {
+function Calendar({ onSelectDate, setIsOpenNew }) {
     const [startDate, setStartDate] = useState(null);
 
     const handleCalendarClose = () => {
@@ -16,6 +16,7 @@ function Calendar({ onSelectDate }) {
                 )
             );
             onSelectDate(selectedDateUTC);
+            setIsOpenNew(true)
             console.log(selectedDateUTC);
         }
     };
