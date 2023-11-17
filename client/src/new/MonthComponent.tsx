@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './MonthComponent.css'
+import DayComponent from './DayComponent'
+import {getAllDiaryEntries} from '../ApiService'
 type Props = {
     currentYear: number,
     currentMonth: number,
@@ -12,42 +14,13 @@ type EventData = {
     imageUrl: string,
 }
 const MonthComponent = (props: Props) => {
-
-    const events = [{
-        title: 'Title',
-        text: 'descriptions',
-        date: '2023-10-01',
-        imageUrl: 'string',
-    },
-    {
-        title: 'Vlads Birthday',
-        text: 'descriptions',
-        date: '2023-09-30',
-        imageUrl: 'string',
-    },
-    {
-        title: 'Vlads Birthday',
-        text: 'descriptions',
-        date: '2023-11-01',
-        imageUrl: 'string',
-    },
-    {
-        title: 'Vlads Birthday',
-        text: 'descriptions',
-        date: '2023-11-28',
-        imageUrl: 'string',
-    },
-    {
-        title: 'Vlads Birthday',
-        text: 'descriptions',
-        date: '2023-12-01',
-        imageUrl: 'string',
-    },
-
-    ]
-
-
-
+//useeffect , usestate (all events diary)
+const [events, setEvents]= useState<EventData[]>([])
+useEffect(()=> {
+    getAllDiaryEntries().then(data=>setEvents(data))
+    console.log(events)
+}, [])
+ 
 
     const getDaysInMonth = (year: number, month: number): number => {
         return new Date(year, month + 1, 0).getDate();
@@ -119,10 +92,10 @@ const MonthComponent = (props: Props) => {
                     <div key={index} className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
                         {day}
                         {dayEvents && (
-                            <div className="event">
-                                <h4>{dayEvents.title}</h4>
-
-                            </div>
+                                <DayComponent title={dayEvents.title} description={dayEvents.text} date={new Date(Date.now())} image={dayEvents.imageUrl} />
+                            // <div className="event">
+                            //     {/* <h4>{dayEvents.title}</h4> */}
+                            // </div>
                         )}
                     </div>
                 );

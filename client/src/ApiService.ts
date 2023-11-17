@@ -8,7 +8,8 @@ const checkResponse = (response: Response): void => {
     if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
 };
 
-const getAllDiaryEntries = async (): Promise<[DiaryType]> => {
+// const getAllDiaryEntries = async (): Promise<[]> => {//TODO []type
+const getAllDiaryEntries = async (): Promise<[]> => {
     try {
         const response = await fetch(`${BASE_URL}/diary/entries`);
         checkResponse(response);

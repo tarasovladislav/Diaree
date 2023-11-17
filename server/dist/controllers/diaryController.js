@@ -13,6 +13,7 @@ const diary_js_1 = __importDefault(require("../models/diary.js"));
 async function getAllDiaryEntries(req, res) {
     try {
         const allDiaryEntries = await diary_js_1.default.find();
+        console.log(allDiaryEntries);
         res.status(200).json(allDiaryEntries);
     }
     catch (error) {
@@ -70,6 +71,7 @@ async function postDiaryEntry(req, res) {
             imageUrl,
             tags,
         });
+        console.log(diaryEntryToAdd);
         res.status(201).json(diaryEntryToAdd);
     }
     catch (error) {

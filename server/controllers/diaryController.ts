@@ -13,6 +13,7 @@ import Diary from "../models/diary.js"
 async function getAllDiaryEntries(req: Request, res: Response): Promise<void> {
     try {
         const allDiaryEntries = await Diary.find();
+        console.log(allDiaryEntries)
         res.status(200).json(allDiaryEntries);
     } catch (error) {
         console.error(error);
@@ -76,6 +77,7 @@ async function postDiaryEntry(req: Request, res: Response): Promise<void> {
             imageUrl,
             tags,
         });
+        console.log(diaryEntryToAdd)
 
         res.status(201).json(diaryEntryToAdd);
     } catch (error) {

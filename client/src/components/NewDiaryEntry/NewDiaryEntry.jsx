@@ -34,12 +34,14 @@ function NewDiaryEntry({
 
   useEffect(() => {
     if (selectedDate) {
-      const formattedDate = selectedDate.toLocaleDateString("en-US", {
-        weekday: "short",
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      });
+    //   const formattedDate = selectedDate.toLocaleDateString("en-US", {
+    //     weekday: "short",
+    //     year: "numeric",
+    //     month: "short",
+    //     day: "numeric",
+    //   });
+      const formattedDate = selectedDate.toISOString().split('T')[0]
+      console.log(formattedDate)
       setNewDiaryEntry({
         ...newDiaryEntry,
         date: formattedDate,
@@ -63,7 +65,8 @@ function NewDiaryEntry({
 
       const newEntryData = {
         ...newDiaryEntry,
-        date: adjustedDate.toISOString(),
+        // date: adjustedDate.toISOString(),
+        date: adjustedDate.toISOString().split('T')[0],
         tags: selectedTags.map((tag) => tag.name),
       };
 

@@ -26,8 +26,9 @@ const DayComponent = (props: Props) => {
   return (
     <div>
       <div className='dayComponent' onClick={handleClick}>
-        <p>{props.title}</p>
-        <img src={props.image} alt='day event' />
+        {props.date.toISOString()}
+        <h3>{props.title}</h3>
+        {/* <img src={props.image} alt='day event' /> */}
       </div>
 
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>

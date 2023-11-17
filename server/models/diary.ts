@@ -9,7 +9,8 @@ const diarySchema = new mongoose.Schema({
         required: false,
     },
     date: {
-        type: Date,
+        // type: Date,
+        type: String,
         required: true,
         // set: (value: Date) => {
         //     if (value instanceof Date) {
