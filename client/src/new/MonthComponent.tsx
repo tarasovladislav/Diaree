@@ -12,42 +12,39 @@ type EventData = {
     imageUrl: string,
 }
 const MonthComponent = (props: Props) => {
-    // const [events, setEvents] = useState<EventData[]>([])
+
     const events = [{
         title: 'Title',
         text: 'descriptions',
-        date: '2023-11-17',
+        date: '2023-10-01',
         imageUrl: 'string',
     },
     {
         title: 'Vlads Birthday',
         text: 'descriptions',
-        date: '2023-11-29',
+        date: '2023-09-30',
         imageUrl: 'string',
     },
     {
-        title: 'Sosi sosi time',
-        text: 'descriptions',
-        date: '2023-11-18',
-        imageUrl: 'string',
-    },{
         title: 'Vlads Birthday',
         text: 'descriptions',
-        date: '2023-11-30',
+        date: '2023-11-01',
+        imageUrl: 'string',
+    },
+    {
+        title: 'Vlads Birthday',
+        text: 'descriptions',
+        date: '2023-11-28',
+        imageUrl: 'string',
+    },
+    {
+        title: 'Vlads Birthday',
+        text: 'descriptions',
+        date: '2023-12-01',
         imageUrl: 'string',
     },
 
-]
-    // useEffect(() => {
-    //     setEvents([
-    //         {
-    //             title: 'Title',
-    //             text: 'descriptions',
-    //             date: '2023-11-17',
-    //             imageUrl: 'string',
-    //         }
-    //     ])
-    // }, [])
+    ]
 
 
 
@@ -69,33 +66,64 @@ const MonthComponent = (props: Props) => {
     const daysInPreviousMonth = getDaysInMonth(props.currentYear, props.currentMonth - 1);
     const leadingDays = Array.from({ length: firstDayOfMonth }, (_, i) => daysInPreviousMonth - i).reverse();
     const currentMonthDays = Array.from({ length: daysInMonth }, (_, i) => i + 1);
-    const trailingDaysCount = 35 - (firstDayOfMonth + daysInMonth);
+    const totalDays = firstDayOfMonth + daysInMonth;
+
+    const totalCells = totalDays > 35 ? 42 : 35;
+
+    const trailingDaysCount = totalCells - (firstDayOfMonth + daysInMonth);
     const trailingDays = Array.from({ length: trailingDaysCount }, (_, i) => i + 1);
     const grid = [...leadingDays, ...currentMonthDays, ...trailingDays];
 
+    //missing type def
     const eventsMap = new Map(
         events.map(event => [event.date, event])
     );
-
-
+    // Helper function to create the date string in 'YYYY-MM-DD' format
+    const formatDateKey = (year: number, month: number, day: number) => {
+        // Correctly adjust month number for JavaScript Date (0-11)
+        month += 1;
+        // Pad single digit month and day with leading zeros
+        const paddedMonth = month.toString().padStart(2, '0');
+        const paddedDay = day.toString().padStart(2, '0');
+        // Return the date string
+        return `${year}-${paddedMonth}-${paddedDay}`;
+    };
 
     return (
         <div className="month-view">
             {grid.map((day, index) => {
-                const dateKey = `${props.currentYear}-${String(props.currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                console.log(dateKey)
+                // Determine the correct year, month, and day for the dateKey
+                let year = props.currentYear;
+                let month = props.currentMonth;
+                // Adjust for leading days
+                if (index < leadingDays.length) {
+                    month -= 1;
+                    if (month < 0) {
+                        year -= 1;
+                        month = 11; // December of the previous year
+                    }
+                    day = daysInPreviousMonth - leadingDays.length + index + 1;
+                }
+                // Adjust for trailing days
+                else if (index >= leadingDays.length + daysInMonth) {
+                    month += 1;
+                    if (month > 11) {
+                        year += 1;
+                        month = 0; // January of the next year
+                    }
+                    day = index - (leadingDays.length + daysInMonth) + 1;
+                }
+                const dateKey = formatDateKey(year, month, day);
                 const dayEvents = eventsMap.get(dateKey);
-                console.log(dayEvents)
                 return (
                     <div key={index} className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
                         {day}
-                        {/* {dayEvents && dayEvents.map(event => ( */}
-                        {dayEvents && <div key={dayEvents.title} className="event">
-                            <h4>{dayEvents.title}</h4>
-                            {/* <img src={dayEvents.imageUrl} alt={dayEvents.title} /> */}
-                            {/* <p>{dayEvents.text}</p> */}
-                        </div>}
-                        {/* ))} */}
+                        {dayEvents && (
+                            <div className="event">
+                                <h4>{dayEvents.title}</h4>
+
+                            </div>
+                        )}
                     </div>
                 );
             })}

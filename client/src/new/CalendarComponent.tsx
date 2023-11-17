@@ -12,7 +12,6 @@ const CalendarComponent = (props: Props) => {
 
     return (
         <div>
-            BLBALBALBAL
             <MonthComponent currentYear={2023} currentMonth={10} /> 
             {/* month 0 january */}
         </div>
