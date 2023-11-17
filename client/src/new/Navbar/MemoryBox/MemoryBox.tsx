@@ -25,7 +25,7 @@ const MemoryBox: React.FC<MemoryBoxType> = ({ data }: MemoryBoxType) => {
     return (
         <div className="MemoryBox">
             {data && Array.isArray(data) && data.length > 0 ? (
-                data.map((item, index) => (
+                data.slice(0,4).map((item, index) => (
                     <MemoryBoxItem key={index} title={item.title} description={item.description} />
                 ))
             ) : (

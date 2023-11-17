@@ -1,6 +1,7 @@
 import './Navbar.css';
 import NavbarBox from './MemoryBox/MemoryBox';
 import TagBox from './TagBox/TagBox';
+import DiaryLogo from '../../assets/diary.png';
 
 const mockData = [
   {
@@ -14,6 +15,10 @@ const mockData = [
   {
     title: 'Test3',
     description: 'Test3'
+  },
+  {
+    title: 'Test4',
+    description: 'Test4Test4Test4Test4Test4Test4Test4Test4Test4Test4'
   },
   {
     title: 'Test4',
@@ -99,24 +104,25 @@ const mockTags = [
 const Navbar = () => {
   return (
     <div className="Navbar">
-      <div className="Title">
+      <div className="Title" style={{ paddingBlockEnd: '5px'}} >
         <h2>Dιαɾҽҽ</h2>
+        <img src={DiaryLogo} alt="Logo" style={{ height: '32px'}} />
       </div>
       <div className="Recent-Memories">
         <h4>Recent memories</h4>
-        <NavbarBox data={[]} />
+        <NavbarBox data={mockData} />
       </div>
       <div className="Border"></div>
       <div className="Random-Memorie">
         <button>Random memory</button>
       </div>
-      <div className="Border"></div>
+      <div className="Border" style={{ paddingBlockStart: '0px' }}></div>
       <div className="Tags">
         <h4>Tags</h4>
-        <TagBox data={[]} />
+        <TagBox data={mockTags} />
       </div>
-      <div className="Border"></div>
-      <footer style={{ textAlign: 'center', marginTop: '-7px' }}>
+      <footer>
+        <div className="Border" style={{ marginBottom: '15px'}}></div>
         <p>&copy; Diarrhea<br />All toilet paper reserved.</p>
       </footer>
     </div>
