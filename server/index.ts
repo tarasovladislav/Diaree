@@ -24,8 +24,17 @@ app.use(router);
 
 db().catch((error) => console.log(error));
 
-app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
-});
+async function startServer() {
+    const server = app.listen(PORT, () => {
+      console.log(`Listening on port ${PORT}`);
+    });
+  
+    return server;
+  }
+  
+  if (require.main === module) {
+    // If this file is run directly, start the server
+    startServer();
+  }
 
-export default app
+   export default startServer;

@@ -21,7 +21,14 @@ app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(router_js_1.default);
 (0, db_js_1.default)().catch((error) => console.log(error));
-app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
-});
-exports.default = app;
+async function startServer() {
+    const server = app.listen(PORT, () => {
+        console.log(`Listening on port ${PORT}`);
+    });
+    return server;
+}
+if (require.main === module) {
+    // If this file is run directly, start the server
+    startServer();
+}
+exports.default = startServer;
