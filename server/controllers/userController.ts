@@ -15,7 +15,7 @@ const postRegister = async (req: Request, res: Response): Promise<any> => {
         const { username, password, name } = req.body; //Get credentials from body
         if (!username || !password || !name) return res.status(400).json({ error: "Credentials not provided correctly" });
 
-        const user = await User.find({ username });
+        const user = await User.findOne({ username });
         if (user) return res.status(400).json({ error: "Username is already taken" }); //Check if user with username: username already is taken/exists
 
         const user_id = uuidv4(); //Generate a uuidv4 for the user_id
@@ -54,13 +54,9 @@ const postLogin = async (req: Request, res: Response): Promise<any> => {
 
 const getUser = async (req: Request, res: Response): Promise<any> => {
     try {
-        const { authorization } = req.headers; //Get token (saved as authorization) from headers
-        if (!authorization) return res.status(400).json({ error: "Token not provided" });
-
-        const user_id = tokenToUserId(authorization); //Decode the token into a user_id
-
-        const user = await User.findOne({ user_id });
-        if (!user) return res.status(400).json({ error: "User does not exists" });
+        const validatedUser = await validateUser(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: "Invalid user" });
+        const { user } = validatedUser;
 
         const { _id, password, __v, ...filteredUser } = user.toObject(); //Filter out unnecessary properties
 
@@ -71,14 +67,58 @@ const getUser = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
-function tokenToUserId(token: string): String {
-    const decodedToken = jwt.verify(token, SECRET_KEY) as { user_id: string }; //Verify the token with the secret key
-    return decodedToken.user_id; //Return the user_id from the token payload
+const putUpdate = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const { password } = req.body;
+        const validatedUser = await validateUser(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: "Invalid user" });
+        const { user_id, user } = validatedUser;
+
+        res.status(200).send('Success')
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
+
+async function validateUser(req: Request, res: Response): Promise<{ user_id: string; user: any } | undefined> {
+    try {
+        const { authorization } = req.headers;
+        if (!authorization) {
+            res.status(401).json({ error: "No token provided" });
+            return undefined;
+        }
+        const user_id = tokenToUserId(authorization);
+        if (!user_id) {
+            res.status(401).json({ error: "Could not verify signature" });
+            return undefined;
+        }
+        const user = await User.findOne({ user_id });
+        if (!user) {
+            res.status(404).json({ error: "User does not exist" });
+            return undefined;
+        }
+        return { user_id, user };
+    } catch (error) {
+        throw error;
+    }
+}
+
+
+function tokenToUserId(token: string) {
+    try {
+        const decodedToken = jwt.verify(token, SECRET_KEY) as { user_id: string }; //Verify the token with the secret key
+        return decodedToken.user_id; //Return the user_id from the token payload
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
 }
 
 
 export default {
     postRegister,
     postLogin,
-    getUser
+    getUser,
+    putUpdate
 }

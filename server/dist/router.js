@@ -30,4 +30,5 @@ router.post('/diary/image/upload', upload.single('image'), diaryController_js_1.
 router.post('/user/account/login', userController_js_1.default.postLogin);
 router.post('/user/account/register', userController_js_1.default.postRegister);
 router.get('/user/account', userController_js_1.default.getUser);
+router.put('/user/account/update', userController_js_1.default.putUpdate);
 exports.default = router;

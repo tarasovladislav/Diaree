@@ -28,6 +28,7 @@ router.post('/diary/image/upload', upload.single('image'), diaryController.uploa
 router.post('/user/account/login', userController.postLogin);
 router.post('/user/account/register', userController.postRegister);
 router.get('/user/account', userController.getUser);
+router.put('/user/account/update', userController.putUpdate);
 
 
 export default router;
