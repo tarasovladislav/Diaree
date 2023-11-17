@@ -1,8 +1,9 @@
 import React from 'react'
 import MonthComponent from './MonthComponent'
+import { DiaryType } from '../Types/Types'
 
 type Props = {
-
+    diaries: DiaryType[]
 }
 
 const CalendarComponent = (props: Props) => {
@@ -12,7 +13,7 @@ const CalendarComponent = (props: Props) => {
 
     return (
         <div>
-            <MonthComponent currentYear={2023} currentMonth={10} /> 
+            <MonthComponent currentYear={2023} currentMonth={10} diaries={props.diaries} />
             {/* month 0 january */}
         </div>
     )

@@ -3,7 +3,7 @@ import Modal from './DayModal';
 type Props = {
   title: string,
   description: string,
-  date: Date,
+  date: string,
   image: string
 }
 
@@ -26,8 +26,7 @@ const DayComponent = (props: Props) => {
   return (
     <div>
       <div className='dayComponent' onClick={handleClick}>
-        {props.date.toISOString()}
-        <h3>{props.title}</h3>
+        <span>{props.title}</span>
         {/* <img src={props.image} alt='day event' /> */}
       </div>
 

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import './MonthComponent.css'
 import DayComponent from './DayComponent'
-import {getAllDiaryEntries} from '../ApiService'
+import { getAllDiaryEntries } from '../ApiService'
+import { DiaryType } from '../Types/Types'
+
 type Props = {
     currentYear: number,
     currentMonth: number,
+    diaries: DiaryType[]
 }
 
 type EventData = {
@@ -14,13 +17,12 @@ type EventData = {
     imageUrl: string,
 }
 const MonthComponent = (props: Props) => {
-//useeffect , usestate (all events diary)
-const [events, setEvents]= useState<EventData[]>([])
-useEffect(()=> {
-    getAllDiaryEntries().then(data=>setEvents(data))
-    console.log(events)
-}, [])
- 
+    const [events, setEvents] = useState<EventData[]>([])
+    useEffect(() => {
+        getAllDiaryEntries().then(data => setEvents(data))
+        console.log(events)
+    }, [])
+
 
     const getDaysInMonth = (year: number, month: number): number => {
         return new Date(year, month + 1, 0).getDate();
@@ -49,7 +51,8 @@ useEffect(()=> {
 
     //missing type def
     const eventsMap = new Map(
-        events.map(event => [event.date, event])
+        props.diaries.map(event => [event.date, event])
+        // events.map(event => [event.date, event])
     );
     // Helper function to create the date string in 'YYYY-MM-DD' format
     const formatDateKey = (year: number, month: number, day: number) => {
@@ -90,12 +93,14 @@ useEffect(()=> {
                 const dayEvents = eventsMap.get(dateKey);
                 return (
                     <div key={index} className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
-                        {day}
+                        <span>
+                            {day}
+                        </span>
                         {dayEvents && (
-                                <DayComponent title={dayEvents.title} description={dayEvents.text} date={new Date(Date.now())} image={dayEvents.imageUrl} />
-                            // <div className="event">
-                            //     {/* <h4>{dayEvents.title}</h4> */}
-                            // </div>
+                            <div style={{ overflow: "scroll", width: "100%", }}>
+                                <DayComponent title={dayEvents.title} description={dayEvents.text} date={dayEvents.date} image={dayEvents.imageUrl} />
+
+                            </div>
                         )}
                     </div>
                 );
