@@ -1,6 +1,7 @@
 import './Navbar.css';
 import NavbarBox from './MemoryBox/MemoryBox';
 import TagBox from './TagBox/TagBox';
+import DiaryLogo from '../../assets/diary.png';
 
 const mockData = [
   {
@@ -105,6 +106,7 @@ const Navbar = () => {
     <div className="Navbar">
       <div className="Title" style={{ paddingBlockEnd: '5px'}} >
         <h2>Dιαɾҽҽ</h2>
+        <img src={DiaryLogo} alt="Logo" style={{ height: '32px'}} />
       </div>
       <div className="Recent-Memories">
         <h4>Recent memories</h4>
