@@ -18,6 +18,10 @@ const mockData = [
   {
     title: 'Test4',
     description: 'Test4Test4Test4Test4Test4Test4Test4Test4Test4Test4'
+  },
+  {
+    title: 'Test4',
+    description: 'Test4Test4Test4Test4Test4Test4Test4Test4Test4Test4'
   }
 ]
 
@@ -99,21 +103,21 @@ const mockTags = [
 const Navbar = () => {
   return (
     <div className="Navbar">
-      <div className="Title">
+      <div className="Title" style={{ paddingBlockEnd: '5px'}} >
         <h2>Dιαɾҽҽ</h2>
       </div>
       <div className="Recent-Memories">
         <h4>Recent memories</h4>
-        <NavbarBox data={[]} />
+        <NavbarBox data={mockData} />
       </div>
       <div className="Border"></div>
       <div className="Random-Memorie">
         <button>Random memory</button>
       </div>
-      <div className="Border"></div>
+      <div className="Border" style={{ paddingBlockStart: '0px' }}></div>
       <div className="Tags">
         <h4>Tags</h4>
-        <TagBox data={[]} />
+        <TagBox data={mockTags} />
       </div>
       <footer>
         <div className="Border" style={{ marginBottom: '15px'}}></div>
