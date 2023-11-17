@@ -12,6 +12,7 @@ type Props = {
 const CalendarComponent = (props: Props) => {
     // useEffect for getting data 
 
+    //testing
     const [currentYear, setCurrentYear] = useState(2023)
     const [currentMonth, setCurrentMonth] = useState(10)
 
