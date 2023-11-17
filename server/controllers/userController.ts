@@ -6,9 +6,7 @@ import { Request, Response } from 'express';
 import dotenv from "dotenv";
 dotenv.config({ path: '../.env' });
 //TODO: Move to .env
-const SECRET_KEY = process.env.SECRET_KEY!//'Vlad wants to sosi sosi';
-console.log(SECRET_KEY);
-
+const SECRET_KEY = process.env.SECRET_KEY!;
 
 const postRegister = async (req: Request, res: Response): Promise<any> => {
     try {
@@ -67,14 +65,24 @@ const getUser = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
-const putUpdate = async (req: Request, res: Response): Promise<any> => {
+const putUpdate = async (req: Request, res: Response): Promise<any> => { //TODO: fix
     try {
         const { password } = req.body;
-        const validatedUser = await validateUser(req, res);
+        const validatedUser = await validateUser(req, res); 
         if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: "Invalid user" });
         const { user_id, user } = validatedUser;
 
-        res.status(200).send('Success')
+        await User.findOneAndUpdate(
+            { user_id },
+            {
+                $set: {
+                    password: password ? await bcrypt.hash(password, 10) : user.password //If password is provided update it otherwise just skip TODO: refactor
+                }
+            },
+            { returnDocument: 'after' }
+        );
+
+        res.status(200).send('Successfully updated credentials');
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });
