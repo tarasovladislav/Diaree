@@ -1,8 +1,36 @@
 .Navbar {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     height: calc(100vh - 20px);
-    width: 20%;
+    min-width: 20%;
+    max-width: 20%;
     border: 2px solid black;
     border-radius: 10px;
     margin: 10px;
+    padding: 15px;
+}
+
+.Navbar .Title {
+    border-bottom: 1px solid black;
+    /* box-shadow: 0px 6px rgba(0, 0, 0, 0.15); */
+}
+
+.Navbar .Recent-Memories h4, .Navbar .Tags h4 {
+    padding: 5px;
+    text-align: center;
+}
+
+.Navbar .Random-Memorie button:hover {
+    transform: scale(1.03);
+}
+
+.Navbar .Border {
+    padding-block-start: 10px;
+    border-bottom: 1px solid black;
+}
+
+.Navbar .Random-Memorie button {
+    width: 100%;
 }
