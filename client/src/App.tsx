@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from "./new/Navbar/Navbar";
 import DiaryList from "./components/DiaryList/DiaryList";
 import Calendar from "./components/Calendar/Calendar";
 import Popup from "./components/Popup/Popup";
@@ -16,7 +16,7 @@ type AppProps = {
 }
 
 
-function App(): React.FC {
+function App() {
     const [diaries, setDiaries] = useState<DiaryType[]>([]);
     const [selectedDate, setSelectedDate] = useState(null);
     const [diaryEntry, setDiaryEntry] = useState(null);
@@ -37,7 +37,7 @@ function App(): React.FC {
                 setDiaries(data);
             })
             .catch((error) => console.error(error));
-    }, [diaries]);
+    }, []);
 
 
     const handleCloseModal = () => {
@@ -73,9 +73,10 @@ function App(): React.FC {
     const [isOpenNew, setIsOpenNew] = useState(false)
 
     return (
-        <div>
+        <>
+        <div className="App">
+            <Navbar />
             <CalendarComponent diaries={diaries} setSelectedDate={setSelectedDate} setIsOpenNew={setIsOpenNew} />
-            {/* <Navbar /> */}
             {/* <div className="calendar-container">
                 <Calendar onSelectDate={setSelectedDate} setIsOpenNew={setIsOpenNew} />
             </div> */}
@@ -128,6 +129,7 @@ function App(): React.FC {
       )} */}
 
         </div>
+        </>
     );
 }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import './CalendarComponent.css';
 import MonthComponent from './MonthComponent'
 import { DiaryType } from '../Types/Types'
 
@@ -11,10 +11,8 @@ type Props = {
 const CalendarComponent = (props: Props) => {
     // useEffect for getting data 
 
-
-
     return (
-        <div>
+        <div className='Calendar'>
             <MonthComponent currentYear={2023} currentMonth={10} diaries={props.diaries} setSelectedDate={props.setSelectedDate} setIsOpenNew={props.setIsOpenNew} />
             {/* month 0 january */}
         </div>
