@@ -1,0 +1,18 @@
+.month-view {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 columns for 7 days of the week */
+    grid-gap: 5px;
+  }
+  
+  .day {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+  }
+  
+  .day.other-month {
+    background-color: #e0e0e0; /* Distinguish days from other months with a different color */
+  }
+  

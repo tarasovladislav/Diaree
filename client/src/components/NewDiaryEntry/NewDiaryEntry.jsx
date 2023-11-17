@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { addDiaryEntry } from "../../ApiService";
+import { postDiaryEntry } from "../../ApiService";
 import "./NewDiaryEntry.css";
 
 function NewDiaryEntry({
@@ -67,7 +67,7 @@ function NewDiaryEntry({
         tags: selectedTags.map((tag) => tag.name),
       };
 
-      addDiaryEntry(newEntryData)
+      postDiaryEntry(newEntryData)
         .then((data) => {
           console.log("New diary entry added:", data);
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getTags, addTag, deleteTag } from "../../ApiService";
+import { getAllTags, postTag, deleteTag } from "../../ApiService";
 import Tag from "../Tag/Tag";
 import "./TagManagement.css";
 
@@ -12,7 +12,7 @@ function TagManagement({ tags, setTags }) {
 
   const fetchTags = async () => {
     try {
-      const myTags = await getTags();
+      const myTags = await getAllTags();
       setTags(myTags);
     } catch (error) {
       console.error("Error fetching tags:", error);
@@ -21,7 +21,7 @@ function TagManagement({ tags, setTags }) {
 
   const handleAddTag = async () => {
     try {
-      const addedTag = await addTag(newTagName);
+      const addedTag = await postTag(newTagName);
       setTags([...tags, addedTag]);
       setNewTagName("");
     } catch (error) {

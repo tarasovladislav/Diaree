@@ -10,6 +10,7 @@ import SearchDiaries from "./components/SearchDiaries/SearchDiaries";
 import FoundEntry from "./components/FoundEntry/FoundEntry";
 import TagManagement from "./components/TagManagement/TagManagement"
 import {DiaryType} from './Types/Types'
+import CalendarComponent from "./new/CalendarComponent";
 type AppProps = {
 
 }
@@ -95,6 +96,7 @@ function App():React.FC{
 
   return (
     <div>
+        <CalendarComponent/>
       <Navbar />
       <SearchDiaries diaries={diaries} onDelete={handleDelete} />
       <div className="tags-container">
