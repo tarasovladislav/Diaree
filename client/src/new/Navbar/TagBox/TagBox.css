@@ -1,0 +1,47 @@
+.TagBox {
+    display: flex;
+    flex-flow: row wrap;
+    flex: 0;
+    gap: 5px;
+    border: 1px solid black;
+    height: auto;
+    max-height: 195px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 5px;
+    overflow: scroll;
+}
+
+.TagBox .TagBox-Item {
+    height: 25px;
+    border: 1px solid #007bff;
+    background-color: #007bff;
+    color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    width: max-content;
+    padding-inline: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.TagBox .TagBox-Item:hover {
+    transform: scale(1.03);
+    background-color: #006bde;
+}
+
+.TagBox .TagBox-Item p {
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.TagBox .TagBox-Item span {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.7rem;
+    max-width: 65%;
+}
