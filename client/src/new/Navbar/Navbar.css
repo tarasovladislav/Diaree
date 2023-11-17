@@ -34,3 +34,8 @@
 .Navbar .Random-Memorie button {
     width: 100%;
 }
+
+.Navbar footer {
+    text-align: center;
+    margin-top: auto;
+}

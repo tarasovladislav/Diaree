@@ -115,8 +115,8 @@ const Navbar = () => {
         <h4>Tags</h4>
         <TagBox data={[]} />
       </div>
-      <div className="Border"></div>
-      <footer style={{ textAlign: 'center', marginTop: '-7px' }}>
+      <footer>
+        <div className="Border" style={{ marginBottom: '15px'}}></div>
         <p>&copy; Diarrhea<br />All toilet paper reserved.</p>
       </footer>
     </div>
