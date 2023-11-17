@@ -1,16 +1,16 @@
-export type Diary = {
+export type DiaryType = {
     _id:string,
     title: string,
     text?: string,
-    // date
+    date: Date,
     createdAt: Date,
     imageUrl?: string,
-    tags: [Tag]
+    tags: TagType[]
 }
 
 
 
-export type Tag = {
+export type TagType = {
     name: string
 }
 

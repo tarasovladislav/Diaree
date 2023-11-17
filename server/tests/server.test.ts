@@ -4,16 +4,18 @@ import request from 'supertest';
 
 describe('GET / - getAllDiaryEntries', () => {
     it('should return all diary entries', async () => {
-        const sampleData = 
-            {"__v": 0, 
-            "_id": "6556493d98e49a5e51e726a6", 
-            "createdAt": "2023-11-16T01:00:00.000Z", 
-            "date": "2023-11-16T00:00:00.000Z", 
-            "imageUrl": "https://example.com/image.jpg", 
-            "tags": ["personal", "reflection"], 
-            "text": "This is the content of the diary entry. It can be a longer piece of text.", 
-            "title": "Sample Diary Entry"}
-        ;
+        const sampleData =
+        {
+            "__v": 0,
+            "_id": "6556493d98e49a5e51e726b6",
+            "createdAt": "2023-11-16T01:00:00.000Z",
+            "date": "2023-11-16T00:00:00.000Z",
+            "imageUrl": "https://example.com/image.jpg",
+            "tags": ["personal", "reflection"],
+            "text": "This is the content of the diary entry. It can be a longer piece of text.",
+            "title": "Sample Diary Entry"
+        }
+            ;
         // await Diary.insertMany(sampleData);
         const response = await request(app).get('/diary/entries');
 

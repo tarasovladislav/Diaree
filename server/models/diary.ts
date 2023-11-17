@@ -11,20 +11,19 @@ const diarySchema = new mongoose.Schema({
     date: {
         type: Date,
         required: true,
-        set: (value: Date) => {
-            if (value instanceof Date) {
-                value.setHours(0, 0, 0, 0);
-                return value;
-            }
-            return value;
-        },
-        default: () => Date.now()
+        // set: (value: Date) => {
+        //     if (value instanceof Date) {
+        //         value.setHours(0, 0, 0, 0);
+        //         return value;
+        //     }
+        //     return value;
+        // },
     },
-    createdAt: {
-        type: Date,
-        default: () => Date.now()
-        // default: () => new Date(Date.now() + 60 * 60 * 1000),
-    },
+    // createdAt: {
+    //     type: Date,
+    //     default: () => Date.now()
+    //     // default: () => new Date(Date.now() + 60 * 60 * 1000),
+    // },
     imageUrl: {
         type: String,
         required: false,

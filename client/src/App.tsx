@@ -9,29 +9,28 @@ import NewDiaryEntry from "./components/NewDiaryEntry/NewDiaryEntry";
 import SearchDiaries from "./components/SearchDiaries/SearchDiaries";
 import FoundEntry from "./components/FoundEntry/FoundEntry";
 import TagManagement from "./components/TagManagement/TagManagement"
-
+import {DiaryType} from './Types/Types'
 type AppProps = {
 
 }
 
 
 function App():React.FC{
-  const [diaries, setDiaries] = useState([]);
+  const [diaries, setDiaries] = useState<DiaryType[]>([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [diaryEntry, setDiaryEntry] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
-  const [recentDiaries, setRecentDiaries] = useState([]);
+  const [recentDiaries, setRecentDiaries] = useState<DiaryType[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
     getAllDiaryEntries()
       .then((data) => {
-        const sortedEntries = data.sort(
-          (a, b) => new Date(b.date) - new Date(a.date)
-        );
+        const sortedEntries:DiaryType[] = data.sort(
+            (a: DiaryType, b: DiaryType) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-        const recentEntries = sortedEntries.slice(0, 3);
+        const recentEntries:DiaryType[] = sortedEntries.slice(0, 3);
 
         setRecentDiaries(recentEntries);
         setDiaries(sortedEntries);

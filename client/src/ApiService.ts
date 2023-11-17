@@ -1,14 +1,14 @@
 //TODO: Move to .env
 const BASE_URL = "http://localhost:3000";
 // const BASE_URL = process.env.REACT_APP_BASE_URL;
-import { Diary, Tag } from './Types/Types.js'
+import { DiaryType, TagType } from './Types/Types.js'
 
 
 const checkResponse = (response: Response): void => {
     if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
 };
 
-const getAllDiaryEntries = async (): Promise<[Diary]> => {
+const getAllDiaryEntries = async (): Promise<[DiaryType]> => {
     try {
         const response = await fetch(`${BASE_URL}/diary/entries`);
         checkResponse(response);
@@ -19,7 +19,7 @@ const getAllDiaryEntries = async (): Promise<[Diary]> => {
     }
 }
 
-const getRecentDiaryEntries = async (): Promise<[Diary]> => {
+const getRecentDiaryEntries = async (): Promise<[DiaryType]> => {
     try {
         const response = await fetch(`${BASE_URL}/diary/entries/recent`);
         checkResponse(response);
@@ -30,7 +30,7 @@ const getRecentDiaryEntries = async (): Promise<[Diary]> => {
     }
 }
 
-const getDiaryEntryById = async (_id: String): Promise<Diary> => {
+const getDiaryEntryById = async (_id: String): Promise<DiaryType> => {
     try {
         const response = await fetch(`${BASE_URL}/diary/entries/${_id}`);
         checkResponse(response);
@@ -54,7 +54,7 @@ const deleteDiaryEntry = async (_id: String): Promise<{ message: string }> => {
     }
 }
 
-const postDiaryEntry = async (data: Diary):Promise<Diary> => { //TODO: FIX any
+const postDiaryEntry = async (data: DiaryType):Promise<DiaryType> => { //TODO: FIX any
     try {
         const response = await fetch(`${BASE_URL}/diary/entries`, {
             method: 'POST',
@@ -72,7 +72,7 @@ const postDiaryEntry = async (data: Diary):Promise<Diary> => { //TODO: FIX any
 }
 
 //TODO: Do we need this function?
-const putDiaryEntry = async (data: Diary):Promise<Diary> => { //TODO: Fix any
+const putDiaryEntry = async (data: DiaryType):Promise<DiaryType> => { //TODO: Fix any
     try {
         const response = await fetch(`${BASE_URL}/diary/entries/${data._id}`, { //TODO: Is this right?
             method: 'PUT',
@@ -89,7 +89,7 @@ const putDiaryEntry = async (data: Diary):Promise<Diary> => { //TODO: Fix any
     }
 }
 
-const getAllTags = async ():Promise<[Tag]> => {
+const getAllTags = async ():Promise<[TagType]> => {
     try {
         const response = await fetch(`${BASE_URL}/diary/tags`);
         checkResponse(response);
@@ -100,7 +100,7 @@ const getAllTags = async ():Promise<[Tag]> => {
     }
 }
 
-const postTag = async (name: String):Promise<Tag> => {
+const postTag = async (name: String):Promise<TagType> => {
     console.log(name);
     try {
         const response = await fetch(`${BASE_URL}/diary/tags`, {
