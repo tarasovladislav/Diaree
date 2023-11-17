@@ -1,0 +1,15 @@
+{
+  "name": "diaree",
+  "version": "1.0.0",
+  "description": "A simple diary react app",
+  "main": "jest.config.js",
+  "scripts": {
+    "dependencies": "npm run install-server-dependencies && npm run install-client-dependencies",
+    "d": "npm run dependencies",
+    "install-server-dependencies": "cd server && npm install",
+    "install-client-dependencies": "cd client && npm install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
