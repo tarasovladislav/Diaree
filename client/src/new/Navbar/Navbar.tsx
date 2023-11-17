@@ -1,5 +1,5 @@
 import './Navbar.css';
-import NavbarBox from './NavbarBox/NavbarBox';
+import NavbarBox from './MemoryBox/MemoryBox';
 import TagBox from './TagBox/TagBox';
 
 const mockData = [
@@ -104,7 +104,7 @@ const Navbar = () => {
       </div>
       <div className="Recent-Memories">
         <h4>Recent memories</h4>
-        <NavbarBox data={mockData} />
+        <NavbarBox data={[]} />
       </div>
       <div className="Border"></div>
       <div className="Random-Memorie">
@@ -113,7 +113,7 @@ const Navbar = () => {
       <div className="Border"></div>
       <div className="Tags">
         <h4>Tags</h4>
-        <TagBox data={mockTags} />
+        <TagBox data={[]} />
       </div>
       <div className="Border"></div>
       <footer style={{ textAlign: 'center', marginTop: '-7px' }}>

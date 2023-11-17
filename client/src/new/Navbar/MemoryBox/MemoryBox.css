@@ -1,4 +1,4 @@
-.NavbarBox {
+.MemoryBox {
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -9,7 +9,7 @@
     padding: 5px;
 }
 
-.NavbarBox .NavbarBox-Item {
+.MemoryBox .MemoryBox-Item {
     border: 1px solid #007bff;
     background-color: #007bff;
     color: rgba(255, 255, 255, 0.9);
@@ -19,17 +19,17 @@
     overflow: hidden;
 }
 
-.NavbarBox .NavbarBox-Item:hover {
+.MemoryBox .MemoryBox-Item:hover {
     transform: scale(1.03);
     background-color: #006bde;
 }
 
-.NavbarBox .NavbarBox-Item p {
+.MemoryBox .MemoryBox-Item p {
     font-size: 0.9rem;
     font-weight: bold;
 }
 
-.NavbarBox .NavbarBox-Item span {
+.MemoryBox .MemoryBox-Item span {
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;

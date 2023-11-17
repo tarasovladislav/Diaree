@@ -26,7 +26,7 @@ const TagBox: React.FC<TagBoxType> = ({ data }: TagBoxType) => {
           <TagBoxItem key={index} title={item.title} />
         ))
       ) : (
-        <h4>No recent memories</h4>
+        <h4>No tags yet</h4>
       )}
     </div>
   )
