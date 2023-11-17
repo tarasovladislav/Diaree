@@ -10,7 +10,11 @@ import SearchDiaries from "./components/SearchDiaries/SearchDiaries";
 import FoundEntry from "./components/FoundEntry/FoundEntry";
 import TagManagement from "./components/TagManagement/TagManagement"
 import {DiaryType} from './Types/Types'
+<<<<<<< Updated upstream
 import CalendarComponent from "./new/CalendarComponent";
+=======
+import DayComponent from "./new/DayComponent";
+>>>>>>> Stashed changes
 type AppProps = {
 
 }
@@ -111,6 +115,7 @@ function App():React.FC{
       <div className="calendar-container">
         <Calendar onSelectDate={setSelectedDate} />
       </div>
+      <DayComponent title={"something"} description={"we are testing this shiz"} date={new Date(Date.now())} image={""}/>
       {diaryEntry && (
         <FoundEntry
           entry={diaryEntry}
