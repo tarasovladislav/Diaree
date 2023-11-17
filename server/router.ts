@@ -4,6 +4,7 @@ import multer from "multer";
 const upload = multer({ dest: "uploads/" });
 import diaryController from './controllers/diaryController.js';
 import tagController from './controllers/tagController.js';
+import userController from './controllers/userController.js';
 
 //TODO: Change controller names
 
@@ -24,5 +25,9 @@ router.get('/diary/entries/:date', diaryController.getDiaryEntryByDate);
 router.post('/diary/image/upload', upload.single('image'), diaryController.uploadImage);
 
 //TODO: Add user => router.post('/user/login', ...)
+router.post('/user/account/login', userController.postLogin);
+router.post('/user/account/register', userController.postRegister);
+router.get('/user/account', userController.getUser);
+
 
 export default router;

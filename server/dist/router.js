@@ -9,6 +9,7 @@ const multer_1 = __importDefault(require("multer"));
 const upload = (0, multer_1.default)({ dest: "uploads/" });
 const diaryController_js_1 = __importDefault(require("./controllers/diaryController.js"));
 const tagController_js_1 = __importDefault(require("./controllers/tagController.js"));
+const userController_js_1 = __importDefault(require("./controllers/userController.js"));
 //TODO: Change controller names
 //Diary
 router.get('/diary/entries', diaryController_js_1.default.getAllDiaryEntries);
@@ -26,4 +27,7 @@ router.get('/diary/entries/:date', diaryController_js_1.default.getDiaryEntryByD
 //Image
 router.post('/diary/image/upload', upload.single('image'), diaryController_js_1.default.uploadImage);
 //TODO: Add user => router.post('/user/login', ...)
+router.post('/user/account/login', userController_js_1.default.postLogin);
+router.post('/user/account/register', userController_js_1.default.postRegister);
+router.get('/user/account', userController_js_1.default.getUser);
 exports.default = router;
