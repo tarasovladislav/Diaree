@@ -63,7 +63,7 @@
 }
 
 .DiaryEntry .Information .Information-Item input::placeholder,
-.DiaryEntry .Information .Information-Item textarea::placeholder  {
+.DiaryEntry .Information .Information-Item textarea::placeholder {
     text-align: center;
 }
 
@@ -76,4 +76,29 @@
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
+}
+
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    background-color: #007acc;
+    color: #fff;
+    border-radius: 4px;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+}
+
+.tag button {
+    /* background: none; */
+    background-color: #007acc;
+    border: none;
+    color: #fff;
+    margin-left: 4px;
+    cursor: pointer;
 }

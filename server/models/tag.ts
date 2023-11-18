@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const tagSchema = new mongoose.Schema({
-  name: {
+  title: {
     type: String,
     required: false,
     unique: true,
@@ -11,3 +11,4 @@ const tagSchema = new mongoose.Schema({
 const Tag = mongoose.model("Tag", tagSchema);
 
 export default Tag;
+export {tagSchema}

@@ -24,6 +24,12 @@
     flex-direction: column
 }
 
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
 /* try this */
 @media (max-width: 1000px) {
     .month-view {

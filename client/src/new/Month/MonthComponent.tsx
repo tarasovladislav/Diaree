@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './MonthComponent.css'
 import DayComponent from '../DayComponent/DayComponent'
-import { getAllDiaryEntries } from '../../ApiService'
 import { DiaryType, EventData } from '../../Types/Types'
 import SearchComponent from '../search/searchComponent'
 import { useDiary } from '../../Utils/diary'
@@ -62,9 +61,11 @@ const MonthComponent = (props: Props) => {
         <>
             <div className="rightContainer">
 
+
                 <div className="nav-btn-Container">
 
                     <div className='button-container'>
+
 
                         <button onClick={() => {
                             let year = props.currentYear;
@@ -92,11 +93,13 @@ const MonthComponent = (props: Props) => {
                             }}>Next Month</button>
                     </div>
 
+
                     <h1>{months[props.currentMonth]}, {props.currentYear}</h1>
                     <div className='search-container'>
 
                         <SearchComponent events={diaries} />
                     </div>
+
                 </div>
                 <div className="month-view">
 
