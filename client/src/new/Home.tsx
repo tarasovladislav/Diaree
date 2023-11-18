@@ -6,11 +6,6 @@ import { useDiary } from "../Utils/diary";
 import DiaryEntry from "./DiaryEntry/DiaryEntry";
 import ExistingDay from "./ExistingDay/ExistingDay";
 function Home() {
-
-    const [tags, setTags] = useState([]);
-
-    const { diariesByDate } = useDiary()
-    console.log(diariesByDate)
     return (
         <>
             <div className="Home">

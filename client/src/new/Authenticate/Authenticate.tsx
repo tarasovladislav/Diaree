@@ -7,7 +7,7 @@ const Authenticate = () => {
     const [isOnLogin, setIsOnLogin] = useState(true);
 
     return (
-        <div>
+        <div className='Authenticate'>
             <Login isOnLogin={isOnLogin} setIsOnLogin={() => setIsOnLogin(!isOnLogin)} />
             <Register isOnLogin={!isOnLogin} setIsOnLogin={() => setIsOnLogin(!isOnLogin)} />
         </div>
