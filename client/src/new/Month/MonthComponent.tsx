@@ -127,14 +127,13 @@ const MonthComponent = (props: Props) => {
                         }
                         const dateKey = formatDateKey(year, month, day);
                         const dayEvents = eventsMap[dateKey];
+                        console.log(dayEvents)
                         return (dayEvents ?
-
                             <div key={index} className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
                                 <span style={{ alignSelf: 'center' }}>
                                     {day}
                                 </span>
-                                {dayEvents.map(event => <DayComponent dayEvents={dayEvents} title={event.title} description={event.text} date={event.date} image={event.imageUrl} />
-                                )}
+                                {dayEvents.map(event => <DayComponent dayEvents={dayEvents} title={event.title} description={event.text} date={event.date} imageUrl={event.imageUrl} />)}
                             </div>
                             :
                             <div

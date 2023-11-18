@@ -9,7 +9,7 @@ type Props = {
     title: string,
     description: string,
     date: string,
-    image: string
+    imageUrl: string
     dayEvents: DiaryType[]
 }
 
@@ -32,8 +32,8 @@ const DayComponent = (props: Props) => {
         // <div style={{ display: 'flex',  }}>
         <>
             <div className='dayComponent' onClick={handleClick} style={{ backgroundColor: '#eee', flex: 1 }}>
+                {props.imageUrl && <img src={props.imageUrl} style={{ width: '40px', height: '40px' }} alt='day event' />}
                 <span>{props.title}</span>
-                {/* <img src={props.image} alt='day event' /> */}
             </div>
 
             <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
@@ -41,16 +41,12 @@ const DayComponent = (props: Props) => {
                     <div className="header">
                         <h1>{props.date}</h1>
                         <button>Add New Event</button>
-
                     </div>
-                    {/* array.map and each  */}
-                    {props.dayEvents && props.dayEvents.map((event) => <DayEventListItem title={event.title} description={event.description} date={event.date} image={event.image} />)}
-
+                    {props.dayEvents && props.dayEvents.map((event) => <DayEventListItem title={event.title} description={event.description} date={event.date} imageUrl={event.imageUrl} />)}
                 </div>
             </Modal>
         </>
 
-        // </div>
     )
 }
 
