@@ -77,3 +77,13 @@
     cursor: pointer;
     font-weight: bold;
 }
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px
+}
+.modalComponent {
+    overflow: auto;
+}
