@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { useEffect } from 'react';
 import { useAuth } from './Utils/auth';
 import Home from './new/Home';
-import Login from './new/Login/Login';
+import Authenticate from './new/Authenticate/Authenticate';
 
 const App = () => {
     const { authenticated, login } = useAuth();
@@ -20,19 +20,12 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<Navigate to="/home" />} />
                     <Route path="/home" element={<Home />} />
-                    <Route path='/login' element={<Login />} />
+                    <Route path='/authenticate' element={<Authenticate />} />
                     {/* <Route path='*' element={<ErrorPage />} /> */}
                 </Routes>
             </div>
         </Router>
     );
 }
-
-// { path: '/', element: <Navigate to={'/dashboard'} /> },
-// { path: '/dashboard', element: <Home /> },
-// { path: '/login', element: <Login /> },
-// { path: '/register', element: <Register /> },
-// { path: '/profile', element: <Profile /> },
-// { path: '*', element: <ErrorPage /> }
 
 export default App;

@@ -1,9 +1,14 @@
 import './Login.css';
-import User from '../../assets/user.png';
-import Lock from '../../assets/lock.png';
-import { postLogin } from '../../ApiService';
+import React from 'react';
+import User from '../../../assets/user.png';
+import Lock from '../../../assets/lock.png';
+import { postLogin } from '../../../ApiService';
 
-const Login = () => {
+type LoginType = {
+    setIsOnLogin: () => { }
+}
+
+const Login: React.FC<LoginType> = ({ setIsOnLogin }: LoginType) => {
     const handleLogin = async (e: any) => {
         e.preventDefault();
         const username = e.currentTarget.username.value;
@@ -15,12 +20,13 @@ const Login = () => {
         alert(response.error);
     }
 
+
     return (
         <div className="Login">
             <div className="Login-Main">
                 <div className="Switch">
-                    <button>Register</button>
-                    <button>Log In</button>
+                    <button className='Button-Disabled'>Log In</button>
+                    <button onClick={() => { setIsOnLogin(false) }}>Register</button>
                 </div>
                 <form className="Login-Form" onSubmit={handleLogin}>
                     <div className="Title">
