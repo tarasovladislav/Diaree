@@ -4,14 +4,14 @@ type Props = {
     title: string,
     description: string,
     date: string,
-    image: string
+    imageUrl: string
 }
 
 const DayEventListItem = (props: Props) => {
     return (
         <>
             <div className="eventListItem">
-                {props.image && <img src={props.image} alt={props.title} />}
+                {props.imageUrl && <img src={props.imageUrl} alt={props.title} />}
                 <div className="eventData">
                     <h2>{props.title}</h2>
                     <p>{props.description}</p>
