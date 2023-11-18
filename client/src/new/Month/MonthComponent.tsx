@@ -17,6 +17,8 @@ type Props = {
 
 
 const MonthComponent = (props: Props) => {
+
+    const months = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     const { setSelectedDate, diaries, setIsAddNewEvent, diariesByDate } = useDiary()
 
     const getDaysInMonth = (year: number, month: number): number => {
@@ -55,39 +57,47 @@ const MonthComponent = (props: Props) => {
         // Return the date string
         return `${year}-${paddedMonth}-${paddedDay}`;
     };
-  
+
     return (
         <>
             <div className="rightContainer">
 
-                <div className="buttonContainer">
+                <div className="nav-btn-Container">
 
-                    <button onClick={() => {
-                        let year = props.currentYear;
-                        let month = props.currentMonth - 1;
-                        if (month < 0) {
-                            year -= 1;
-                            month = 11;
-                        }
+                    <div className='button-container'>
 
-                        props.setCurrentMonth(month)
-                        props.setCurrentYear(year)
-                    }}>Previous Month</button >
-
-
-                    <button onClick={
-                        () => {
+                        <button onClick={() => {
                             let year = props.currentYear;
-                            let month = props.currentMonth + 1;
-                            if (month > 11) {
-                                year += 1;
-                                month = 0;
+                            let month = props.currentMonth - 1;
+                            if (month < 0) {
+                                year -= 1;
+                                month = 11;
                             }
+
                             props.setCurrentMonth(month)
                             props.setCurrentYear(year)
-                        }}>Next Month</button>
+                        }}>Previous Month</button >
+
+
+                        <button onClick={
+                            () => {
+                                let year = props.currentYear;
+                                let month = props.currentMonth + 1;
+                                if (month > 11) {
+                                    year += 1;
+                                    month = 0;
+                                }
+                                props.setCurrentMonth(month)
+                                props.setCurrentYear(year)
+                            }}>Next Month</button>
+                    </div>
+
+                    <h1>{months[props.currentMonth]}, {props.currentYear}</h1>
+                    <div className='search-container'>
+
+                        <SearchComponent events={diaries} />
+                    </div>
                 </div>
-                <SearchComponent events={diaries} />
                 <div className="month-view">
 
 
@@ -99,7 +109,7 @@ const MonthComponent = (props: Props) => {
                             month -= 1;
                             if (month < 0) {
                                 year -= 1;
-                                month = 11; 
+                                month = 11;
                             }
                             day = daysInPreviousMonth - leadingDays.length + index + 1;
                         }
@@ -115,11 +125,11 @@ const MonthComponent = (props: Props) => {
                         const dateKey = formatDateKey(year, month, day);
                         const dayEvents = diariesByDate[dateKey];
                         return (dayEvents ?
-                            <div 
-                            onClick={() => {
-                                setSelectedDate(dateKey)
-                            }}
-                            key={index} className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
+                            <div
+                                onClick={() => {
+                                    setSelectedDate(dateKey)
+                                }}
+                                key={index} className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
                                 <span style={{ alignSelf: 'center' }}>
                                     {day}
                                 </span>
