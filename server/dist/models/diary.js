@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
+const tag_1 = require("./tag");
 const diarySchema = new mongoose_1.default.Schema({
     title: {
         type: String,
@@ -21,11 +22,7 @@ const diarySchema = new mongoose_1.default.Schema({
         type: String,
         required: false,
     },
-    tags: [
-        {
-            type: String,
-        },
-    ],
+    tags: [tag_1.tagSchema],
 });
 const Diary = mongoose_1.default.model("Diary", diarySchema);
 exports.default = Diary;
