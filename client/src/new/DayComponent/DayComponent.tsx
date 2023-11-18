@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from '../DayModal/DayModal';
 import './DayComponent.css'
 import DayEventListItem from '../DayEventListItem/DayEventListItem';
+import { getAllDiaryEntriesByDate } from '../../ApiService'
+import { DiaryType } from '../../Types/Types'
+
 type Props = {
     title: string,
     description: string,
@@ -11,6 +14,17 @@ type Props = {
 
 
 const DayComponent = (props: Props) => {
+    const [dayDiaries, setDayDiaries]=useState([])
+
+    useEffect(() => {
+        getAllDiaryEntriesByDate(props.date)
+            .then((data) => {
+                setDayDiaries(data);
+            })
+            .catch((error) => console.error(error));
+    }, []);
+
+
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -40,10 +54,7 @@ const DayComponent = (props: Props) => {
 
                     </div>
                     {/* array.map and each  */}
-                    <DayEventListItem title={props.title} description={props.description} date={props.date} image={props.image} />
-                    <DayEventListItem title={props.title} description={props.description} date={props.date} image={props.image} />
-                    <DayEventListItem title={props.title} description={props.description} date={props.date} image={props.image} />
-                    <DayEventListItem title={props.title} description={props.description} date={props.date} image={props.image} />
+                    {dayDiaries.map((event)=><DayEventListItem title={event.title} description={event.description} date={event.date} image={event.image} />)}
 
                 </div>
             </Modal>

@@ -148,6 +148,16 @@ const getUser = async (token: String) => {
     }
 }
 
+const getAllDiaryEntriesByDate = async (date:string)=> {
+    try {
+        const response = await fetch(`${BASE_URL}/diary/entries/date/${date}`);
+        checkResponse(response);
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
 
 export {
     getAllDiaryEntries,
@@ -159,5 +169,6 @@ export {
     getAllTags,
     postTag,
     deleteTag,
-    getUser
+    getUser,
+    getAllDiaryEntriesByDate
 }

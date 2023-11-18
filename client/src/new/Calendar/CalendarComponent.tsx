@@ -13,8 +13,8 @@ const CalendarComponent = (props: Props) => {
     // useEffect for getting data 
 
     //testing
-    const [currentYear, setCurrentYear] = useState<number>(2023)
-    const [currentMonth, setCurrentMonth] = useState<number>(10)
+    const [currentYear, setCurrentYear] = useState<number>(new Date().getFullYear())
+    const [currentMonth, setCurrentMonth] = useState<number>(new Date().getMonth())
 
     return (
         <div className='Calendar'>

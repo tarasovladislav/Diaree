@@ -6,9 +6,15 @@
     padding: 5px;
     margin: 5px;
     border-radius: 8px;
+    overflow: auto;
 }
 
 img {
     height: 100%;
     max-width: 50%;
+    border-radius: 8px
+}
+
+.eventData h2 {
+    margin-bottom: 10px
 }
