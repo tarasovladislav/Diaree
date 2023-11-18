@@ -33,6 +33,7 @@
 
 .Login .Login-Form .Credentials img {
     height: 22px;
+    border-radius: 0;
 }
 
 .Login .Login-Form .Credentials .Username,

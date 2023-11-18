@@ -1,5 +1,5 @@
 import './Login.css';
-import Email from '../../assets/email.png';
+import User from '../../assets/user.png';
 import Lock from '../../assets/lock.png';
 
 const Login = () => {
@@ -11,17 +11,17 @@ const Login = () => {
         <div className="Login">
                 <form className="Login-Form" onSubmit={handleLogin}>
                     <div className="Title">
-                        <h2>Welcome to <span>Diaree</span></h2>
+                        <h2>Welcome to <span>Diaree</span>.</h2>
                         <p>No, not Diarrhea...</p>
                     </div>
                     <div className="Credentials">
                         <div className="Username">
-                            <img src={Email} />
-                            <input type="text" placeholder='Username' />
+                            <img src={User} />
+                            <input type="text" name='username' placeholder='Username' required={true} />
                         </div>
                         <div className="Password">
                             <img src={Lock} />
-                            <input type="password" placeholder='Password' />
+                            <input type="password" name='password' placeholder='Password' required={true} />
                         </div>
                         <div className="Submit">
                             <a href='/register'>or register</a>
