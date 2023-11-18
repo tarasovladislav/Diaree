@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import './MonthComponent.css'
 import DayComponent from '../DayComponent/DayComponent'
 import { getAllDiaryEntries } from '../../ApiService'
-import { DiaryType } from '../../Types/Types'
+import { DiaryType, EventData } from '../../Types/Types'
+import SearchComponent from '../search/searchComponent'
+
 
 type Props = {
     currentYear: number,
@@ -13,6 +15,7 @@ type Props = {
     setCurrentMonth: React.Dispatch<React.SetStateAction<number>>,
     setCurrentYear: React.Dispatch<React.SetStateAction<number>>,
 }
+
 
 const MonthComponent = (props: Props) => {
     const [eventsMap, setEventsMap] = useState({})
@@ -101,6 +104,7 @@ const MonthComponent = (props: Props) => {
                             props.setCurrentYear(year)
                         }}>Next Month</button>
                 </div>
+                <SearchComponent events={events} />
                 <div className="month-view">
 
 
