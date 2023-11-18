@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './MonthComponent.css'
 import DayComponent from '../DayComponent/DayComponent'
-import { getAllDiaryEntries } from '../../ApiService'
 import { DiaryType, EventData } from '../../Types/Types'
 import SearchComponent from '../search/searchComponent'
 import { useDiary } from '../../Utils/diary'

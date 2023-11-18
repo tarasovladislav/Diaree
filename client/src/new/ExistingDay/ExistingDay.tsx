@@ -11,13 +11,10 @@ const ExistingDay = (props: Props) => {
 
     return (
         isShowDayEvents && (
-
             <div className="DiaryEntry">
                 <div className="Modal-Overlay">
                     <div className="Modal">
                         <button className="Close" onClick={() => setIsShowDayEvents(false)}>Close</button>
-                       
-
                         <div className="Title">
                             <div className="header">
                                 <h1>{selectedDate}</h1>

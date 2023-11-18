@@ -3,7 +3,7 @@ import { uploadImage, postDiaryEntry } from '../../ApiService';
 import './DiaryEntry.css';
 import { useDiary } from '../../Utils/diary';
 
-const DiaryEntry = ({ isOpen, onClose }) => {
+const DiaryEntry = () => {
     const [isUploading, setIsUploading] = useState(false);
     const { selectedDate, setDiaries, isAddNewEvent, setIsAddNewEvent } = useDiary()
     const [newDiaryEntry, setNewDiaryEntry] = useState({
@@ -51,7 +51,7 @@ const DiaryEntry = ({ isOpen, onClose }) => {
         postDiaryEntry(newEntryData)
             .then(data => {
                 setDiaries((prevDiaries) => [data, ...prevDiaries]);
-                setIsAddNewEvent(false) 
+                setIsAddNewEvent(false)
             })
 
     }
@@ -77,7 +77,6 @@ const DiaryEntry = ({ isOpen, onClose }) => {
                             </div>
                             <div className="Information-Item">
                                 <label htmlFor="description">Description</label>
-                                {/* <input type="text" name='description' placeholder='Enter a title' /> */}
                                 <textarea name="description" cols={35} rows={7} placeholder='Enter a description' required={true} onChange={(e) =>
                                     setNewDiaryEntry({
                                         ...newDiaryEntry,
