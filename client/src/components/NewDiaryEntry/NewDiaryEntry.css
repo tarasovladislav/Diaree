@@ -44,16 +44,7 @@ label {
   margin-bottom: 10px;
 }
 
-input[type="text"],
-textarea {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 600px;
-  height: 20px;
-}
-
-button {
+/* button {
   background-color: #007bff;
   color: #fff;
   padding: 10px;
@@ -62,7 +53,7 @@ button {
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.3s;
-}
+} */
 
 button:hover {
   background-color: #0056b3;

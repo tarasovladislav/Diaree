@@ -1,0 +1,130 @@
+.Login-Main {
+    display: flex;
+    flex-direction: column;
+}
+
+.Login-Main .Switch {
+    display: flex;
+    align-self: flex-end;
+    margin-right: 10px;
+    gap: 10px;
+}
+
+.Login-Main .Switch button {
+    height: 32px;
+    padding-inline: 20px;
+    background: #b69de6;
+    border: 1px solid #b69de6;
+    border-radius: 5px 5px 0 0;
+    border-bottom: none;
+    cursor: pointer;
+    transition: all .3s ease;
+    color: antiquewhite;
+}
+
+.Login .Login-Main .Switch .Button-Disabled {
+    color: rgba(255, 255, 255, 0.6);
+    opacity: 0.7;
+    height: 25px;
+    margin-top: 7px;
+    cursor: not-allowed;
+}
+
+.Login-Main .Switch button:hover {
+    transform: scale(1.05);
+    color: #fff;
+}
+
+.Login-Form {
+    border: 1.5px solid #fff;
+    height: 43vh;
+    width: 35vw;
+    border-radius: 5px;
+    box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, .12);
+}
+
+.Login .Login-Form {
+    padding: 25px;
+}
+
+.Login .Login-Form .Title .State {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.Login .Login-Form .Title p {
+    font-size: 0.8rem;
+    padding-inline-start: 3px;
+    padding-block-start: 3px;
+}
+
+.Login .Login-Form .Title span {
+    color: rgba(182, 157, 230);
+}
+
+.Login .Login-Form .Credentials {
+    padding-block-start: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.Login .Login-Form .Credentials img {
+    height: 22px;
+    border-radius: 0;
+}
+
+.Login .Login-Form .Credentials .Username,
+.Login .Login-Form .Credentials .Password {
+    padding-inline-start: 25px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.Login .Login-Form .Credentials input {
+    font-size: 16px;
+    padding: 20px 0px;
+    height: 56px;
+    border: none;
+    width: 80%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+}
+
+.Login .Login-Form .Credentials input:focus {
+    outline: 0;
+}
+
+.Login .Login-Form .Credentials .Submit {
+    align-self: flex-end;
+    padding-inline-end: 11%;
+    padding-block-start: 15px;
+}
+
+.Login .Login-Form .Credentials .Submit a {
+    padding-inline-end: 20px;
+    font-size: 0.75rem;
+    color: #000;
+    transition: all .3s ease;
+}
+
+.Login .Login-Form .Credentials .Submit a:hover {
+    color: rgba(182, 157, 230);
+}
+
+.Login .Login-Form .Credentials .Submit button {
+    height: 40px;
+    width: 90px;
+    border-radius: 24px;
+    background-color: #b69de6;
+    border: none;
+    transition: all .3s ease;
+    color: antiquewhite;
+}
+
+.Login .Login-Form .Credentials .Submit button:hover {
+    transform: translateY(-3px);
+}
