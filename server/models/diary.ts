@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import { tagSchema } from "./tag";
+
 const diarySchema = new mongoose.Schema({
     title: {
         type: String,
@@ -16,11 +18,7 @@ const diarySchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    tags: [
-        {
-            type: String,
-        },
-    ],
+    tags: [tagSchema],
 });
 
 const Diary = mongoose.model("Diary", diarySchema);

@@ -13,7 +13,6 @@ const SearchComponent = (props: Props) => {
     const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
     const handleSearch = (query: string) => {
         if(query !== ''){
-
             const filteredResults = props.events.filter((result) =>
                 result.title.toLowerCase().includes(query.toLowerCase())
             );
@@ -24,10 +23,13 @@ const SearchComponent = (props: Props) => {
     };
 
     return (
+        <>
+        
         <div>
             <SearchBarComponent onSearch={handleSearch} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
             <SearchResultComponent results={searchResults} />
         </div>
+        </>
     );
 };
 
