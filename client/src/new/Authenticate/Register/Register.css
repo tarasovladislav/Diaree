@@ -7,6 +7,7 @@
     display: flex;
     align-self: flex-end;
     margin-right: 10px;
+    transform: translateY(9vh);
     gap: 10px;
 }
 
@@ -36,8 +37,9 @@
 }
 
 .Register-Form {
+    margin-top: 9vh;
     border: 1.5px solid #fff;
-    height: 45vh;
+    height: 52vh;
     width: 35vw;
     border-radius: 5px;
     box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, .12);
@@ -45,6 +47,12 @@
 
 .Register .Register-Form {
     padding: 25px;
+}
+
+.Register .Register-Form .Title .State {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .Register .Register-Form .Title p {
@@ -70,7 +78,8 @@
 }
 
 .Register .Register-Form .Credentials .Username,
-.Register .Register-Form .Credentials .Password {
+.Register .Register-Form .Credentials .Password,
+.Register .Register-Form .Credentials .Confirm-Password {
     padding-inline-start: 25px;
     display: flex;
     flex-direction: row;
@@ -84,6 +93,7 @@
     height: 56px;
     border: none;
     width: 80%;
+    transition: all 1s ease;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     background-color: transparent;
 }

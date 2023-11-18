@@ -5,10 +5,11 @@ import Lock from '../../../assets/lock.png';
 import { postLogin } from '../../../ApiService';
 
 type LoginType = {
-    setIsOnLogin: () => { }
+    isOnLogin: boolean,
+    setIsOnLogin: (isOnLogin: boolean) => {}
 }
 
-const Login: React.FC<LoginType> = ({ setIsOnLogin }: LoginType) => {
+const Login: React.FC<LoginType> = ({ isOnLogin, setIsOnLogin }: LoginType) => {
     const handleLogin = async (e: any) => {
         e.preventDefault();
         const username = e.currentTarget.username.value;
@@ -21,8 +22,10 @@ const Login: React.FC<LoginType> = ({ setIsOnLogin }: LoginType) => {
     }
 
 
+
+
     return (
-        <div className="Login">
+        <div className="Login" id={isOnLogin ? 'fadeIn' : 'fadeOut'}>
             <div className="Login-Main">
                 <div className="Switch">
                     <button className='Button-Disabled'>Log In</button>
@@ -30,8 +33,11 @@ const Login: React.FC<LoginType> = ({ setIsOnLogin }: LoginType) => {
                 </div>
                 <form className="Login-Form" onSubmit={handleLogin}>
                     <div className="Title">
-                        <h2>Welcome to <span>Dιαɾҽҽ</span>.</h2>
-                        <p>No, not Diarrhea...</p>
+                        <div className="State">
+                            <h2>Welcome <span>back</span>!</h2>
+                            <h2>Log In</h2>
+                        </div>
+                        <p>We missed you!</p>
                     </div>
                     <div className="Credentials">
                         <div className="Username">
@@ -43,7 +49,7 @@ const Login: React.FC<LoginType> = ({ setIsOnLogin }: LoginType) => {
                             <input type="password" name='password' placeholder='Password' required={true} />
                         </div>
                         <div className="Submit">
-                            <a href='/register'>or register</a>
+                            <a href='#' onClick={() => { setIsOnLogin(false) }}>or register</a>
                             <button>Log in</button>
                         </div>
                     </div>

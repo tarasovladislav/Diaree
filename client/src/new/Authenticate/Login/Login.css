@@ -37,7 +37,7 @@
 
 .Login-Form {
     border: 1.5px solid #fff;
-    height: 45vh;
+    height: 43vh;
     width: 35vw;
     border-radius: 5px;
     box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, .12);
@@ -45,6 +45,12 @@
 
 .Login .Login-Form {
     padding: 25px;
+}
+
+.Login .Login-Form .Title .State {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .Login .Login-Form .Title p {
