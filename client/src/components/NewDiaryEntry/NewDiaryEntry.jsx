@@ -35,15 +35,6 @@ function NewDiaryEntry({
 
     useEffect(() => {
         if (selectedDate) {
-            //   const formattedDate = selectedDate.toLocaleDateString("en-US", {
-            //     weekday: "short",
-            //     year: "numeric",
-            //     month: "short",
-            //     day: "numeric",
-            //   });
-            // console.log(selectedDate)
-            // const formattedDate = selectedDate.toISOString().split('T')[0]
-            // console.log(formattedDate)
             setNewDiaryEntry({
                 ...newDiaryEntry,
                 date: selectedDate,
@@ -55,15 +46,7 @@ function NewDiaryEntry({
         e.preventDefault();
 
         if (selectedDate) {
-            // const localMidnight = new Date(
-            //     selectedDate.getFullYear(),
-            //     selectedDate.getMonth(),
-            //     selectedDate.getDate()
-            // );
 
-            // const timeZoneOffsetMs = selectedDate.getTimezoneOffset() * 60000;
-
-            // const adjustedDate = new Date(localMidnight.getTime() - timeZoneOffsetMs);
 
             const newEntryData = {
                 ...newDiaryEntry,
@@ -110,6 +93,7 @@ function NewDiaryEntry({
                 setIsUploading(false);
 
                 setNewDiaryEntry({ ...newDiaryEntry, imageUrl: data.imageUrl });
+                console.log
             })
             .catch((error) => {
                 console.error("Error uploading image:", error);

@@ -20,7 +20,7 @@ const mockUser = {
 const AuthContext = createContext(defaultAuthContext);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const [authenticated, setAuthenticated] = useState(false);
+    const [authenticated, setAuthenticated] = useState(true);
     const [user, setUser] = useState(mockUser);
     const [token, setToken] = useState(() => localStorage.getItem('token'));
     const [loading, setLoading] = useState(true);

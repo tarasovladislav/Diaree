@@ -55,7 +55,7 @@ const deleteDiaryEntry = async (_id: String): Promise<{ message: string }> => {
     }
 }
 
-const postDiaryEntry = async (data: DiaryType):Promise<DiaryType> => { //TODO: FIX any
+const postDiaryEntry = async (data: DiaryType): Promise<DiaryType> => { //TODO: FIX any
     try {
         const response = await fetch(`${BASE_URL}/diary/entries`, {
             method: 'POST',
@@ -73,7 +73,7 @@ const postDiaryEntry = async (data: DiaryType):Promise<DiaryType> => { //TODO: F
 }
 
 //TODO: Do we need this function?
-const putDiaryEntry = async (data: DiaryType):Promise<DiaryType> => { //TODO: Fix any
+const putDiaryEntry = async (data: DiaryType): Promise<DiaryType> => { //TODO: Fix any
     try {
         const response = await fetch(`${BASE_URL}/diary/entries/${data._id}`, { //TODO: Is this right?
             method: 'PUT',
@@ -90,7 +90,7 @@ const putDiaryEntry = async (data: DiaryType):Promise<DiaryType> => { //TODO: Fi
     }
 }
 
-const getAllTags = async ():Promise<[TagType]> => {
+const getAllTags = async (): Promise<[TagType]> => {
     try {
         const response = await fetch(`${BASE_URL}/diary/tags`);
         checkResponse(response);
@@ -101,7 +101,7 @@ const getAllTags = async ():Promise<[TagType]> => {
     }
 }
 
-const postTag = async (name: String):Promise<TagType> => {
+const postTag = async (name: String): Promise<TagType> => {
     console.log(name);
     try {
         const response = await fetch(`${BASE_URL}/diary/tags`, {
@@ -119,7 +119,7 @@ const postTag = async (name: String):Promise<TagType> => {
     }
 }
 
-const deleteTag = async (_id: String):Promise<{ message: string }> => {
+const deleteTag = async (_id: String): Promise<{ message: string }> => {
     try {
         const response = await fetch(`${BASE_URL}/diary/tags/${_id}`, {
             method: "DELETE",
@@ -148,7 +148,7 @@ const getUser = async (token: String) => {
     }
 }
 
-const getAllDiaryEntriesByDate = async (date:string)=> {
+const getAllDiaryEntriesByDate = async (date: string) => {
     try {
         const response = await fetch(`${BASE_URL}/diary/entries/date/${date}`);
         checkResponse(response);
@@ -158,9 +158,24 @@ const getAllDiaryEntriesByDate = async (date:string)=> {
         throw error;
     }
 }
+const uploadImage = async (data: any) => {
+    try {
+        const response = await fetch(`${BASE_URL}/diary/image/upload`, {
+            method: 'POST',
+            body: data
+        });
+        checkResponse(response);
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
 
 export {
     getAllDiaryEntries,
+    uploadImage,
     getRecentDiaryEntries,
     getDiaryEntryById,
     postDiaryEntry,

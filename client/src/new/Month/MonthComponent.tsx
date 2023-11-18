@@ -4,32 +4,20 @@ import DayComponent from '../DayComponent/DayComponent'
 import { getAllDiaryEntries } from '../../ApiService'
 import { DiaryType, EventData } from '../../Types/Types'
 import SearchComponent from '../search/searchComponent'
+import { useDiary } from '../../Utils/diary'
 
 
 type Props = {
     currentYear: number,
     currentMonth: number,
-    diaries: DiaryType[],
-    setSelectedDate: React.Dispatch<React.SetStateAction<string>>,
-    setIsOpenNew: React.Dispatch<React.SetStateAction<boolean>>,
+
     setCurrentMonth: React.Dispatch<React.SetStateAction<number>>,
     setCurrentYear: React.Dispatch<React.SetStateAction<number>>,
 }
 
 
 const MonthComponent = (props: Props) => {
-    const [eventsMap, setEventsMap] = useState({})
-    useEffect(() => {
-        const newEventsMap = {};
-        props.diaries.forEach(event => {
-            // const dateKey = formatDateKey(event.date.getFullYear(), event.date.getMonth(), event.date.getDate());
-            if (!newEventsMap[event.date]) {
-                newEventsMap[event.date] = [];
-            }
-            newEventsMap[event.date].push(event);
-        });
-        setEventsMap(newEventsMap);
-    }, [props.diaries]);
+    const { setSelectedDate, diaries, setIsAddNewEvent, diariesByDate } = useDiary()
 
     const getDaysInMonth = (year: number, month: number): number => {
         return new Date(year, month + 1, 0).getDate();
@@ -67,12 +55,7 @@ const MonthComponent = (props: Props) => {
         // Return the date string
         return `${year}-${paddedMonth}-${paddedDay}`;
     };
-    const handleDayClick = (dateKey: string): void => {
-        console.log(dateKey);
-        props.setSelectedDate(dateKey)
-        props.setIsOpenNew(true)
-    }    
-
+  
     return (
         <>
             <div className="rightContainer">
@@ -104,7 +87,7 @@ const MonthComponent = (props: Props) => {
                             props.setCurrentYear(year)
                         }}>Next Month</button>
                 </div>
-                <SearchComponent events={props.diaries} />
+                <SearchComponent events={diaries} />
                 <div className="month-view">
 
 
@@ -116,7 +99,7 @@ const MonthComponent = (props: Props) => {
                             month -= 1;
                             if (month < 0) {
                                 year -= 1;
-                                month = 11; // December of the previous year
+                                month = 11; 
                             }
                             day = daysInPreviousMonth - leadingDays.length + index + 1;
                         }
@@ -125,15 +108,18 @@ const MonthComponent = (props: Props) => {
                             month += 1;
                             if (month > 11) {
                                 year += 1;
-                                month = 0; // January of the next year
+                                month = 0;
                             }
                             day = index - (leadingDays.length + daysInMonth) + 1;
                         }
                         const dateKey = formatDateKey(year, month, day);
-                        const dayEvents = eventsMap[dateKey];
-                        console.log(dayEvents)
+                        const dayEvents = diariesByDate[dateKey];
                         return (dayEvents ?
-                            <div key={index} className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
+                            <div 
+                            onClick={() => {
+                                setSelectedDate(dateKey)
+                            }}
+                            key={index} className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
                                 <span style={{ alignSelf: 'center' }}>
                                     {day}
                                 </span>
@@ -141,7 +127,10 @@ const MonthComponent = (props: Props) => {
                             </div>
                             :
                             <div
-                                onClick={() => handleDayClick(dateKey)}
+                                onClick={() => {
+                                    setSelectedDate(dateKey)
+                                    setIsAddNewEvent(true);
+                                }}
                                 key={index}
                                 className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
                                 <span style={{ alignSelf: 'center' }}>
