@@ -5,7 +5,7 @@ const SearchResultComponent: React.FC<SearchResultsProps> = ({ results }) => {
         <div>
             {results.map((result, index) => (
                 <div key={index}>
-                    <h3>{result.title}</h3>
+                    <p>{result.title}</p>
                 </div>
             ))}
         </div>

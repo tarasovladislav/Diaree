@@ -104,7 +104,7 @@ const MonthComponent = (props: Props) => {
                             props.setCurrentYear(year)
                         }}>Next Month</button>
                 </div>
-                <SearchComponent events={events} />
+                <SearchComponent events={props.diaries} />
                 <div className="month-view">
 
 

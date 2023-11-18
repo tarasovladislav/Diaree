@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { SearchBarProps } from '../../Types/Types';
 
 
-const SearchBarComponent: React.FC<SearchBarProps> = ({ onSearch }) => {
-  const [searchQuery, setSearchQuery] = useState<string>('');
+const SearchBarComponent = ({ onSearch, searchQuery, setSearchQuery }) => {
+  // const [searchQuery, setSearchQuery] = useState<string>('');
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;

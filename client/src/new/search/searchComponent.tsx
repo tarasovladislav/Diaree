@@ -9,25 +9,12 @@ type Props = {
 }
 
 const SearchComponent = (props: Props) => {
-    console.log('prop.event: ',props.events)
-
-    const titles = props.events.map(event => event.title)
-
-    console.log('title', titles)
-    
-    const [allResults, setAllResults] = useState<SearchResult[]>([]);
-
-    useEffect(()=>{
-        setAllResults(titles.map((title)=> ({title})))
-    }, [titles])
-
-    console.log("all results",allResults)
-
+  const [searchQuery, setSearchQuery] = useState<string>('');
     const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
     const handleSearch = (query: string) => {
         if(query !== ''){
 
-            const filteredResults = allResults.filter((result) =>
+            const filteredResults = props.events.filter((result) =>
                 result.title.toLowerCase().includes(query.toLowerCase())
             );
             setSearchResults(filteredResults);
@@ -38,7 +25,7 @@ const SearchComponent = (props: Props) => {
 
     return (
         <div>
-            <SearchBarComponent onSearch={handleSearch} />
+            <SearchBarComponent onSearch={handleSearch} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
             <SearchResultComponent results={searchResults} />
         </div>
     );
