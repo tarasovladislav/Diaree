@@ -14,18 +14,19 @@ type Props = {
     setCurrentYear: React.Dispatch<React.SetStateAction<number>>,
 }
 
-type EventData = {
-    title: string,
-    text: string,
-    date: string,
-    imageUrl: string,
-}
 const MonthComponent = (props: Props) => {
-    const [events, setEvents] = useState<EventData[]>([])
+    const [eventsMap, setEventsMap] = useState({})
     useEffect(() => {
-        getAllDiaryEntries().then(data => setEvents(data))
-    }, [])
-
+        const newEventsMap = {};
+        props.diaries.forEach(event => {
+            // const dateKey = formatDateKey(event.date.getFullYear(), event.date.getMonth(), event.date.getDate());
+            if (!newEventsMap[event.date]) {
+                newEventsMap[event.date] = [];
+            }
+            newEventsMap[event.date].push(event);
+        });
+        setEventsMap(newEventsMap);
+    }, [props.diaries]);
 
     const getDaysInMonth = (year: number, month: number): number => {
         return new Date(year, month + 1, 0).getDate();
@@ -52,11 +53,7 @@ const MonthComponent = (props: Props) => {
     const trailingDays = Array.from({ length: trailingDaysCount }, (_, i) => i + 1);
     const grid = [...leadingDays, ...currentMonthDays, ...trailingDays];
 
-    //missing type def
-    const eventsMap = new Map(
-        props.diaries.map(event => [event.date, event])
-        // events.map(event => [event.date, event])
-    );
+
     // Helper function to create the date string in 'YYYY-MM-DD' format
     const formatDateKey = (year: number, month: number, day: number): string => {
         // Correctly adjust month number for JavaScript Date (0-11)
@@ -72,10 +69,11 @@ const MonthComponent = (props: Props) => {
         props.setSelectedDate(dateKey)
         props.setIsOpenNew(true)
     }
+
     return (
         <>
             <div className="rightContainer">
-                
+
                 <div className="buttonContainer">
 
                     <button onClick={() => {
@@ -128,18 +126,21 @@ const MonthComponent = (props: Props) => {
                             day = index - (leadingDays.length + daysInMonth) + 1;
                         }
                         const dateKey = formatDateKey(year, month, day);
-                        const dayEvents = eventsMap.get(dateKey);
-
+                        const dayEvents = eventsMap[dateKey];
                         return (dayEvents ?
+
                             <div key={index} className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
                                 <span style={{ alignSelf: 'center' }}>
                                     {day}
                                 </span>
-                                <DayComponent title={dayEvents.title} description={dayEvents.text} date={dayEvents.date} image={dayEvents.imageUrl} />
-                                <DayComponent title={dayEvents.title + '123'} description={dayEvents.text} date={dayEvents.date} image={dayEvents.imageUrl} />
+                                {dayEvents.map(event => <DayComponent dayEvents={dayEvents} title={event.title} description={event.text} date={event.date} image={event.imageUrl} />
+                                )}
                             </div>
                             :
-                            <div onClick={() => handleDayClick(dateKey)} key={index} className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
+                            <div
+                                onClick={() => handleDayClick(dateKey)}
+                                key={index}
+                                className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
                                 <span style={{ alignSelf: 'center' }}>
                                     {day}
                                 </span>

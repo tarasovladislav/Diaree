@@ -8,7 +8,7 @@ const multer_1 = __importDefault(require("multer"));
 const upload = (0, multer_1.default)({ dest: "uploads/" });
 const cloudinary_1 = require("cloudinary");
 const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
+dotenv_1.default.config({ path: '../.env' });
 const diary_js_1 = __importDefault(require("../models/diary.js"));
 async function getAllDiaryEntries(req, res) {
     try {
@@ -45,10 +45,14 @@ async function getDiaryEntryById(req, res) {
         res.status(500).json({ error: "Internal server error" });
     }
 }
+//change to get all
 async function getDiaryEntryByDate(req, res) {
     try {
         const { date } = req.params;
-        const foundDiaryEntry = await diary_js_1.default.findOne({ date }).exec();
+        console.log(req.params);
+        // console.log(date)
+        const foundDiaryEntry = await diary_js_1.default.find({ date });
+        // console.log(foundDiaryEntry)
         if (!foundDiaryEntry) {
             return res
                 .status(404)
@@ -61,6 +65,21 @@ async function getDiaryEntryByDate(req, res) {
         res.status(500).json({ error: "Internal server error" });
     }
 }
+// async function getDiaryEntryByDate(req: Request, res: Response) {
+//     try {
+//         const { date } = req.params;
+//         const foundDiaryEntry = await Diary.findOne({ date }).exec();
+//         if (!foundDiaryEntry) {
+//             return res
+//                 .status(404)
+//                 .json({ message: "No diary entry found for the date" });
+//         }
+//         res.status(200).json(foundDiaryEntry);
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ error: "Internal server error" });
+//     }
+// }
 async function postDiaryEntry(req, res) {
     try {
         const { title, text, date, imageUrl, tags } = req.body;
@@ -92,10 +111,6 @@ async function uploadImage(req, res) {
         }
         else {
             const result = await cloudinary_1.v2.uploader.upload(req.file.path, {
-                width: 500,
-                height: 500,
-                crop: "fit",
-                gravity: "center",
                 quality: "auto",
                 fetch_format: "auto",
             });

@@ -14,22 +14,9 @@ const diarySchema = new mongoose_1.default.Schema({
         required: false,
     },
     date: {
-        // type: Date,
         type: String,
         required: true,
-        // set: (value: Date) => {
-        //     if (value instanceof Date) {
-        //         value.setHours(0, 0, 0, 0);
-        //         return value;
-        //     }
-        //     return value;
-        // },
     },
-    // createdAt: {
-    //     type: Date,
-    //     default: () => Date.now()
-    //     // default: () => new Date(Date.now() + 60 * 60 * 1000),
-    // },
     imageUrl: {
         type: String,
         required: false,
@@ -40,10 +27,5 @@ const diarySchema = new mongoose_1.default.Schema({
         },
     ],
 });
-// TODO DONE made default instead 
-// diarySchema.pre("save", function (next) {
-//     this.updatedAt = Date.now();
-//     next();
-// });
 const Diary = mongoose_1.default.model("Diary", diarySchema);
 exports.default = Diary;

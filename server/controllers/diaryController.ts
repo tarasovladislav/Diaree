@@ -4,7 +4,7 @@ import multer from 'multer'
 const upload = multer({ dest: "uploads/" });
 import { v2 as cloudinary } from 'cloudinary'
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ path: '../.env' });
 import { Request, Response } from 'express';
 
 import Diary from "../models/diary.js"
@@ -48,10 +48,14 @@ async function getDiaryEntryById(req: Request, res: Response): Promise<void> {
     }
 }
 
+//change to get all
 async function getDiaryEntryByDate(req: Request, res: Response) {
     try {
         const { date } = req.params;
-        const foundDiaryEntry = await Diary.findOne({ date }).exec();
+        console.log(req.params)
+        // console.log(date)
+        const foundDiaryEntry = await Diary.find({ date });
+        // console.log(foundDiaryEntry)
 
         if (!foundDiaryEntry) {
             return res
@@ -65,6 +69,23 @@ async function getDiaryEntryByDate(req: Request, res: Response) {
         res.status(500).json({ error: "Internal server error" });
     }
 }
+// async function getDiaryEntryByDate(req: Request, res: Response) {
+//     try {
+//         const { date } = req.params;
+//         const foundDiaryEntry = await Diary.findOne({ date }).exec();
+
+//         if (!foundDiaryEntry) {
+//             return res
+//                 .status(404)
+//                 .json({ message: "No diary entry found for the date" });
+//         }
+
+//         res.status(200).json(foundDiaryEntry);
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ error: "Internal server error" });
+//     }
+// }
 
 async function postDiaryEntry(req: Request, res: Response): Promise<void> {
     try {
@@ -95,23 +116,16 @@ cloudinary.config({
 async function uploadImage(req: Request, res: Response): Promise<void> {
     try {
         console.log("Received image upload request");
-
-
         if (!req.file) {
             res.status(400).json({ error: "No image uploaded" });
         } else {
             const result = await cloudinary.uploader.upload(req.file.path, {
-                width: 500,
-                height: 500,
-                crop: "fit",
-                gravity: "center",
                 quality: "auto",
                 fetch_format: "auto",
             })
             const imageUrl = result.url;
             res.json({ imageUrl });
         }
-
     } catch (error) {
         console.error("Error uploading image to Cloudinary:", error);
         res.status(500).json({ error: "Failed to upload image" });
