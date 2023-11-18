@@ -1,13 +1,38 @@
-.Login {
+.Login-Main {
+    display: flex;
+    flex-direction: column;
+}
+
+.Login-Main .Switch {
+    display: flex;
+    align-self: flex-end;
+    margin-right: 10px;
+    gap: 10px;
+}
+
+.Login-Main .Switch button {
+    height: 32px;
+    padding-inline: 20px;
+    background: #b69de6;
+    border: 1px solid #b69de6;
+    border-radius: 5px 5px 0 0;
+    border-bottom: none;
+    cursor: pointer;
+    transition: all .3s ease;
+    color: antiquewhite;
+}
+
+.Login-Main .Switch button:hover {
+    transform: scale(1.05);
+    color: #fff;
+}
+
+.Login-Form {
     border: 1.5px solid #fff;
     height: 45vh;
     width: 35vw;
     border-radius: 5px;
     box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, .12);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 .Login .Login-Form {
@@ -62,7 +87,7 @@
 .Login .Login-Form .Credentials .Submit {
     align-self: flex-end;
     padding-inline-end: 11%;
-    padding-block-start: 10px;
+    padding-block-start: 15px;
 }
 
 .Login .Login-Form .Credentials .Submit a {
@@ -81,8 +106,9 @@
     width: 90px;
     border-radius: 24px;
     background-color: #b69de6;
-    ;
+    border: none;
     transition: all .3s ease;
+    color: antiquewhite;
 }
 
 .Login .Login-Form .Credentials .Submit button:hover {

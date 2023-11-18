@@ -148,6 +148,23 @@ const getUser = async (token: String) => {
     }
 }
 
+const postLogin = async (username: String, password: String) => {
+    try {
+        const response = await fetch(`${BASE_URL}/user/account/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        })
+        //checkResponse(response);
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
 const getAllDiaryEntriesByDate = async (date:string)=> {
     try {
         const response = await fetch(`${BASE_URL}/diary/entries/date/${date}`);
@@ -170,5 +187,6 @@ export {
     postTag,
     deleteTag,
     getUser,
+    postLogin,
     getAllDiaryEntriesByDate
 }

@@ -1,17 +1,30 @@
 import './Login.css';
 import User from '../../assets/user.png';
 import Lock from '../../assets/lock.png';
+import { postLogin } from '../../ApiService';
 
 const Login = () => {
-    const handleLogin = (e: any) => {
+    const handleLogin = async (e: any) => {
         e.preventDefault();
+        const username = e.currentTarget.username.value;
+        const password = e.currentTarget.password.value;
+
+        const response = await postLogin(username, password);
+
+        if (response.token) return localStorage.setItem('token', response.token);
+        alert(response.error);
     }
 
     return (
         <div className="Login">
+            <div className="Login-Main">
+                <div className="Switch">
+                    <button>Register</button>
+                    <button>Log In</button>
+                </div>
                 <form className="Login-Form" onSubmit={handleLogin}>
                     <div className="Title">
-                        <h2>Welcome to <span>Diaree</span>.</h2>
+                        <h2>Welcome to <span>Dιαɾҽҽ</span>.</h2>
                         <p>No, not Diarrhea...</p>
                     </div>
                     <div className="Credentials">
@@ -29,6 +42,7 @@ const Login = () => {
                         </div>
                     </div>
                 </form>
+            </div>
         </div>
     )
 }
