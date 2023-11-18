@@ -20,7 +20,7 @@ router.get('/diary/tags', tagController.getAllTags);
 router.post('/diary/tags', tagController.postTag);
 router.delete('/diary/tags/:id', tagController.deleteTag);
 //Date
-router.get('/diary/entries/:date', diaryController.getDiaryEntryByDate);
+router.get('/diary/entries/date/:date', diaryController.getDiaryEntryByDate);
 //Image
 router.post('/diary/image/upload', upload.single('image'), diaryController.uploadImage);
 

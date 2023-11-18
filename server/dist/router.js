@@ -23,7 +23,7 @@ router.get('/diary/tags', tagController_js_1.default.getAllTags);
 router.post('/diary/tags', tagController_js_1.default.postTag);
 router.delete('/diary/tags/:id', tagController_js_1.default.deleteTag);
 //Date
-router.get('/diary/entries/:date', diaryController_js_1.default.getDiaryEntryByDate);
+router.get('/diary/entries/date/:date', diaryController_js_1.default.getDiaryEntryByDate);
 //Image
 router.post('/diary/image/upload', upload.single('image'), diaryController_js_1.default.uploadImage);
 //TODO: Add user => router.post('/user/login', ...)
