@@ -27,9 +27,7 @@ const DiaryEntry = () => {
     return (
         <div className="DiaryEntry">
             <div className="Modal-Overlay">
-                <button className="Close" title="Close Modal">
-                    &times;
-                </button>
+                <button className="Close">Close</button>
                 <div className="Modal" onSubmit={createDiaryEntry}>
                     <div className="Title">
                         <h2>Create a new diary entry</h2>
@@ -42,7 +40,7 @@ const DiaryEntry = () => {
                         <div className="Information-Item">
                             <label htmlFor="description">Description</label>
                             {/* <input type="text" name='description' placeholder='Enter a title' /> */}
-                            <textarea name="description" cols='35' rows="7" placeholder='Enter a description' required={true} />
+                            <textarea name="description" cols={35} rows={7} placeholder='Enter a description' required={true} />
                         </div>
                         <div className="Information-Item">
                             <label htmlFor="image"></label>

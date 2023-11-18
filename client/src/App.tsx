@@ -81,7 +81,7 @@ function App() {
             {/* <div className="calendar-container">
                 <Calendar onSelectDate={setSelectedDate} setIsOpenNew={setIsOpenNew} />
             </div> */}
-            <DiaryEntry
+            {/* <DiaryEntry
                 // isOpen={isOpenNew}
                 // setIsOpenNew={setIsOpenNew}
                 // onClose={handleCloseModal}
@@ -89,7 +89,7 @@ function App() {
                 // setDiaries={setDiaries}
                 // diaries={diaries}
                 // tags={tags}
-            />
+            /> */}
 
             {/* <SearchDiaries diaries={diaries} onDelete={handleDelete} /> */}
             {/* <div className="tags-container">
