@@ -1,7 +1,9 @@
+import './SearchResultComponent.css';
 import { useState } from "react";
 import { SearchResultsProps } from "../../Types/Types";
 import ExistingDay from "../ExistingDay/ExistingDay";
 import { useDiary } from "../../Utils/diary";
+
 
 const SearchResultComponent: React.FC<SearchResultsProps> = ({ results }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,7 +19,7 @@ const SearchResultComponent: React.FC<SearchResultsProps> = ({ results }) => {
     //     setIsModalOpen(false);
     // };
     return (
-        <div>
+        <div className="search-result-container">
             {results.map((result, index) => (
                 <div key={index}>
                     <p onClick={()=>{handleClick(result.date)}}>{result.title}</p>

@@ -16,6 +16,8 @@ type Props = {
 
 
 const MonthComponent = (props: Props) => {
+
+    const months = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     const { setSelectedDate, diaries, setIsAddNewEvent, diariesByDate } = useDiary()
 
     const getDaysInMonth = (year: number, month: number): number => {
@@ -59,8 +61,11 @@ const MonthComponent = (props: Props) => {
         <>
             <div className="rightContainer">
 
-                <div className="buttonContainer">
-                    <div className="buttons">
+
+                <div className="nav-btn-Container">
+
+                    <div className='button-container'>
+
 
                         <button onClick={() => {
                             let year = props.currentYear;
@@ -88,7 +93,13 @@ const MonthComponent = (props: Props) => {
                             }}>Next Month</button>
                     </div>
 
-                    <SearchComponent events={diaries} />
+
+                    <h1>{months[props.currentMonth]}, {props.currentYear}</h1>
+                    <div className='search-container'>
+
+                        <SearchComponent events={diaries} />
+                    </div>
+
                 </div>
                 <div className="month-view">
 

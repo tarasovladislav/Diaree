@@ -36,3 +36,14 @@
         grid-template-columns: repeat(4, 1fr);
     }
 }
+
+.nav-btn-Container{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.button-container{
+    display: flex;
+    /* justify-content: space-between; */
+}
