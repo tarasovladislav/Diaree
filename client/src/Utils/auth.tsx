@@ -32,8 +32,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const login = async () => {
         if (!token) return; //Tries to log in to fast before setting token TODO: FIX!!!
         setAuthenticated(true);
-        const userInfo = await getUser(token);
-        setUser(userInfo);
+        const response = await getUser(token);
+        setUser(response);
         setLoading(false);
     };
 
@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         <AuthContext.Provider value={{ authenticated, user, setUser, login, logout, token, setToken }} >
             {children}
         </AuthContext.Provider>
-    )
+    );
 };
 
 export const useAuth = () => {

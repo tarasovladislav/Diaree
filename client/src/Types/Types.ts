@@ -1,3 +1,5 @@
+import React from "react"
+
 export type DiaryType = {
     _id:string,
     title: string,
@@ -41,3 +43,9 @@ export type EventData = {
     imageUrl: string,
 }
 
+export type DiaryContextType = {
+    diaries: DiaryType[],
+    setDiaries: React.Dispatch<React.SetStateAction<any>>,
+    selectedDate: undefined,
+    setSelectedDate: React.Dispatch<React.SetStateAction<any>>
+}
