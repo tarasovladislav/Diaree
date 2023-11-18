@@ -1,7 +1,7 @@
 import './CalendarComponent.css';
 import React, { useState } from 'react'
-import MonthComponent from './MonthComponent'
-import { DiaryType } from '../Types/Types'
+import MonthComponent from '../Month/MonthComponent'
+import { DiaryType } from '../../Types/Types'
 
 type Props = {
     diaries: DiaryType[],
@@ -13,8 +13,8 @@ const CalendarComponent = (props: Props) => {
     // useEffect for getting data 
 
     //testing
-    const [currentYear, setCurrentYear] = useState(2023)
-    const [currentMonth, setCurrentMonth] = useState(10)
+    const [currentYear, setCurrentYear] = useState<number>(2023)
+    const [currentMonth, setCurrentMonth] = useState<number>(10)
 
     return (
         <div className='Calendar'>

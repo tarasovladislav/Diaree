@@ -1,5 +1,5 @@
 import React from "react";
-
+import './DayModal.css'
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -15,7 +15,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     <div className="modal-overlay">
       <div className="modal-content">
         <button className="close-button" onClick={onClose} title="Close Modal">
-          &times;
+          &times; CLOSE
         </button>
         {children}
       </div>

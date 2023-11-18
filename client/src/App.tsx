@@ -10,7 +10,7 @@ import SearchDiaries from "./components/SearchDiaries/SearchDiaries";
 import FoundEntry from "./components/FoundEntry/FoundEntry";
 import TagManagement from "./components/TagManagement/TagManagement"
 import { DiaryType } from './Types/Types'
-import CalendarComponent from "./new/CalendarComponent";
+import CalendarComponent from "./new/Calendar/CalendarComponent";
 type AppProps = {
 
 }
