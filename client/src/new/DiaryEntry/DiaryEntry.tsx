@@ -125,19 +125,6 @@ const DiaryEntry = () => {
                                 } />
                             </div>
 
-
-
-                            {/* <div className="Information-Item">
-                                <label htmlFor="tags">Tags</label>
-                                <input name="description" placeholder='Enter tags' onChange={(e) =>
-                                    setNewDiaryEntry({
-                                        ...newDiaryEntry,
-                                        text: e.target.value,
-                                    })
-                                } />
-                            </div> */}
-
-
                             <div className="Information-Item">
                                 <input
                                     type="text"
@@ -155,8 +142,6 @@ const DiaryEntry = () => {
                                     ))}
                                 </div>
                             </div>
-
-
 
                             <div className="Information-Item">
                                 <label htmlFor="image"></label>

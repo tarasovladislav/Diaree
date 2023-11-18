@@ -136,7 +136,7 @@ const MonthComponent = (props: Props) => {
                                 <span style={{ alignSelf: 'center' }}>
                                     {day}
                                 </span>
-                                {dayEvents.map(event => <DayComponent dayEvents={dayEvents} title={event.title} imageUrl={event.imageUrl} />)}
+                                {dayEvents.map(event => <DayComponent dayEvents={dayEvents} title={event.title} imageUrl={event.imageUrl} tags={event.tags}/>)}
                             </div>
                             :
                             <div

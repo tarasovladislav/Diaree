@@ -101,15 +101,15 @@ const getAllTags = async (): Promise<[TagType]> => {
     }
 }
 
-const postTag = async (name: String): Promise<TagType> => {
-    console.log(name);
+const postTag = async (title: String): Promise<TagType> => {
+    console.log(title);
     try {
         const response = await fetch(`${BASE_URL}/diary/tags`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ name }),
+            body: JSON.stringify({ title }),
         });
         checkResponse(response);
         return await response.json();
@@ -182,7 +182,7 @@ const postRegister = async (username: String, password: String) => {
     }
 }
 
-const getAllDiaryEntriesByDate = async (date:string)=> {
+const getAllDiaryEntriesByDate = async (date: string) => {
     try {
         const response = await fetch(`${BASE_URL}/diary/entries/date/${date}`);
         checkResponse(response);

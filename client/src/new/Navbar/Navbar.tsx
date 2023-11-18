@@ -83,7 +83,7 @@ const mockTags = [
 ]
 
 const Navbar = () => {
-    const { diaries } = useDiary()
+    const { diaries, tagList } = useDiary()
     const [recentEvents, setRecentEvents] = useState([])
 
     useEffect(() => {
@@ -109,7 +109,7 @@ const Navbar = () => {
             <div className="Border" style={{ paddingBlockStart: '0px' }}></div>
             <div className="Tags">
                 <h4>Tags</h4>
-                <TagBox data={mockTags} />
+                <TagBox data={tagList} />
             </div>
             <footer>
                 <div className="Border" style={{ marginBottom: '15px' }}></div>

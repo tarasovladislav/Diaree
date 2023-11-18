@@ -6,9 +6,11 @@ import { Request, Response } from 'express';
 import { validateUser } from '../utils/userUtils.js';
 import dotenv from "dotenv";
 dotenv.config({ path: '../.env' });
-const SECRET_KEY = process.env.SECRET_KEY!;
 
+const SECRET_KEY = process.env.SECRET_KEY!;
 const postRegister = async (req: Request, res: Response): Promise<any> => {
+    const SECRET_KEY = process.env.SECRET_KEY!;
+
     try {
         const { username, password } = req.body; //Get credentials from body
         if (!username || !password) return res.status(400).json({ error: "Credentials not provided correctly" });
@@ -24,6 +26,7 @@ const postRegister = async (req: Request, res: Response): Promise<any> => {
         });
         const token = jwt.sign({ user_id }, SECRET_KEY); //Create a JWT from the user_id and secret key
         res.status(201).json({ token });
+        return
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });
@@ -31,6 +34,8 @@ const postRegister = async (req: Request, res: Response): Promise<any> => {
 }
 
 const postLogin = async (req: Request, res: Response): Promise<any> => {
+    const SECRET_KEY = process.env.SECRET_KEY!;
+
     try {
         const { username, password } = req.body; //Get credentials from body
         if (!username || !password) return res.status(400).json({ error: "Credentials not provided correctly" })
@@ -43,6 +48,7 @@ const postLogin = async (req: Request, res: Response): Promise<any> => {
 
         const token = jwt.sign({ user_id: user.user_id }, SECRET_KEY); //Create a JWT from the user_id and secret key
         res.status(200).json({ token });
+        return
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });
@@ -58,6 +64,7 @@ const getUser = async (req: Request, res: Response): Promise<any> => {
         const { _id, password, __v, ...filteredUser } = user.toObject(); //Filter out unnecessary properties
 
         res.status(200).json(filteredUser); //Return the filtered user
+        return
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });

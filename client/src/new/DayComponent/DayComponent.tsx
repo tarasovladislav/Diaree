@@ -1,36 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import Modal from '../DayModal/DayModal';
 import './DayComponent.css'
-import DayEventListItem from '../DayEventListItem/DayEventListItem';
 import { DiaryType } from '../../Types/Types'
 import { useDiary } from '../../Utils/diary';
 
 type Props = {
     title: string,
-    imageUrl: string
+    imageUrl: string,
+    tags: [],
     dayEvents: DiaryType[]
 }
 
 
 const DayComponent = (props: Props) => {
-    const { isShowDayEvents, setIsShowDayEvents } = useDiary()
-
+    const { isShowDayEvents, setIsShowDayEvents, selectedTag } = useDiary()
+    console.log(selectedTag)
+    console.log(props.tags)
     return (
+
         <>
-            <div className='dayComponent' onClick={() => setIsShowDayEvents(true)} style={{ backgroundColor: '#eee', flex: 1 }}>
+
+            <div 
+
+            className={`dayComponent ${props.tags.findIndex(el => el.title === selectedTag) !== -1 ? "tagIncluded" : ""}`}
+            
+            onClick={() => setIsShowDayEvents(true)} >
                 {props.imageUrl && <img src={props.imageUrl} style={{ width: '40px', height: '40px' }} alt='day event' />}
                 <span>{props.title}</span>
             </div>
-
-            {/* <Modal>
-                <div className="modalComponent">
-                    <div className="header">
-                        <h1>{props.date}</h1>
-                        <button>Add New Event</button>
-                    </div>
-                    {props.dayEvents && props.dayEvents.map((event) => <DayEventListItem title={event.title} description={event.description} date={event.date} imageUrl={event.imageUrl} />)}
-                </div>
-            </Modal > */}
         </>
 
     )
