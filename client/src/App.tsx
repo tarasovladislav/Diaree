@@ -76,6 +76,7 @@ function App() {
         <>
         <div className="App">
             <Navbar />
+
             <CalendarComponent diaries={diaries} setSelectedDate={setSelectedDate} setIsOpenNew={setIsOpenNew} />
             {/* <div className="calendar-container">
                 <Calendar onSelectDate={setSelectedDate} setIsOpenNew={setIsOpenNew} />

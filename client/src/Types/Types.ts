@@ -21,3 +21,23 @@ export type AuthContextType = {
     token: string | null;
     setToken: React.Dispatch<React.SetStateAction<string | null>>;
 }
+
+export type SearchBarProps ={
+    onSearch: (query: string) => void;
+}
+
+export type SearchResult =  {
+    title: string;
+}
+
+export type SearchResultsProps = {
+    results: SearchResult[];
+}
+
+export type EventData = {
+    title: string,
+    text: string,
+    date: string,
+    imageUrl: string,
+}
+
