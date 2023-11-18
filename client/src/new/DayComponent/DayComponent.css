@@ -3,8 +3,18 @@
     justify-content: space-between;
     padding: 5px
 }
+
 .modalComponent {
     overflow: auto;
-    
+
     /* margin: 10px */
+}
+
+.dayComponent {
+    background-color: #ae9595;
+    flex: 1;
+}
+
+.tagIncluded {
+    background-color: aqua;
 }

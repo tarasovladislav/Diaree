@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     useEffect(() => {
         token ? login() : setLoading(false);
-    }, [token, setLoading]);
+    }, [token]);
 
     const login = async () => {
         if (!token) return; //Tries to log in to fast before setting token TODO: FIX!!!

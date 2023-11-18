@@ -22,11 +22,9 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
     const [isAddNewEvent, setIsAddNewEvent] = useState(false);
     const [isShowDayEvents, setIsShowDayEvents] = useState(false);
     const [selectedDate, setSelectedDate] = useState(undefined);
-
-
-    //new
     const [diariesByDate, setDiariesByDate] = useState({})
-
+    const [tagList, setTagList] = useState([])
+    const [selectedTag, setSelectedTag] = useState('')
 
     useEffect(() => {
         (async () => {
@@ -35,6 +33,7 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
             setDiaries(response);
         })();
     }, [authenticated])
+
 
     useEffect(() => {
         const newEventsMap = {};
@@ -46,10 +45,30 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
         });
         setDiariesByDate(newEventsMap);
     }, [diaries]);
+    useEffect(() => {
+        const transformTags = (data) => {
+            const tagCounts = {};
+            data.forEach(item => {
+                item.tags.forEach(tag => {
+                    if (tag && tag.title) { // Check if tag and tag.title exist
+                        if (tag.title in tagCounts) {
+                            tagCounts[tag.title]++;
+                        } else {
+                            tagCounts[tag.title] = 1;
+                        }
+                    }
+                });
 
+            });
+            return Object.entries(tagCounts).map(([title, count]) => ({ title, count }));
+        };
+        const transformedTags = transformTags(diaries).sort((a, b) => b.count - a.count);
+        setTagList(transformedTags);
+        console.log(tagList)
+    }, [diaries])
 
     return (
-        <DiaryContext.Provider value={{ diaries, setDiaries, selectedDate, setSelectedDate, isAddNewEvent, setIsAddNewEvent, isShowDayEvents, setIsShowDayEvents, diariesByDate, setDiariesByDate }} >
+        <DiaryContext.Provider value={{ diaries, setDiaries, selectedDate, setSelectedDate, isAddNewEvent, setIsAddNewEvent, isShowDayEvents, setIsShowDayEvents, diariesByDate, setDiariesByDate, tagList, selectedTag, setSelectedTag }} >
             {children}
         </DiaryContext.Provider>
     );

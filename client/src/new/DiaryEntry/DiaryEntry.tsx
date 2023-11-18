@@ -2,18 +2,18 @@ import { useState } from 'react';
 import { uploadImage, postDiaryEntry } from '../../ApiService';
 import './DiaryEntry.css';
 import { useDiary } from '../../Utils/diary';
-
+import Modal from '../Modal/Modal';
 const DiaryEntry = () => {
     const [isUploading, setIsUploading] = useState(false);
     const { selectedDate, setDiaries, isAddNewEvent, setIsAddNewEvent } = useDiary()
     const [tagValue, setTagValue] = useState('');
     const [tags, setTags] = useState([]);
 
-    const handleInputChange = (e) => {
+    const handleTagChange = (e) => {
         setTagValue(e.target.value);
     };
 
-    const handleInputKeyPress = (e) => {
+    const handleTagKeyPress = (e) => {
         if (e.key === 'Enter' || e.key === ',') {
             e.preventDefault();
             if (tagValue.trim() !== '') {
@@ -83,93 +83,64 @@ const DiaryEntry = () => {
 
     }
 
-
-
-
-    //trying
-
-
-
-
-
-
-
-
-
     return (
-        isAddNewEvent && (<div className="DiaryEntry">
-            <div className="Modal-Overlay">
-                <button className="Close" onClick={() => setIsAddNewEvent(false)}>Close</button>
-                <div className="Modal" onSubmit={createDiaryEntry}>
-                    <div className="Title">
-                        <h2>Create a new diary entry</h2>
-                    </div>
-                    <div className="Information">
-                        <form onSubmit={handleSubmit}>
-                            <div className="Information-Item">
-                                <label htmlFor="title">Title</label>
-                                <input type="text" name='title' placeholder='Enter a title' required={true} onChange={(e) =>
-                                    setNewDiaryEntry({
-                                        ...newDiaryEntry,
-                                        title: e.target.value,
-                                    })
-                                } />
-                            </div>
-                            <div className="Information-Item">
-                                <label htmlFor="description">Description</label>
-                                <textarea name="description" cols={35} rows={7} placeholder='Enter a description' required={true} onChange={(e) =>
-                                    setNewDiaryEntry({
-                                        ...newDiaryEntry,
-                                        text: e.target.value,
-                                    })
-                                } />
-                            </div>
+        isAddNewEvent && (
 
-
-
-                            {/* <div className="Information-Item">
-                                <label htmlFor="tags">Tags</label>
-                                <input name="description" placeholder='Enter tags' onChange={(e) =>
-                                    setNewDiaryEntry({
-                                        ...newDiaryEntry,
-                                        text: e.target.value,
-                                    })
-                                } />
-                            </div> */}
-
-
-                            <div className="Information-Item">
-                                <input
-                                    type="text"
-                                    placeholder="Enter tags"
-                                    value={tagValue}
-                                    onChange={handleInputChange}
-                                    onKeyDown={handleInputKeyPress}
-                                />
-                                <div className="tags">
-                                    {tags.map((tag, index) => (
-                                        <div key={index} className="tag">
-                                            {tag}
-                                            <button onClick={() => removeTag(index)}>X</button>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-
-
-                            <div className="Information-Item">
-                                <label htmlFor="image"></label>
-                                <input type="file" accept='image/*' disabled={isUploading} onChange={handleUploadImage} />
-                                <button type='submit' disabled={isUploading} >
-                                    {isUploading ? 'Uploading...' : 'Save'}
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+            <Modal onClose={() => setIsAddNewEvent(false)}>
+                <div className="Title">
+                    <h2>Create a new diary entry</h2>
                 </div>
-            </div>
-        </div>)
+                <div className="Information">
+                    <form onSubmit={handleSubmit}>
+                        <div className="Information-Item">
+                            <label htmlFor="title">Title</label>
+                            <input type="text" name='title' placeholder='Enter a title' required={true} onChange={(e) =>
+                                setNewDiaryEntry({
+                                    ...newDiaryEntry,
+                                    title: e.target.value,
+                                })
+                            } />
+                        </div>
+                        <div className="Information-Item">
+                            <label htmlFor="description">Description</label>
+                            <textarea name="description" cols={35} rows={7} placeholder='Enter a description' required={true} onChange={(e) =>
+                                setNewDiaryEntry({
+                                    ...newDiaryEntry,
+                                    text: e.target.value,
+                                })
+                            } />
+                        </div>
+
+                        <div className="Information-Item">
+                            <input
+                                type="text"
+                                placeholder="Enter tags"
+                                value={tagValue}
+                                onChange={handleTagChange}
+                                onKeyDown={handleTagKeyPress}
+                            />
+                            <div className="tags">
+                                {tags.map((tag, index) => (
+                                    <div key={index} className="tag">
+                                        {tag}
+                                        <button onClick={() => removeTag(index)}>X</button>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="Information-Item">
+                            <label htmlFor="image"></label>
+                            <input type="file" accept='image/*' disabled={isUploading} onChange={handleUploadImage} />
+                            <button type='submit' disabled={isUploading} >
+                                {isUploading ? 'Uploading...' : 'Save'}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </Modal>
+        )
     )
 }
 
