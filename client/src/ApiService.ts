@@ -148,6 +148,20 @@ const getUser = async (token: String) => {
     }
 }
 
+const uploadImage = async(data: any) => {
+    try {
+        const response = await fetch(`${BASE_URL}/diary/image/upload`, {
+            method: 'POST',
+            body: data
+        });
+        checkResponse(response);
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
 
 export {
     getAllDiaryEntries,
@@ -159,5 +173,6 @@ export {
     getAllTags,
     postTag,
     deleteTag,
-    getUser
+    getUser,
+    uploadImage
 }

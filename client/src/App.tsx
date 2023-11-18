@@ -11,6 +11,7 @@ import FoundEntry from "./components/FoundEntry/FoundEntry";
 import TagManagement from "./components/TagManagement/TagManagement"
 import { DiaryType } from './Types/Types'
 import CalendarComponent from "./new/CalendarComponent";
+import DiaryEntry from "./new/DiaryEntry/DiaryEntry";
 type AppProps = {
 
 }
@@ -80,14 +81,14 @@ function App() {
             {/* <div className="calendar-container">
                 <Calendar onSelectDate={setSelectedDate} setIsOpenNew={setIsOpenNew} />
             </div> */}
-            <NewDiaryEntry
-                isOpen={isOpenNew}
-                setIsOpenNew={setIsOpenNew}
-                onClose={handleCloseModal}
-                selectedDate={selectedDate}
-                setDiaries={setDiaries}
-                diaries={diaries}
-                tags={tags}
+            <DiaryEntry
+                // isOpen={isOpenNew}
+                // setIsOpenNew={setIsOpenNew}
+                // onClose={handleCloseModal}
+                // selectedDate={selectedDate}
+                // setDiaries={setDiaries}
+                // diaries={diaries}
+                // tags={tags}
             />
 
             {/* <SearchDiaries diaries={diaries} onDelete={handleDelete} /> */}
