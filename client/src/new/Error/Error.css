@@ -1,0 +1,17 @@
+.Error {
+    background-color: antiquewhite;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Error h2 {
+    font-size: 10rem;
+}
+
+.Error h3 {
+    font-size: 2rem;
+}

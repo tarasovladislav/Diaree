@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './Utils/auth';
-import Home from './new/Home';
 import Authenticate from './new/Authenticate/Authenticate';
-
-const RedirectToAuthenticate = () => <Navigate to="/authenticate" />;
+import Error from './new/Error/Error';
 
 const App = () => {
     const { authenticated, login } = useAuth();
@@ -28,7 +26,7 @@ const App = () => {
                         element={authenticated ? <Navigate to="/home" /> : <Navigate to="/authenticate" />}
                     />
                     <Route path="/authenticate" element={<Authenticate />} />
-                    {/* <Route path='*' element={<ErrorPage />} /> */}
+                    <Route path='*' element={<Error />} />
                 </Routes>
             </div>
         </Router>
