@@ -5,6 +5,7 @@ import CalendarComponent from "./Calendar/CalendarComponent";
 import { useDiary } from "../Utils/diary";
 import DiaryEntry from "./DiaryEntry/DiaryEntry";
 import ExistingDay from "./ExistingDay/ExistingDay";
+import Modal from "./Modal/Modal";
 function Home() {
     return (
         <>
@@ -13,6 +14,9 @@ function Home() {
                 <CalendarComponent />
                 <DiaryEntry />
                 <ExistingDay />
+                {/* <Modal>
+                    THIS IS MHY CHILDER
+                </Modal> */}
             </div>
         </>
     );
