@@ -71,7 +71,7 @@ const MonthComponent = (props: Props) => {
         console.log(dateKey);
         props.setSelectedDate(dateKey)
         props.setIsOpenNew(true)
-    }
+    }    
 
     return (
         <>
@@ -148,7 +148,6 @@ const MonthComponent = (props: Props) => {
                                     {day}
                                 </span>
                             </div>
-
                         );
                     })}
                 </div>

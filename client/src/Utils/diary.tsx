@@ -19,11 +19,11 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
 
     useEffect(() => {
         (async() => {
-            if (!authenticated) return;
+            if (!authenticated) return
             const response = await getAllDiaryEntries();
             setDiaries(response);
         })();
-    })
+    }, [authenticated])
 
     return (
         <DiaryContext.Provider value={{ diaries, setDiaries, selectedDate, setSelectedDate }} >

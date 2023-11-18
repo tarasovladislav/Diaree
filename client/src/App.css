@@ -25,5 +25,5 @@ body {
 .App {
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: flex-start;
 }

@@ -1,15 +1,14 @@
 .Navbar {
-    position: relative;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    height: calc(100vh - 20px);
+    /* height: calc(100vh - 20px); */
     min-width: 20%;
     max-width: 20%;
     border: 2px solid black;
     border-radius: 10px;
-    margin: 10px;
     padding: 15px;
+    margin: 10px;
 }
 
 .Navbar .Title {
