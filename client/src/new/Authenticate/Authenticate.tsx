@@ -4,7 +4,7 @@ import Login from './Login/Login';
 import Register from './Register/Register';
 
 const Authenticate = () => {
-    const [isOnLogin, setIsOnLogin] = useState(!true);
+    const [isOnLogin, setIsOnLogin] = useState(true);
 
     return (
         <div>

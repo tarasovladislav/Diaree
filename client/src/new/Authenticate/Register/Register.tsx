@@ -1,41 +1,60 @@
 import './Register.css';
 import User from '../../../assets/user.png';
 import Lock from '../../../assets/lock.png';
-import { postLogin } from '../../../ApiService';
+import { postRegister } from '../../../ApiService';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-type RegisterType = {
-    isOnLogin: boolean,
-    setIsOnLogin: (isOnLogin: boolean) => {}
-}
+const Register: React.FC<{ isOnLogin: boolean, setIsOnLogin: (isOnLogin: boolean) => void }> = ({ isOnLogin, setIsOnLogin }) => {
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        password: '',
+        isFirstPasswordValid: false,
+        isSecondPasswordMatching: false,
+        borderColor: '',
+    });
 
-const Register: React.FC<RegisterType> = ({ isOnLogin, setIsOnLogin }: RegisterType) => {
-    const [password, setPassword] = useState('');
-    const [isFirstPasswordValid, setisFirstPasswordValid] = useState(false);
-    const [isSecondPasswordMatching, setIsSecondPasswordMatching] = useState(false);
-    const [color, setColor] = useState('')
-
-    const handleLogin = async (e: any) => {
+    const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const username = e.currentTarget.username.value;
-        const password = e.currentTarget.password.value;
+        const { username, password, confirmPassword } = e.currentTarget;
+        if (password.value !== confirmPassword.value) {
+            password.value = '';
+            confirmPassword.value = '';
+            return alert("Passwords don't match");
+        }
 
-        const response = await postLogin(username, password);
+        const response = await postRegister(username.value, password.value);
 
-        if (response.token) return localStorage.setItem('token', response.token);
-        alert(response.error);
-    }
+        if (response.token) {
+            localStorage.setItem('token', response.token);
+            navigate('/home');
+
+        } else {
+            alert(response.error);
+            username.value = '';
+            password.value = '';
+            confirmPassword.value = '';
+        }
+    };
 
     const handleFirstPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const _password = e.target.value;
-        setPassword(_password)
-        setisFirstPasswordValid(_password.length >= 4);
+        const password = e.target.value;
+        setFormData({
+            ...formData,
+            password,
+            isFirstPasswordValid: password.length >= 4,
+        });
     };
 
     const handleSecondPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
         const _password = e.target.value;
-        setIsSecondPasswordMatching(_password !== password);
-        if (_password.length >= 3) setColor(_password !== password ? '1px solid red' : '1px solid green')
+        if (_password.length === 0) return setFormData({ ...formData, borderColor: '1px solid rgba(0, 0, 0, 0.1)' })
+        if (_password.length < 3) return;
+        setFormData({
+            ...formData,
+            isSecondPasswordMatching: _password !== formData.password,
+            borderColor: _password !== formData.password ? '1px solid red' : '1px solid green',
+        });
     };
 
 
@@ -43,10 +62,10 @@ const Register: React.FC<RegisterType> = ({ isOnLogin, setIsOnLogin }: RegisterT
         <div className="Register" id={isOnLogin ? 'fadeIn' : 'fadeOut'}>
             <div className="Register-Main">
                 <div className="Switch">
-                    <button onClick={() => { setIsOnLogin(true) }}>Log In</button>
                     <button className='Button-Disabled'>Register</button>
+                    <button onClick={() => { setIsOnLogin(true) }}>Log In</button>
                 </div>
-                <form className="Register-Form" onSubmit={handleLogin}>
+                <form className="Register-Form" onSubmit={handleRegister}>
                     <div className="Title">
                         <div className="State">
                             <h2>Welcome to <span>Dιαɾҽҽ</span>.</h2>
@@ -68,20 +87,20 @@ const Register: React.FC<RegisterType> = ({ isOnLogin, setIsOnLogin }: RegisterT
                                 required={true}
                                 minLength={4}
                                 onChange={handleFirstPassword}
-                                style={isFirstPasswordValid ? { borderBottom: '1px solid green' } : {}}
+                                style={formData.isFirstPasswordValid ? { borderBottom: '1px solid green' } : {}}
                             />
                         </div>
                         <div className="Confirm-Password">
                             <img src={Lock} />
                             <input
                                 type="password"
-                                name="confirm-password"
+                                name="confirmPassword"
                                 placeholder="Confirm password"
                                 required={true}
                                 minLength={4}
                                 onChange={handleSecondPassword}
-                                style={{ borderBottom: color }}
-                                />
+                                style={{ borderBottom: formData.borderColor }}
+                            />
                         </div>
                         <div className="Submit">
                             <a href='#' onClick={() => { setIsOnLogin(true) }}>or log in</a>

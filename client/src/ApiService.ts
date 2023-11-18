@@ -165,6 +165,23 @@ const postLogin = async (username: String, password: String) => {
     }
 }
 
+const postRegister = async (username: String, password: String) => {
+    try {
+        const response = await fetch(`${BASE_URL}/user/account/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        })
+        //checkResponse(response);
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
 const getAllDiaryEntriesByDate = async (date:string)=> {
     try {
         const response = await fetch(`${BASE_URL}/diary/entries/date/${date}`);
@@ -188,5 +205,6 @@ export {
     deleteTag,
     getUser,
     postLogin,
+    postRegister,
     getAllDiaryEntriesByDate
 }

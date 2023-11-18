@@ -10,8 +10,8 @@ const SECRET_KEY = process.env.SECRET_KEY!;
 
 const postRegister = async (req: Request, res: Response): Promise<any> => {
     try {
-        const { username, password, name } = req.body; //Get credentials from body
-        if (!username || !password || !name) return res.status(400).json({ error: "Credentials not provided correctly" });
+        const { username, password } = req.body; //Get credentials from body
+        if (!username || !password) return res.status(400).json({ error: "Credentials not provided correctly" });
 
         const user = await User.findOne({ username });
         if (user) return res.status(400).json({ error: "Username is already taken" }); //Check if user with username: username already is taken/exists
@@ -20,11 +20,10 @@ const postRegister = async (req: Request, res: Response): Promise<any> => {
         await User.insertMany({
             user_id,
             username,
-            password: await bcrypt.hash(password, 10), //Use bcrypt to safely store password
-            name
+            password: await bcrypt.hash(password, 10) //Use bcrypt to safely store password
         });
         const token = jwt.sign({ user_id }, SECRET_KEY); //Create a JWT from the user_id and secret key
-        res.status(201).send(token);
+        res.status(201).json({ token });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });
@@ -43,7 +42,7 @@ const postLogin = async (req: Request, res: Response): Promise<any> => {
         if (!validPassword) return res.status(401).json({ error: "Incorrect password" });
 
         const token = jwt.sign({ user_id: user.user_id }, SECRET_KEY); //Create a JWT from the user_id and secret key
-        res.status(200).send(token);
+        res.status(200).json({ token });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });

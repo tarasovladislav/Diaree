@@ -3,22 +3,25 @@ import React from 'react';
 import User from '../../../assets/user.png';
 import Lock from '../../../assets/lock.png';
 import { postLogin } from '../../../ApiService';
+import { useNavigate } from 'react-router-dom';
 
-type LoginType = {
-    isOnLogin: boolean,
-    setIsOnLogin: (isOnLogin: boolean) => {}
-}
-
-const Login: React.FC<LoginType> = ({ isOnLogin, setIsOnLogin }: LoginType) => {
+const Login: React.FC<{ isOnLogin: boolean, setIsOnLogin: (isOnLogin: boolean) => void }> = ({ isOnLogin, setIsOnLogin }) => {
+    const navigate = useNavigate();
     const handleLogin = async (e: any) => {
         e.preventDefault();
-        const username = e.currentTarget.username.value;
-        const password = e.currentTarget.password.value;
+        const username = e.currentTarget.username;
+        const password = e.currentTarget.password;
 
-        const response = await postLogin(username, password);
+        const response = await postLogin(username.value, password.value);
 
-        if (response.token) return localStorage.setItem('token', response.token);
-        alert(response.error);
+        if (response.token) {
+            localStorage.setItem('token', response.token);
+            navigate('/home');
+        } else {
+            alert(response.error);
+            username.value = '';
+            password.value = '';
+        }
     }
 
 
@@ -28,8 +31,8 @@ const Login: React.FC<LoginType> = ({ isOnLogin, setIsOnLogin }: LoginType) => {
         <div className="Login" id={isOnLogin ? 'fadeIn' : 'fadeOut'}>
             <div className="Login-Main">
                 <div className="Switch">
-                    <button className='Button-Disabled'>Log In</button>
                     <button onClick={() => { setIsOnLogin(false) }}>Register</button>
+                    <button className='Button-Disabled'>Log In</button>
                 </div>
                 <form className="Login-Form" onSubmit={handleLogin}>
                     <div className="Title">
