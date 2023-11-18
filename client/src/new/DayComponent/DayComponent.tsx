@@ -10,20 +10,11 @@ type Props = {
     description: string,
     date: string,
     image: string
+    dayEvents: DiaryType[]
 }
 
 
 const DayComponent = (props: Props) => {
-    const [dayDiaries, setDayDiaries]=useState([])
-
-    useEffect(() => {
-        getAllDiaryEntriesByDate(props.date)
-            .then((data) => {
-                setDayDiaries(data);
-            })
-            .catch((error) => console.error(error));
-    }, []);
-
 
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,7 +26,6 @@ const DayComponent = (props: Props) => {
     const handleCloseModal = (): void => {
         setIsModalOpen(false);
     };
-
 
 
     return (
@@ -54,7 +44,7 @@ const DayComponent = (props: Props) => {
 
                     </div>
                     {/* array.map and each  */}
-                    {dayDiaries.map((event)=><DayEventListItem title={event.title} description={event.description} date={event.date} image={event.image} />)}
+                    {props.dayEvents && props.dayEvents.map((event) => <DayEventListItem title={event.title} description={event.description} date={event.date} image={event.image} />)}
 
                 </div>
             </Modal>
