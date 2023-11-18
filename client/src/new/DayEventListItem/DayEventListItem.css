@@ -1,0 +1,14 @@
+.eventListItem {
+    display: flex;
+    border: 1px solid black;
+    height: 30%;
+    gap: 10px;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 8px;
+}
+
+img {
+    height: 100%;
+    max-width: 50%;
+}

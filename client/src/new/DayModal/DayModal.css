@@ -1,0 +1,7 @@
+.modalComponent {
+    background-color: #fff;
+    height: 65vh;
+    width: 55vw;
+    border-radius: 8px;
+    padding: 20px
+}
