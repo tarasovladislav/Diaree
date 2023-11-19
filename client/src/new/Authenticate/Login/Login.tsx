@@ -3,10 +3,12 @@ import React from 'react';
 import User from '../../../assets/user.png';
 import Lock from '../../../assets/lock.png';
 import { postLogin } from '../../../ApiService';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../Utils/auth';
 
 const Login: React.FC<{ isOnLogin: boolean, setIsOnLogin: (isOnLogin: boolean) => void }> = ({ isOnLogin, setIsOnLogin }) => {
     const navigate = useNavigate();
+    const { setToken } = useAuth();
     const handleLogin = async (e: any) => {
         e.preventDefault();
         const username = e.currentTarget.username;
@@ -15,7 +17,8 @@ const Login: React.FC<{ isOnLogin: boolean, setIsOnLogin: (isOnLogin: boolean) =
         const response = await postLogin(username.value, password.value);
 
         if (response.token) {
-            localStorage.setItem('token', response.token);
+            setToken(response.token);
+            localStorage.setItem('token', response.token)
             navigate('/home');
         } else {
             alert(response.error);

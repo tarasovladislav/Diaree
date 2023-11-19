@@ -30,11 +30,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, [token]);
 
     const login = async () => {
-        if (!token) return; //Tries to log in to fast before setting token TODO: FIX!!!
-        setAuthenticated(true);
-        const response = await getUser(token);
-        setUser(response);
-        setLoading(false);
+        if (token) { //Tries to log in to fast before setting token TODO: FIX!!!
+            setAuthenticated(true);
+            const response = await getUser(token);
+            setUser(response);
+            setLoading(false);
+        }
     };
 
     const logout = () => {

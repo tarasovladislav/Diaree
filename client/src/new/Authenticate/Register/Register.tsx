@@ -4,9 +4,11 @@ import Lock from '../../../assets/lock.png';
 import { postRegister } from '../../../ApiService';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../Utils/auth';
 
 const Register: React.FC<{ isOnLogin: boolean, setIsOnLogin: (isOnLogin: boolean) => void }> = ({ isOnLogin, setIsOnLogin }) => {
     const navigate = useNavigate();
+    const { setToken } = useAuth();
     const [formData, setFormData] = useState({
         password: '',
         isFirstPasswordValid: false,
@@ -26,7 +28,8 @@ const Register: React.FC<{ isOnLogin: boolean, setIsOnLogin: (isOnLogin: boolean
         const response = await postRegister(username.value, password.value);
 
         if (response.token) {
-            localStorage.setItem('token', response.token);
+            setToken(response.token);
+            localStorage.setItem('token', response.token)
             navigate('/home');
 
         } else {
