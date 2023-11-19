@@ -140,6 +140,7 @@ const getUser = async (token: String) => {
                 'Authorization': `${token}`
             }
         });
+        console.log(response)
         checkResponse(response);
         return await response.json();
     } catch (error) {

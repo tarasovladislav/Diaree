@@ -28,7 +28,9 @@ const App = () => {
                     />
                     <Route
                         path="/authenticate"
+
                         element={authenticated ? <Navigate to="/home" /> : <Authenticate />}
+
                     />
                     <Route path='*' element={<Error />} />
                 </Routes>

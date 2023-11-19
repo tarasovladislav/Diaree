@@ -4,13 +4,14 @@ import { v4 as uuidv4 } from 'uuid';
 import jwt from 'jsonwebtoken';
 import { Request, Response } from 'express';
 import { validateUser } from '../utils/userUtils.js';
+
+import path from 'path'
 import dotenv from "dotenv";
-dotenv.config({ path: '../.env' });
+
+dotenv.config({ path: path.join(__dirname, '..', '..', '.env') });
 
 const SECRET_KEY = process.env.SECRET_KEY!;
 const postRegister = async (req: Request, res: Response): Promise<any> => {
-    const SECRET_KEY = process.env.SECRET_KEY!;
-
     try {
         const { username, password } = req.body; //Get credentials from body
         if (!username || !password) return res.status(400).json({ error: "Credentials not provided correctly" });
@@ -34,7 +35,7 @@ const postRegister = async (req: Request, res: Response): Promise<any> => {
 }
 
 const postLogin = async (req: Request, res: Response): Promise<any> => {
-    const SECRET_KEY = process.env.SECRET_KEY!;
+    // const SECRET_KEY = process.env.SECRET_KEY!;
 
     try {
         const { username, password } = req.body; //Get credentials from body

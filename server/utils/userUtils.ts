@@ -1,8 +1,10 @@
 import User from '../models/user.js';
 import jwt from 'jsonwebtoken';
 import { Request, Response } from 'express';
+import path from 'path'
 import dotenv from "dotenv";
-dotenv.config({ path: '../.env' });
+
+dotenv.config({ path: path.join(__dirname, '..', '..', '.env') });
 
 export async function validateUser(req: Request, res: Response): Promise<{ user_id: string; user: any } | undefined> {
     try {
@@ -30,6 +32,7 @@ export async function validateUser(req: Request, res: Response): Promise<{ user_
 
 export function tokenToUserId(token: string) {
     const SECRET_KEY = process.env.SECRET_KEY!;
+    // const SECRET_KEY = 'sda';
     try {
         const decodedToken = jwt.verify(token, SECRET_KEY) as { user_id: string }; //Verify the token with the secret key
         return decodedToken.user_id; //Return the user_id from the token payload

@@ -28,14 +28,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
         token ? login() : setLoading(false);
     }, [token]);
+    useEffect(() => {
 
+    }, [token])
     const login = async () => {
+
         if (token) { //Tries to log in to fast before setting token TODO: FIX!!!
             setAuthenticated(true);
             const response = await getUser(token);
             setUser(response);
             setLoading(false);
         }
+
     };
 
     const logout = () => {
