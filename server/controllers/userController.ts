@@ -59,18 +59,21 @@ const postLogin = async (req: Request, res: Response): Promise<any> => {
 const getUser = async (req: Request, res: Response): Promise<any> => {
     try {
         const validatedUser = await validateUser(req, res);
-        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: "Invalid user" });
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) {
+            return res.status(401).json({ error: "Invalid user or authentication failed" });
+        }
+
         const { user } = validatedUser;
 
-        const { _id, password, __v, ...filteredUser } = user.toObject(); //Filter out unnecessary properties
+        const { _id, password, __v, ...filteredUser } = user.toObject(); // Filter out unnecessary properties
 
-        res.status(200).json(filteredUser); //Return the filtered user
-        return
+        res.status(200).json(filteredUser); // Return the filtered user
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Internal server error" });
+        console.error("Error in getUser:", error);
+        res.status(500).json({ error: "Internal server error in getUser" });
     }
-}
+};
+
 
 const putUpdate = async (req: Request, res: Response): Promise<any> => { //TODO: fix
     try {
