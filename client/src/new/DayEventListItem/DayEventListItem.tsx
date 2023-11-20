@@ -3,29 +3,42 @@ import './DayEventListItem.css'
 import { MdDelete } from "react-icons/md";
 import { deleteDiaryEntry } from '../../ApiService'
 import { useDiary } from '../../Utils/diary';
+import { useSingleEntry } from '../../Utils/singleEntry';
+
 
 type Props = {
     title: string,
-    description: string,
+    text: string,
     date: string,
     imageUrl: string,
     _id: string
 }
 
 const DayEventListItem = (props: Props) => {
-    const {deleteEntry} = useDiary()
+    const { deleteEntry } = useDiary()
+    const { setIsShowSingleEvent, setSelectedEntry } = useSingleEntry();
+
+    // const handleClick = (entry)=>{
+    //     console.log(entry);
+    //     setSelectedEntry(entry);
+    //     setIsShowSingleEvent(true);
+    // } //
+
     return (
         <>
-            <div className="eventListItem">
+            <div className="eventListItem" onClick={()=>{
+                setSelectedEntry(props);
+                setIsShowSingleEvent(true);
+            }} >
                 {props.imageUrl && <img src={props.imageUrl} alt={props.title} />}
-                <div className="eventData">
+                <div className="eventData" >
                     <h2>{props.title}</h2>
-                    <p>{props.description}</p>
+                    <p>{props.text}</p>
                 </div>
-                <div className='deleteButton' 
-                onClick={()=>{
-                    deleteEntry(props._id)
-                }}
+                <div className='deleteButton'
+                    onClick={() => {
+                        deleteEntry(props._id)
+                    }}
                 ><MdDelete size={24} /></div>
             </div>
         </>
