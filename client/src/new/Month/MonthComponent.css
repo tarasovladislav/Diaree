@@ -1,10 +1,3 @@
-.Month .Month-View {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-gap: 5px;
-    flex: 1;
-    padding-inline: 10px;
-}
 
 .Month .Month-Navbar {
     display: flex;
@@ -35,15 +28,33 @@
 .Month .Month-Navbar .Searchbar {
     height: 40px;
 }
+.Month .Month-View {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: 1fr;
+    grid-gap: 5px;
+    /* flex-grow: 1; */
+    /* flex-shrink: 1; */
+    padding-inline: 10px;
+}
 
 .day {
-    height: 130px !important;
     overflow: auto;
     display: flex;
+    align-items: stretch;
+    justify-items: center;
     flex-direction: column;
     border: 1px solid #ddd;
     border-radius: 5px;
-    cursor: pointer;
+    flex: 1;
+}
+
+.dayEventList {
+    gap: 2px;
+    max-height: 100%;
+    overflow: auto;
+    flex-direction: column;
+    height: 100%;
 }
 
 .day.other-month {
@@ -62,4 +73,15 @@
     .month-view {
         grid-template-columns: repeat(4, 1fr);
     }
+}
+
+.nav-btn-Container{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.button-container{
+    display: flex;
+    /* justify-content: space-between; */
 }

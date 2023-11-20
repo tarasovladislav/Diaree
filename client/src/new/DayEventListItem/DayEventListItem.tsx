@@ -25,7 +25,6 @@ const DayEventListItem = (props: Props) => {
                 <div className='deleteButton' 
                 onClick={()=>{
                     deleteEntry(props._id)
-                    //also delete from loaded diaries
                 }}
                 ><MdDelete size={24} /></div>
             </div>
