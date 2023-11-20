@@ -9,7 +9,7 @@ type Props = {
     _id:string
 }
 
-
+//TODO rename this component
 const DayComponent = (props: Props) => {
     const { isShowDayEvents, setIsShowDayEvents, selectedTag } = useDiary();
     return (
