@@ -12,6 +12,12 @@
     color: #b69de6;
 }
 
+.Dashboard-Main .Title .Start h2:hover {
+    transform: scale(1.03);
+    filter: brightness(0.95);
+    cursor: pointer;
+}
+
 .Dashboard-Main .Title .End {
     display: flex;
     flex-direction: row;

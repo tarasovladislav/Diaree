@@ -20,7 +20,7 @@ const SearchResultComponent: React.FC<SearchResultsProps> = ({ results }) => {
     return (
         <div className="Searchbar-Result">
             {results.map((result, index) => (
-                <div key={index}>
+                <div className='Searchbar-Result-Item' key={index}>
                     <p onClick={()=>{handleClick(result.date)}}>{result.title}</p>
                 </div>
             ))}
