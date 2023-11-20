@@ -1,7 +1,6 @@
 import React from 'react'
 import './DayEventListItem.css'
 import { MdDelete } from "react-icons/md";
-import { deleteDiaryEntry } from '../../ApiService'
 import { useDiary } from '../../Utils/diary';
 import { useSingleEntry } from '../../Utils/singleEntry';
 

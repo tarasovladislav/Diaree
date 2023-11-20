@@ -112,7 +112,8 @@ async function postDiaryEntry(req, res) {
             }
         }, { new: true } // To get the updated user data
         );
-        res.status(201).json({ message: "Success" });
+        const pushedDiaryEntry = updatedUser?.diary_entries[updatedUser.diary_entries.length - 1];
+        res.status(201).json(pushedDiaryEntry);
     }
     catch (error) {
         console.error(error);
@@ -173,9 +174,16 @@ async function deleteDiaryEntry(req, res) {
         if (!validatedUser || !validatedUser.user_id || !validatedUser.user)
             return res.status(401).json({ error: validatedUser });
         const { id } = req.params;
-        const deletedEntry = await diary_js_1.default.findByIdAndDelete(id);
-        if (!deletedEntry) {
+        const userId = validatedUser.user_id;
+        const updatedUser = await user_js_1.default.findOneAndUpdate({ user_id: userId }, {
+            $pull: {
+                diary_entries: { _id: id }
+            }
+        }, { new: true } // To get the updated user data
+        );
+        if (!updatedUser) {
             res.status(404).json({ message: "Diary entry not found" });
+            return;
         }
         res.status(200).json({ message: "Diary entry deleted successfully" });
     }

@@ -22,5 +22,5 @@ const diarySchema = new mongoose.Schema({
 });
 
 const Diary = mongoose.model("Diary", diarySchema);
-
+export {diarySchema}
 export default Diary;
