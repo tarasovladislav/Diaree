@@ -1,4 +1,3 @@
-
 .eventListItem {
     display: flex;
     border: 1px solid black;
@@ -11,19 +10,24 @@
     position: relative
 }
 
-img {
-    height: 100%;
+.eventListItem img {
     max-width: 50%;
-    border-radius: 8px
+    border-radius: 8px;
+    margin-right: 10px
 }
 
 .eventData h2 {
     margin-bottom: 10px
 }
+
 .deleteButton {
     position: absolute;
     top: 0;
     right: 0;
     padding: 5px;
     cursor: pointer;
+}
+
+.eventListContent {
+    display: flex;
 }

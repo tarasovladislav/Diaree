@@ -1,9 +1,9 @@
 import './SearchbarResult.css';
 import { SearchResultsProps } from "../../Types/Types";
-import {useSingleEntry} from '../../Utils/singleEntry'
+import { useSingleEntry } from '../../Utils/singleEntry'
 
 const SearchResultComponent: React.FC<SearchResultsProps> = ({ results }) => {
-    const {isShowSingleEvent, setIsShowSingleEvent, setSelectedEntry  } = useSingleEntry();
+    const { isShowSingleEvent, setIsShowSingleEvent, setSelectedEntry } = useSingleEntry();
 
     const handleClick = (result) => {
         console.log('here')
@@ -14,11 +14,11 @@ const SearchResultComponent: React.FC<SearchResultsProps> = ({ results }) => {
     return (
         <div className="search-result-container">
             {results.map((result, index) => (
-                <div key={index}>
-                    <p onClick={()=>{handleClick(result)}}>{result.title}</p>
+                <div key={index} onClick={() => { handleClick(result) }}>
+                    <p >{result.title}</p>
                 </div>
             ))}
-            
+
         </div>
     );
 };

@@ -1,0 +1,22 @@
+
+
+.oneEntryContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.description-container {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.description-container img {
+    max-width: 40%;
+}

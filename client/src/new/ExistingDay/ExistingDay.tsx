@@ -22,7 +22,7 @@ const ExistingDay = (props: Props) => {
                 }}>Add New Event</button>
                 <div className='EventList'>
                     {diariesByDate[selectedDate] && diariesByDate[selectedDate].map((event) => {
-                        return <DayEventListItem _id={event._id} title={event.title} text={event.description} date={event.date} imageUrl={event.imageUrl} />
+                        return <DayEventListItem _id={event._id} title={event.title} text={event.text} date={event.date} imageUrl={event.imageUrl} />
                     })}
                 </div>
             </Modal>
