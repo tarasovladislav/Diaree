@@ -30,13 +30,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
         token ? login() : setLoading(false);
     }, [token]);
-    useEffect(() => {
 
-    }, [token])
     const login = async () => {
         if (token) {
             const validToken = await getValidateToken(token);
-
             if (validToken.status === 401) {
                 localStorage.removeItem('token'); //Remove corrupted token
                 window.location.reload();

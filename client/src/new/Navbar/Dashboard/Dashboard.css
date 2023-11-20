@@ -20,8 +20,9 @@
     gap: 10px;
 }
 
-.Dashboard-Main .Title .End img {
+.Dashboard-Main .Title .End img:hover {
     cursor: pointer;
+    transform: scale(1.03);
 }
 
 .Dashboard-Main .Recent-Memories h4,
