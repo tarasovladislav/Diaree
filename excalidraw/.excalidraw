@@ -348,8 +348,8 @@
     },
     {
       "type": "text",
-      "version": 524,
-      "versionNonce": 327869766,
+      "version": 525,
+      "versionNonce": 2016270756,
       "isDeleted": false,
       "id": "I5LtyhNJ4tbx8Vg62NYz4",
       "fillStyle": "hachure",
@@ -369,7 +369,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1700247082596,
+      "updated": 1700491509570,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -380,7 +380,7 @@
       "containerId": null,
       "originalText": "Recent Memos",
       "lineHeight": 1.25,
-      "baseline": 17
+      "baseline": 18
     },
     {
       "type": "rectangle",
@@ -611,8 +611,8 @@
     },
     {
       "type": "text",
-      "version": 450,
-      "versionNonce": 1794472474,
+      "version": 451,
+      "versionNonce": 1299251868,
       "isDeleted": false,
       "id": "mjU1wAldwVNhi_DC2uFWc",
       "fillStyle": "hachure",
@@ -632,7 +632,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1700247082596,
+      "updated": 1700491509570,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -643,7 +643,7 @@
       "containerId": null,
       "originalText": "Tags",
       "lineHeight": 1.25,
-      "baseline": 17
+      "baseline": 18
     },
     {
       "type": "rectangle",

@@ -1,7 +1,7 @@
 .header {
     display: flex;
     justify-content: space-between;
-    padding: 5px
+    padding: 5px;
 }
 
 .modalComponent {
@@ -10,9 +10,20 @@
     /* margin: 10px */
 }
 
-.dayComponent {
-    background-color: #ae9595;
-    flex: 1;
+.DayComponent {
+    border: 1px solid #b69de6;
+    background-color: #b69de6;
+    border-radius: 5px;
+    margin-inline: 5px;
+    margin-block: 2px;
+    height: 100%;
+    text-align: center;
+}
+
+.DayComponent:hover {
+    cursor: pointer;
+    transform: scale(1.03);
+    filter: brightness(0.95);
 }
 
 .tagIncluded {
