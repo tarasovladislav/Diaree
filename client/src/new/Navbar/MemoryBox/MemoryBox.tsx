@@ -29,7 +29,7 @@ const MemoryBox: React.FC<MemoryBoxType> = ({ data }: MemoryBoxType) => {
                     <MemoryBoxItem key={index} title={item.title} description={item.description} />
                 ))
             ) : (
-                <h4>No recent memories yet</h4>
+                <h4>No recent memories</h4>
             )}
         </div>
     );

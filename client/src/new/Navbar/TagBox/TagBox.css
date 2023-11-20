@@ -1,7 +1,7 @@
 .TagBox {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 3px;
     border: 1px solid black;
     height: 195px;
     width: 100%;
@@ -18,8 +18,8 @@
     flex: 0 0 auto;
     height: 25px;
     margin-bottom: 5px;
-    border: 1px solid #007bff;
-    background-color: #007bff;
+    border: 1px solid #b69de6;
+    background-color: #b69de6;
     color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     cursor: pointer;
@@ -33,7 +33,7 @@
 
 .TagBox .TagBox-Item:hover {
     transform: scale(1.03);
-    background-color: #006bde;
+    filter: brightness(0.95);
 }
 
 .TagBox .TagBox-Item p {
