@@ -185,11 +185,12 @@ async function putDiaryEntry(req: Request, res: Response): Promise<void> {
 
 async function deleteDiaryEntry(req: Request, res: Response): Promise<any> {
     try {
+
         const validatedUser = await validateUser(req, res);
         if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
         const { id } = req.params;
         const userId = validatedUser.user_id
-
+        console.log(id)
         const updatedUser = await User.findOneAndUpdate(
             { user_id: userId },
             {
