@@ -1,66 +1,8 @@
 .Navbar {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    /* height: calc(100vh - 20px); */
     min-width: 20%;
     max-width: 20%;
     border: 2px solid black;
     border-radius: 10px;
     padding: 15px;
     margin: 10px;
-}
-
-.Navbar .Title {
-    border-bottom: 1px solid black;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    color: #b69de6;
-}
-
-.Navbar .Title .End {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.Navbar .Title .End img {
-    cursor: pointer;
-}
-
-.Navbar .Recent-Memories h4,
-.Navbar .Tags h4 {
-    padding: 5px;
-    text-align: center;
-}
-
-.Navbar .Random-Memorie button {
-    background-color: #b69de6;
-    border: 1px solid #b69de6;
-    border-radius: 10px;
-    color: #fff;
-    height: 40px;
-    cursor: pointer;
-}
-
-.Navbar .Random-Memorie button:hover {
-    transform: scale(1.03);
-    filter: brightness(0.95);
-}
-
-.Navbar .Border {
-    padding-block-start: 10px;
-    border-bottom: 1px solid black;
-}
-
-.Navbar .Random-Memorie button {
-    width: 100%;
-}
-
-.Navbar footer {
-    text-align: center;
-    margin-top: auto;
 }

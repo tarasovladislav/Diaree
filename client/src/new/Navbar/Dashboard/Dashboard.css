@@ -1,0 +1,59 @@
+.Dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.Dashboard .Title {
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #b69de6;
+}
+
+.Dashboard .Title .End {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.Dashboard .Title .End img {
+    cursor: pointer;
+}
+
+.Dashboard .Recent-Memories h4,
+.Dashboard .Tags h4 {
+    padding: 5px;
+    text-align: center;
+}
+
+.Dashboard .Random-Memorie button {
+    background-color: #b69de6;
+    border: 1px solid #b69de6;
+    border-radius: 10px;
+    color: #fff;
+    height: 40px;
+    cursor: pointer;
+}
+
+.Dashboard .Random-Memorie button:hover {
+    transform: scale(1.03);
+    filter: brightness(0.95);
+}
+
+.Dashboard .Border {
+    padding-block-start: 10px;
+    border-bottom: 1px solid black;
+}
+
+.Dashboard .Random-Memorie button {
+    width: 100%;
+}
+
+.Dashboard footer {
+    text-align: center;
+    margin-top: auto;
+}
