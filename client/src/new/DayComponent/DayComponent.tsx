@@ -12,8 +12,6 @@ type Props = {
 
 const DayComponent = (props: Props) => {
     const { isShowDayEvents, setIsShowDayEvents, selectedTag } = useDiary()
-    console.log(selectedTag)
-    console.log(props.tags)
     return (
 
         <>
