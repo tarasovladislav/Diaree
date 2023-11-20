@@ -29,6 +29,8 @@ router.post('/user/account/login', userController.postLogin);
 router.post('/user/account/register', userController.postRegister);
 router.get('/user/account', userController.getUser);
 router.put('/user/account/update', userController.putUpdate);
+//Vliadation
+router.get('/user/account/validate', userController.getValidateToken);
 
 
 export default router;

@@ -31,4 +31,6 @@ router.post('/user/account/login', userController_js_1.default.postLogin);
 router.post('/user/account/register', userController_js_1.default.postRegister);
 router.get('/user/account', userController_js_1.default.getUser);
 router.put('/user/account/update', userController_js_1.default.putUpdate);
+//Vliadation
+router.get('/user/account/validate', userController_js_1.default.getValidateToken);
 exports.default = router;

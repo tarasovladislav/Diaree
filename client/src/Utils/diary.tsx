@@ -64,7 +64,6 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
         };
         const transformedTags = transformTags(diaries).sort((a, b) => b.count - a.count);
         setTagList(transformedTags);
-        console.log(tagList)
     }, [diaries])
 
     return (
