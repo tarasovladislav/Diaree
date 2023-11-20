@@ -233,7 +233,7 @@ const uploadImage = async (data: any) => {
 export {
     getAllDiaryEntries,
     uploadImage,
-    getRecentDiaryEntries,
+    // getRecentDiaryEntries,
     getDiaryEntryById,
     postDiaryEntry,
     deleteDiaryEntry,

@@ -28,6 +28,7 @@ async function getRecentDiaryEntries(req: Request, res: Response): Promise<any> 
     try {
         const validatedUser = await validateUser(req, res);
         if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
+        
         const recentDiaryEntries = await Diary.find({}).sort({ date: -1 }).limit(3);
 
         res.status(200).json(recentDiaryEntries);
