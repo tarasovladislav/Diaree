@@ -1,0 +1,25 @@
+.Account-Main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.Account-Main .Title {
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #b69de6;
+}
+
+.Account-Main .Title .End {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.Account-Main .Title .End img {
+    cursor: pointer;
+}
