@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { getAllDiaryEntries } from '../ApiService';
+import { getAllDiaryEntries, deleteDiaryEntry } from '../ApiService';
 import { DiaryContextType } from '../Types/Types';
 import { useAuth } from './auth';
 
@@ -66,8 +66,15 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
         setTagList(transformedTags);
     }, [diaries])
 
+    //add funciton which delete from diaries
+    const deleteEntry = (_id: string) => {
+        deleteDiaryEntry(_id)
+        setDiaries(diaries.filter(diary => {
+            return diary._id !== _id
+        }))
+    }
     return (
-        <DiaryContext.Provider value={{ diaries, setDiaries, selectedDate, setSelectedDate, isAddNewEvent, setIsAddNewEvent, isShowDayEvents, setIsShowDayEvents, diariesByDate, setDiariesByDate, tagList, selectedTag, setSelectedTag }} >
+        <DiaryContext.Provider value={{ diaries, setDiaries, selectedDate, setSelectedDate, isAddNewEvent, setIsAddNewEvent, isShowDayEvents, setIsShowDayEvents, diariesByDate, setDiariesByDate, tagList, selectedTag, setSelectedTag, deleteEntry }} >
             {children}
         </DiaryContext.Provider>
     );

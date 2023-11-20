@@ -1,12 +1,12 @@
 import './DayComponent.css'
 import { DiaryType } from '../../Types/Types'
 import { useDiary } from '../../Utils/diary';
-
 type Props = {
     title: string,
     imageUrl: string,
     tags: [],
-    dayEvents: DiaryType[]
+    dayEvents: DiaryType[],
+    _id:string
 }
 
 
