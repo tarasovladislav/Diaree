@@ -1,4 +1,3 @@
-
 .Month .Month-Navbar {
     display: flex;
     justify-content: space-between;
@@ -28,14 +27,16 @@
 .Month .Month-Navbar .Searchbar {
     height: 40px;
 }
+
 .Month .Month-View {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-auto-rows: 1fr;
     grid-gap: 5px;
-    /* flex-grow: 1; */
+    flex-grow: 1;
     /* flex-shrink: 1; */
     padding-inline: 10px;
+    padding: 10px;
 }
 
 .day {
@@ -46,6 +47,7 @@
     flex-direction: column;
     border: 1px solid #ddd;
     border-radius: 5px;
+    height: 100%;
     flex: 1;
 }
 
@@ -62,7 +64,7 @@
     cursor: not-allowed;
 }
 
-.rightContainer {
+.Right-Container {
     height: calc(100vh - 20px);
     display: flex;
     flex-direction: column
@@ -75,13 +77,13 @@
     }
 }
 
-.nav-btn-Container{
+.nav-btn-Container {
     display: flex;
     justify-content: space-between;
     padding: 10px;
 }
 
-.button-container{
+.button-container {
     display: flex;
     /* justify-content: space-between; */
 }
