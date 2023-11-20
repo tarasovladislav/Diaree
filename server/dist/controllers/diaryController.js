@@ -27,6 +27,9 @@ async function getAllDiaryEntries(req, res) {
 }
 async function getRecentDiaryEntries(req, res) {
     try {
+        const validatedUser = await (0, userUtils_js_1.validateUser)(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user)
+            return res.status(401).json({ error: validatedUser });
         const recentDiaryEntries = await diary_js_1.default.find({}).sort({ date: -1 }).limit(3);
         res.status(200).json(recentDiaryEntries);
     }
@@ -37,6 +40,9 @@ async function getRecentDiaryEntries(req, res) {
 }
 async function getDiaryEntryById(req, res) {
     try {
+        const validatedUser = await (0, userUtils_js_1.validateUser)(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user)
+            return res.status(401).json({ error: validatedUser });
         const { id } = req.params;
         const oneDiaryEntry = await diary_js_1.default.findById(id);
         if (!oneDiaryEntry) {
@@ -52,6 +58,9 @@ async function getDiaryEntryById(req, res) {
 //change to get all
 async function getDiaryEntryByDate(req, res) {
     try {
+        const validatedUser = await (0, userUtils_js_1.validateUser)(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user)
+            return res.status(401).json({ error: validatedUser });
         const { date } = req.params;
         console.log(req.params);
         // console.log(date)
@@ -160,6 +169,9 @@ async function putDiaryEntry(req, res) {
 }
 async function deleteDiaryEntry(req, res) {
     try {
+        const validatedUser = await (0, userUtils_js_1.validateUser)(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user)
+            return res.status(401).json({ error: validatedUser });
         const { id } = req.params;
         const deletedEntry = await diary_js_1.default.findByIdAndDelete(id);
         if (!deletedEntry) {

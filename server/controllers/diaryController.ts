@@ -24,8 +24,10 @@ async function getAllDiaryEntries(req: Request, res: Response): Promise<any> {
     }
 }
 
-async function getRecentDiaryEntries(req: Request, res: Response): Promise<void> {
+async function getRecentDiaryEntries(req: Request, res: Response): Promise<any> {
     try {
+        const validatedUser = await validateUser(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
         const recentDiaryEntries = await Diary.find({}).sort({ date: -1 }).limit(3);
 
         res.status(200).json(recentDiaryEntries);
@@ -35,8 +37,10 @@ async function getRecentDiaryEntries(req: Request, res: Response): Promise<void>
     }
 }
 
-async function getDiaryEntryById(req: Request, res: Response): Promise<void> {
+async function getDiaryEntryById(req: Request, res: Response): Promise<any> {
     try {
+        const validatedUser = await validateUser(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
         const { id } = req.params;
         const oneDiaryEntry = await Diary.findById(id);
 
@@ -52,8 +56,10 @@ async function getDiaryEntryById(req: Request, res: Response): Promise<void> {
 }
 
 //change to get all
-async function getDiaryEntryByDate(req: Request, res: Response) {
+async function getDiaryEntryByDate(req: Request, res: Response): Promise<any> {
     try {
+        const validatedUser = await validateUser(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
         const { date } = req.params;
         console.log(req.params)
         // console.log(date)
@@ -176,8 +182,10 @@ async function putDiaryEntry(req: Request, res: Response): Promise<void> {
     }
 }
 
-async function deleteDiaryEntry(req: Request, res: Response): Promise<void> {
+async function deleteDiaryEntry(req: Request, res: Response): Promise<any> {
     try {
+        const validatedUser = await validateUser(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
         const { id } = req.params;
         const deletedEntry = await Diary.findByIdAndDelete(id);
 

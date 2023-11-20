@@ -2,7 +2,6 @@
 const BASE_URL = "http://localhost:3000";
 // const BASE_URL = process.env.REACT_APP_BASE_URL;
 import { DiaryType, TagType } from './Types/Types.js'
-import { useAuth } from './Utils/auth.js';
 
 const checkResponse = (response: Response): void => {
     if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
