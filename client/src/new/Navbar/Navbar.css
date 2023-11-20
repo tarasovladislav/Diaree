@@ -1,8 +1,5 @@
 .Navbar {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    /* height: calc(100vh - 20px); */
+    position: relative;
     min-width: 20%;
     max-width: 20%;
     border: 2px solid black;
@@ -11,32 +8,26 @@
     margin: 10px;
 }
 
-.Navbar .Title {
-    border-bottom: 1px solid black;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+#fadeIn {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
 }
 
-.Navbar .Recent-Memories h4, .Navbar .Tags h4 {
-    padding: 5px;
-    text-align: center;
+#fadeOut {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    pointer-events: none;
 }
 
-.Navbar .Random-Memorie button:hover {
-    transform: scale(1.03);
-}
-
-.Navbar .Border {
-    padding-block-start: 10px;
-    border-bottom: 1px solid black;
-}
-
-.Navbar .Random-Memorie button {
+.Account,
+.Dashboard {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-}
-
-.Navbar footer {
-    text-align: center;
-    margin-top: auto;
+    height: 100%;
+    opacity: 0;
+    padding: 15px;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 1;
 }

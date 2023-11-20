@@ -1,0 +1,64 @@
+.Account-Main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.Account-Main .Title {
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #b69de6;
+}
+
+.Account-Main .Title .End {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.Account-Main .Border {
+    padding-block-start: 10px;
+    border-bottom: 1px solid black;
+}
+
+.Account-Main .Title .End img:hover {
+    cursor: pointer;
+    transform: scale(1.03);
+}
+
+.Account-Main footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: auto;
+}
+
+.Account-Main footer button {
+    width: 95%;
+    height: 30px;
+    border-style: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.Account-Main footer button:hover {
+    transform: scale(1.03);
+    filter: brightness(0.95);
+}
+
+.Account-Main footer button:nth-child(1) {
+    color: #fff;
+    background-color: #5a65ea;
+}
+
+.Account-Main footer button:nth-child(2) {
+    color: #fff;
+    background-color: #ea454b;
+}
