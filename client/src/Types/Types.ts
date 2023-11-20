@@ -49,3 +49,7 @@ export type DiaryContextType = {
     selectedDate: undefined,
     setSelectedDate: React.Dispatch<React.SetStateAction<any>>
 }
+
+export type SingleEntryContextType = {
+    entry: DiaryType
+}

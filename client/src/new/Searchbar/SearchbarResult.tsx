@@ -1,30 +1,24 @@
 import './SearchbarResult.css';
-import { useState } from "react";
 import { SearchResultsProps } from "../../Types/Types";
-import { useDiary } from "../../Utils/diary";
-
+import {useSingleEntry} from '../../Utils/singleEntry'
 
 const SearchResultComponent: React.FC<SearchResultsProps> = ({ results }) => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const {isShowSingleEvent, setIsShowSingleEvent, setSelectedEntry  } = useSingleEntry();
 
-    const {setIsShowDayEvents, setSelectedDate}   = useDiary();
-    const handleClick = (date) => {
+    const handleClick = (result) => {
         console.log('here')
-        setSelectedDate(date);
-        setIsShowDayEvents(true);
+        setSelectedEntry(result);
+        setIsShowSingleEvent(true);
     };
 
-    // const handleCloseModal = () => {
-    //     setIsModalOpen(false);
-    // };
     return (
-        <div className="Searchbar-Result">
+        <div className="search-result-container">
             {results.map((result, index) => (
-                <div className='Searchbar-Result-Item' key={index}>
-                    <p onClick={()=>{handleClick(result.date)}}>{result.title}</p>
+                <div key={index}>
+                    <p onClick={()=>{handleClick(result)}}>{result.title}</p>
                 </div>
             ))}
-            {/* {isModalOpen && <ExistingDay />} */}
+            
         </div>
     );
 };

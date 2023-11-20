@@ -349,7 +349,11 @@
     {
       "type": "text",
       "version": 525,
+<<<<<<< Updated upstream
       "versionNonce": 2016270756,
+=======
+      "versionNonce": 1130126901,
+>>>>>>> Stashed changes
       "isDeleted": false,
       "id": "I5LtyhNJ4tbx8Vg62NYz4",
       "fillStyle": "hachure",
@@ -369,7 +373,11 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
+<<<<<<< Updated upstream
       "updated": 1700491509570,
+=======
+      "updated": 1700491510593,
+>>>>>>> Stashed changes
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -612,7 +620,11 @@
     {
       "type": "text",
       "version": 451,
+<<<<<<< Updated upstream
       "versionNonce": 1299251868,
+=======
+      "versionNonce": 1976011675,
+>>>>>>> Stashed changes
       "isDeleted": false,
       "id": "mjU1wAldwVNhi_DC2uFWc",
       "fillStyle": "hachure",
@@ -632,7 +644,11 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
+<<<<<<< Updated upstream
       "updated": 1700491509570,
+=======
+      "updated": 1700491510594,
+>>>>>>> Stashed changes
       "link": null,
       "locked": false,
       "fontSize": 20,
