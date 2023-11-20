@@ -22,7 +22,7 @@ const DayEventListItem = (props: Props) => {
     //     setSelectedEntry(entry);
     //     setIsShowSingleEvent(true);
     // } //
-
+    console.log(props)
     return (
         <>
             <div className="eventListItem">

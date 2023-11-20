@@ -15,9 +15,13 @@
     border-radius: 5px;
     margin-inline: 5px;
     margin-block: 2px;
+    min-height: 30%;
     height: 30%;
-
-    /* flex: 1; */
+    text-wrap: nowrap;
+    overflow-x: hidden;
+    padding: 5px 0;
+    overflow-y: hidden;
+    flex: 1;
     text-align: center;
 }
 
