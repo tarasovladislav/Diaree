@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import { diarySchema } from "./diary";
 
 const userSchema = new mongoose.Schema({
     _id: {
@@ -19,12 +19,10 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     diary_entries: {
-        type: [],
-        required: true
+        type: [diarySchema],
     },
     tags: {
         type: [],
-        required: true
     },
     __v: {
         type: String

@@ -81,7 +81,7 @@ const DiaryEntry = () => {
             .then(data => {
                 console.log(data);
                 
-                setDiaries((prevDiaries) => [newEntryData, ...prevDiaries]);
+                setDiaries((prevDiaries) => [data, ...prevDiaries]);
                 setIsAddNewEvent(false);
                 setTags([]);
             })

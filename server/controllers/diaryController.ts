@@ -28,7 +28,7 @@ async function getRecentDiaryEntries(req: Request, res: Response): Promise<any> 
     try {
         const validatedUser = await validateUser(req, res);
         if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
-        
+
         const recentDiaryEntries = await Diary.find({}).sort({ date: -1 }).limit(3);
 
         res.status(200).json(recentDiaryEntries);
@@ -119,8 +119,8 @@ async function postDiaryEntry(req: Request, res: Response): Promise<any> {
             },
             { new: true } // To get the updated user data
         );
-
-        res.status(201).json({ message: "Success" });
+        const pushedDiaryEntry = updatedUser?.diary_entries[updatedUser.diary_entries.length - 1];
+        res.status(201).json(pushedDiaryEntry);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });
@@ -188,10 +188,21 @@ async function deleteDiaryEntry(req: Request, res: Response): Promise<any> {
         const validatedUser = await validateUser(req, res);
         if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
         const { id } = req.params;
-        const deletedEntry = await Diary.findByIdAndDelete(id);
+        const userId = validatedUser.user_id
 
-        if (!deletedEntry) {
+        const updatedUser = await User.findOneAndUpdate(
+            { user_id: userId },
+            {
+                $pull: {
+                    diary_entries: { _id: id }
+                }
+            },
+            { new: true } // To get the updated user data
+        );
+
+        if (!updatedUser) {
             res.status(404).json({ message: "Diary entry not found" });
+            return
         }
 
         res.status(200).json({ message: "Diary entry deleted successfully" });

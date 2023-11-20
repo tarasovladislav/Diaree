@@ -69,6 +69,7 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
 
     //add funciton which delete from diaries
     const deleteEntry = async (_id: string) => {
+        console.log(_id, token)
         await deleteDiaryEntry(_id, token)
         setDiaries(diaries.filter(diary => {
             return diary._id !== _id
