@@ -1,5 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { getUser } from '../ApiService';
+import { Navigate, redirect, useNavigate } from 'react-router-dom';
+import { getUser, getValidateToken } from '../ApiService';
+import Loading from '../new/Loading/Loading';
 import { AuthContextType } from '../Types/Types';
 
 const defaultAuthContext: AuthContextType = {
@@ -32,14 +34,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     }, [token])
     const login = async () => {
+        if (token) {
+            const validToken = await getValidateToken(token);
 
-        if (token) { //Tries to log in to fast before setting token TODO: FIX!!!
-            setAuthenticated(true);
-            const response = await getUser(token);
-            setUser(response);
-            setLoading(false);
+            if (validToken.status === 401) {
+                localStorage.removeItem('token'); //Remove corrupted token
+                window.location.reload();
+            } else {
+                setAuthenticated(true);
+                const response = await getUser(token);
+                setUser(response);
+                setLoading(false);
+            }
         }
-
     };
 
     const logout = () => {
@@ -51,7 +58,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     if (loading) {
         return (
-            <p>Loading...</p>
+            <Loading />
         )
     }
 

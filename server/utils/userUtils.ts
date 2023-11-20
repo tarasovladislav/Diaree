@@ -6,22 +6,26 @@ import dotenv from "dotenv";
 
 dotenv.config({ path: path.join(__dirname, '..', '..', '.env') });
 
-export async function validateUser(req: Request, res: Response): Promise<{ user_id: string; user: any } | undefined> {
+export async function validateUser(req: Request, res: Response): Promise<any> {
     try {
         const { authorization } = req.headers;
+        let error = '';
         if (!authorization) {
-            res.status(401).json({ error: "No token provided" });
-            return undefined;
+            error ="No token provided";
+            //res.status(401).json({ error: "No token provided" });
+            return error;
         }
         const user_id = tokenToUserId(authorization);
         if (!user_id) {
-            res.status(401).json({ error: "Could not verify signature" });
-            return undefined;
+            error = 'Invalid token'
+            //res.status(401).json({ error: "Invalid token" });
+            return error;
         }
         const user = await User.findOne({ user_id });
         if (!user) {
-            res.status(404).json({ error: "User does not exist" });
-            return undefined;
+            error = 'User does not exist'
+            //res.status(404).json({ error: "User does not exist" });
+            return error;
         }
         return { user_id, user };
     } catch (error) {
@@ -37,7 +41,7 @@ export function tokenToUserId(token: string) {
         const decodedToken = jwt.verify(token, SECRET_KEY) as { user_id: string }; //Verify the token with the secret key
         return decodedToken.user_id; //Return the user_id from the token payload
     } catch (error) {
-        console.error(error);
+        //console.error(error);
         return undefined;
     }
 }

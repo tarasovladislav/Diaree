@@ -2,7 +2,7 @@ import User from '../models/user.js';
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import jwt from 'jsonwebtoken';
-import { Request, Response } from 'express';
+import { Request, response, Response } from 'express';
 import { validateUser } from '../utils/userUtils.js';
 
 import path from 'path'
@@ -59,9 +59,7 @@ const postLogin = async (req: Request, res: Response): Promise<any> => {
 const getUser = async (req: Request, res: Response): Promise<any> => {
     try {
         const validatedUser = await validateUser(req, res);
-        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) {
-            return res.status(401).json({ error: "Invalid user or authentication failed" });
-        }
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
 
         const { user } = validatedUser;
 
@@ -79,7 +77,7 @@ const putUpdate = async (req: Request, res: Response): Promise<any> => { //TODO:
     try {
         const { username, password } = req.body;
         const validatedUser = await validateUser(req, res);
-        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: "Invalid user" });
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
         const { user_id, user } = validatedUser;
         const updatedUsername = username || user.username;
         const updatedPassword = await bcrypt.hash(password, 10) || password;
@@ -102,10 +100,25 @@ const putUpdate = async (req: Request, res: Response): Promise<any> => { //TODO:
     }
 }
 
+const getValidateToken = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const validatedUser = await validateUser(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) res.status(401).json({ status: 401, error: validatedUser })
+        else {
+            res.status(200).json({ message: "Valid token" });
+        }
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
+
 
 export default {
     postRegister,
     postLogin,
     getUser,
-    putUpdate
+    putUpdate,
+    getValidateToken
 }
