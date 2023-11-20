@@ -99,8 +99,16 @@ const MonthComponent = (props: Props) => {
                     </div>
 
                 </div>
+                <div className="weekDay">
+                    <h4 className="dayOfTheWeek">Monday</h4>
+                    <h4 className="dayOfTheWeek">Tuesday</h4>
+                    <h4 className="dayOfTheWeek">Wednesday</h4>
+                    <h4 className="dayOfTheWeek">Thursday</h4>
+                    <h4 className="dayOfTheWeek">Friday</h4>
+                    <h4 className="dayOfTheWeek">Saturday</h4>
+                    <h4 className="dayOfTheWeek">Sunday</h4>
+                </div>
                 <div className="Month-View">
-
 
                     {grid.map((day, index) => {
                         let year = props.currentYear;
@@ -135,10 +143,10 @@ const MonthComponent = (props: Props) => {
                                     {day}
                                 </span>
                                 <div className="dayEventList">
-                                {dayEvents.map(event => <DayComponent _id={event._id} dayEvents={dayEvents} title={event.title} imageUrl={event.imageUrl} tags={event.tags}/>)}
+                                    {dayEvents.map(event => <DayComponent _id={event._id} dayEvents={dayEvents} title={event.title} imageUrl={event.imageUrl} tags={event.tags} />)}
 
                                 </div>
-                                
+
                             </div>
                             :
                             <div
