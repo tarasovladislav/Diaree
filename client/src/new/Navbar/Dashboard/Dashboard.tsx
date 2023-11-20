@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 import { useDiary } from '../../../Utils/diary';
 
 const Dashboard: React.FC<{ isDashboardOpen: boolean, setIsDashboardOpen: (isDashboardOpen: boolean) => void }> = ({ isDashboardOpen, setIsDashboardOpen }) => {
-    const { diaries, tagList } = useDiary()
-    const [recentEvents, setRecentEvents] = useState([])
+    const { diaries, tagList } = useDiary();
+    const [recentEvents, setRecentEvents] = useState([]);
 
     useEffect(() => {
         const recents = diaries.sort((a, b) => b._id - a._id)
@@ -23,7 +23,7 @@ const Dashboard: React.FC<{ isDashboardOpen: boolean, setIsDashboardOpen: (isDas
                         <h2>Dιαɾҽҽ</h2>
                     </div>
                     <div className="End">
-                        <img src={DiaryLogo} alt="Logo" style={{ height: '32px' }} />
+                        <img src={DiaryLogo} alt="Logo" style={{ height: '32px', cursor: 'not-allowed' }} />
                         <img src={User} alt="User" style={{ height: '24px', borderRadius: '0' }} onClick={() => { setIsDashboardOpen(!isDashboardOpen) }} />
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 const userSchema = new mongoose.Schema({
     _id: {
         type: String
@@ -17,9 +18,13 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    name: {
-        type: String,
-        required: false
+    diary_entries: {
+        type: [],
+        required: true
+    },
+    tags: {
+        type: [],
+        required: true
     },
     __v: {
         type: String

@@ -17,7 +17,7 @@ const defaultDiaryContext: DiaryContextType = {
 const DiaryContext = createContext(defaultDiaryContext);
 
 export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
-    const { authenticated } = useAuth();
+    const { authenticated, token } = useAuth();
     const [diaries, setDiaries] = useState([]);
     const [isAddNewEvent, setIsAddNewEvent] = useState(false);
     const [isShowDayEvents, setIsShowDayEvents] = useState(false);
@@ -29,7 +29,7 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
         (async () => {
             if (!authenticated) return
-            const response = await getAllDiaryEntries();
+            const response = await getAllDiaryEntries(token);
             setDiaries(response);
         })();
     }, [authenticated])
@@ -45,6 +45,7 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
         });
         setDiariesByDate(newEventsMap);
     }, [diaries]);
+
     useEffect(() => {
         const transformTags = (data) => {
             const tagCounts = {};
@@ -67,8 +68,8 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
     }, [diaries])
 
     //add funciton which delete from diaries
-    const deleteEntry = (_id: string) => {
-        deleteDiaryEntry(_id)
+    const deleteEntry = async (_id: string) => {
+        await deleteDiaryEntry(_id, token)
         setDiaries(diaries.filter(diary => {
             return diary._id !== _id
         }))

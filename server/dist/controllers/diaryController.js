@@ -10,11 +10,15 @@ const cloudinary_1 = require("cloudinary");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config({ path: '../.env' });
 const diary_js_1 = __importDefault(require("../models/diary.js"));
+const userUtils_js_1 = require("../utils/userUtils.js");
+const user_js_1 = __importDefault(require("../models/user.js"));
 async function getAllDiaryEntries(req, res) {
     try {
-        const allDiaryEntries = await diary_js_1.default.find();
-        console.log(allDiaryEntries);
-        res.status(200).json(allDiaryEntries);
+        const validatedUser = await (0, userUtils_js_1.validateUser)(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user)
+            return res.status(401).json({ error: validatedUser });
+        const { user } = validatedUser;
+        res.status(200).json(user.diary_entries);
     }
     catch (error) {
         console.error(error);
@@ -23,6 +27,9 @@ async function getAllDiaryEntries(req, res) {
 }
 async function getRecentDiaryEntries(req, res) {
     try {
+        const validatedUser = await (0, userUtils_js_1.validateUser)(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user)
+            return res.status(401).json({ error: validatedUser });
         const recentDiaryEntries = await diary_js_1.default.find({}).sort({ date: -1 }).limit(3);
         res.status(200).json(recentDiaryEntries);
     }
@@ -33,6 +40,9 @@ async function getRecentDiaryEntries(req, res) {
 }
 async function getDiaryEntryById(req, res) {
     try {
+        const validatedUser = await (0, userUtils_js_1.validateUser)(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user)
+            return res.status(401).json({ error: validatedUser });
         const { id } = req.params;
         const oneDiaryEntry = await diary_js_1.default.findById(id);
         if (!oneDiaryEntry) {
@@ -48,6 +58,9 @@ async function getDiaryEntryById(req, res) {
 //change to get all
 async function getDiaryEntryByDate(req, res) {
     try {
+        const validatedUser = await (0, userUtils_js_1.validateUser)(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user)
+            return res.status(401).json({ error: validatedUser });
         const { date } = req.params;
         console.log(req.params);
         // console.log(date)
@@ -82,16 +95,24 @@ async function getDiaryEntryByDate(req, res) {
 // }
 async function postDiaryEntry(req, res) {
     try {
+        const validatedUser = await (0, userUtils_js_1.validateUser)(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user)
+            return res.status(401).json({ error: validatedUser });
         const { title, text, date, imageUrl, tags } = req.body;
-        const diaryEntryToAdd = await diary_js_1.default.create({
-            title,
-            text,
-            date,
-            imageUrl,
-            tags,
-        });
-        console.log(diaryEntryToAdd);
-        res.status(201).json(diaryEntryToAdd);
+        const { user_id } = validatedUser;
+        const updatedUser = await user_js_1.default.findOneAndUpdate({ user_id }, {
+            $push: {
+                diary_entries: {
+                    title,
+                    text,
+                    date,
+                    imageUrl,
+                    tags
+                }
+            }
+        }, { new: true } // To get the updated user data
+        );
+        res.status(201).json({ message: "Success" });
     }
     catch (error) {
         console.error(error);
@@ -148,6 +169,9 @@ async function putDiaryEntry(req, res) {
 }
 async function deleteDiaryEntry(req, res) {
     try {
+        const validatedUser = await (0, userUtils_js_1.validateUser)(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user)
+            return res.status(401).json({ error: validatedUser });
         const { id } = req.params;
         const deletedEntry = await diary_js_1.default.findByIdAndDelete(id);
         if (!deletedEntry) {

@@ -8,21 +8,27 @@ dotenv.config({ path: '../.env' });
 import { Request, Response } from 'express';
 
 import Diary from "../models/diary.js"
+import { validateUser } from '../utils/userUtils.js';
+import User from '../models/user.js';
 
 
-async function getAllDiaryEntries(req: Request, res: Response): Promise<void> {
+async function getAllDiaryEntries(req: Request, res: Response): Promise<any> {
     try {
-        const allDiaryEntries = await Diary.find();
-        console.log(allDiaryEntries)
-        res.status(200).json(allDiaryEntries);
+        const validatedUser = await validateUser(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
+        const { user } = validatedUser;
+        res.status(200).json(user.diary_entries);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });
     }
 }
 
-async function getRecentDiaryEntries(req: Request, res: Response): Promise<void> {
+async function getRecentDiaryEntries(req: Request, res: Response): Promise<any> {
     try {
+        const validatedUser = await validateUser(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
+        
         const recentDiaryEntries = await Diary.find({}).sort({ date: -1 }).limit(3);
 
         res.status(200).json(recentDiaryEntries);
@@ -32,8 +38,10 @@ async function getRecentDiaryEntries(req: Request, res: Response): Promise<void>
     }
 }
 
-async function getDiaryEntryById(req: Request, res: Response): Promise<void> {
+async function getDiaryEntryById(req: Request, res: Response): Promise<any> {
     try {
+        const validatedUser = await validateUser(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
         const { id } = req.params;
         const oneDiaryEntry = await Diary.findById(id);
 
@@ -49,8 +57,10 @@ async function getDiaryEntryById(req: Request, res: Response): Promise<void> {
 }
 
 //change to get all
-async function getDiaryEntryByDate(req: Request, res: Response) {
+async function getDiaryEntryByDate(req: Request, res: Response): Promise<any> {
     try {
+        const validatedUser = await validateUser(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
         const { date } = req.params;
         console.log(req.params)
         // console.log(date)
@@ -87,25 +97,36 @@ async function getDiaryEntryByDate(req: Request, res: Response) {
 //     }
 // }
 
-async function postDiaryEntry(req: Request, res: Response): Promise<void> {
+async function postDiaryEntry(req: Request, res: Response): Promise<any> {
     try {
+        const validatedUser = await validateUser(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
         const { title, text, date, imageUrl, tags } = req.body;
+        const { user_id } = validatedUser;
 
-        const diaryEntryToAdd = await Diary.create({
-            title,
-            text,
-            date,
-            imageUrl,
-            tags,
-        });
-        console.log(diaryEntryToAdd)
+        const updatedUser = await User.findOneAndUpdate(
+            { user_id },
+            {
+                $push: {
+                    diary_entries: {
+                        title,
+                        text,
+                        date,
+                        imageUrl,
+                        tags
+                    }
+                }
+            },
+            { new: true } // To get the updated user data
+        );
 
-        res.status(201).json(diaryEntryToAdd);
+        res.status(201).json({ message: "Success" });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });
     }
 }
+
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -162,8 +183,10 @@ async function putDiaryEntry(req: Request, res: Response): Promise<void> {
     }
 }
 
-async function deleteDiaryEntry(req: Request, res: Response): Promise<void> {
+async function deleteDiaryEntry(req: Request, res: Response): Promise<any> {
     try {
+        const validatedUser = await validateUser(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
         const { id } = req.params;
         const deletedEntry = await Diary.findByIdAndDelete(id);
 
