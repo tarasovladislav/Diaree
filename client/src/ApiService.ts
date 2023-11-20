@@ -2,17 +2,22 @@
 const BASE_URL = "http://localhost:3000";
 // const BASE_URL = process.env.REACT_APP_BASE_URL;
 import { DiaryType, TagType } from './Types/Types.js'
-
+import { useAuth } from './Utils/auth.js';
 
 const checkResponse = (response: Response): void => {
     if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
 };
 
 // const getAllDiaryEntries = async (): Promise<[]> => {//TODO []type
-const getAllDiaryEntries = async (): Promise<[]> => {
+const getAllDiaryEntries = async (token: String): Promise<[]> => { 
     try {
-        const response = await fetch(`${BASE_URL}/diary/entries`);
-        checkResponse(response);
+        const response = await fetch(`${BASE_URL}/diary/entries`, {
+            method: 'GET',
+            headers: {
+                "Authorization": `${token}`
+            }
+        });
+        checkResponse(response);        
         return await response.json();
     } catch (error) {
         console.error(error);
@@ -20,16 +25,16 @@ const getAllDiaryEntries = async (): Promise<[]> => {
     }
 }
 
-const getRecentDiaryEntries = async (): Promise<[DiaryType]> => {
-    try {
-        const response = await fetch(`${BASE_URL}/diary/entries/recent`);
-        checkResponse(response);
-        return await response.json();
-    } catch (error) {
-        console.error(error);
-        throw error;
-    }
-}
+// const getRecentDiaryEntries = async (): Promise<[DiaryType]> => {
+//     try {
+//         const response = await fetch(`${BASE_URL}/diary/entries/recent`);
+//         checkResponse(response);
+//         return await response.json();
+//     } catch (error) {
+//         console.error(error);
+//         throw error;
+//     }
+// }
 
 const getDiaryEntryById = async (_id: String): Promise<DiaryType> => {
     try {
@@ -42,10 +47,13 @@ const getDiaryEntryById = async (_id: String): Promise<DiaryType> => {
     }
 }
 
-const deleteDiaryEntry = async (_id: String): Promise<{ message: string }> => {
+const deleteDiaryEntry = async (_id: String, token: String): Promise<{ message: string }> => {
     try {
         const response = await fetch(`${BASE_URL}/diary/entries/${_id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                "Authorization": `${token}`
+            }
         });
         checkResponse(response);
         return await response.json();
@@ -55,12 +63,13 @@ const deleteDiaryEntry = async (_id: String): Promise<{ message: string }> => {
     }
 }
 
-const postDiaryEntry = async (data: DiaryType): Promise<DiaryType> => { //TODO: FIX any
+const postDiaryEntry = async (data: DiaryType, token: String): Promise<DiaryType> => { //TODO: FIX any
     try {
         const response = await fetch(`${BASE_URL}/diary/entries`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `${token}`
             },
             body: JSON.stringify(data),
         });

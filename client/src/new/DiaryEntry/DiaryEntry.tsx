@@ -3,7 +3,10 @@ import { uploadImage, postDiaryEntry } from '../../ApiService';
 import './DiaryEntry.css';
 import { useDiary } from '../../Utils/diary';
 import Modal from '../Modal/Modal';
+import { useAuth } from '../../Utils/auth';
+
 const DiaryEntry = () => {
+    const { token } = useAuth();
     const [isUploading, setIsUploading] = useState(false);
     const { selectedDate, setDiaries, isAddNewEvent, setIsAddNewEvent } = useDiary()
     const [tagValue, setTagValue] = useState('');
@@ -64,7 +67,7 @@ const DiaryEntry = () => {
         console.log('Event triggered: Create diary entry; DiaryEntry.tsx');
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const newTags = tags.map(tag => ({ title: tag }))
         const newEntryData = {
@@ -74,9 +77,11 @@ const DiaryEntry = () => {
             // tags: selectedTags.map((tag) => tag.name),
         };
 
-        postDiaryEntry(newEntryData)
+        await postDiaryEntry(newEntryData, token)
             .then(data => {
-                setDiaries((prevDiaries) => [data, ...prevDiaries]);
+                console.log(data);
+                
+                setDiaries((prevDiaries) => [newEntryData, ...prevDiaries]);
                 setIsAddNewEvent(false);
                 setTags([]);
             })

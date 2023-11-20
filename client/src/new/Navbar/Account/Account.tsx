@@ -20,7 +20,7 @@ const Account: React.FC<{ isDashboardOpen: boolean, setIsDashboardOpen: (isDashb
                     </div>
                     <div className="End">
                         <img src={DiaryLogo} alt="Logo" style={{ height: '32px' }} onClick={() => { setIsDashboardOpen(!isDashboardOpen) }} />
-                        <img src={User} alt="User" style={{ height: '24px', borderRadius: '0' }} />
+                        <img src={User} alt="User" style={{ height: '24px', borderRadius: '0', cursor: 'not-allowed' }} />
                     </div>
                 </div>
                 <footer>

@@ -7,11 +7,6 @@ body {
   background-color: blanchedalmond;
 }
 
-/* .App {
-  flex-direction: row;
-  align-items: flex-start;
-} */
-
 .App {
   display: flex;
   align-items: center;
