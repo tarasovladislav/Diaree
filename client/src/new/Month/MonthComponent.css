@@ -1,9 +1,39 @@
-.month-view {
+.Month .Month-View {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-gap: 5px;
     flex: 1;
     padding-inline: 10px;
+}
+
+.Month .Month-Navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.Month .Month-Navbar .Buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.Month .Month-Navbar .Buttons button {
+    height: 40px;
+    width: 120px;
+    border: 1px solid #b69de6;
+    background-color: #b69de6;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.Month .Month-Navbar .Buttons button:hover {
+    transform: scale(1.03);
+    filter: brightness(0.95);
+}
+
+.Month .Month-Navbar .Searchbar {
+    height: 40px;
 }
 
 .day {
@@ -27,26 +57,9 @@
     flex-direction: column
 }
 
-.buttonContainer {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-}
-
 /* try this */
 @media (max-width: 1000px) {
     .month-view {
         grid-template-columns: repeat(4, 1fr);
     }
-}
-
-.nav-btn-Container{
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-}
-
-.button-container{
-    display: flex;
-    /* justify-content: space-between; */
 }

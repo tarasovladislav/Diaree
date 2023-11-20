@@ -1,8 +1,7 @@
 import React from 'react'
 import './MonthComponent.css'
 import DayComponent from '../DayComponent/DayComponent'
-import { DiaryType, EventData } from '../../Types/Types'
-import SearchComponent from '../search/searchComponent'
+import SearchComponent from '../Searchbar/Searchbar'
 import { useDiary } from '../../Utils/diary'
 
 
@@ -58,13 +57,13 @@ const MonthComponent = (props: Props) => {
     };
 
     return (
-        <>
-            <div className="rightContainer">
+        <div className='Month'>
+            <div className="Right-Container">
 
 
-                <div className="nav-btn-Container">
+                <div className="Month-Navbar">
 
-                    <div className='button-container'>
+                    <div className='Buttons'>
 
 
                         <button onClick={() => {
@@ -95,13 +94,12 @@ const MonthComponent = (props: Props) => {
 
 
                     <h1>{months[props.currentMonth]}, {props.currentYear}</h1>
-                    <div className='search-container'>
-
+                    <div className='Searchbar'>
                         <SearchComponent events={diaries} />
                     </div>
 
                 </div>
-                <div className="month-view">
+                <div className="Month-View">
 
 
                     {grid.map((day, index) => {
@@ -155,7 +153,7 @@ const MonthComponent = (props: Props) => {
                 </div>
             </div>
 
-        </>
+        </div>
 
     )
 }

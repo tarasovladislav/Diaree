@@ -1,0 +1,14 @@
+.Searchbar input {
+    height: 40px;
+    width: 250px;
+    border: 1px solid #b69de6;
+    border-radius: 10px;
+    outline: none;
+    background-color: #b69de6;
+    color: #fff;
+    text-indent: 5px;
+}
+
+.Searchbar input::placeholder {
+    color: #fff;
+}
