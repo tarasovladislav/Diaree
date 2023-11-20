@@ -1,0 +1,28 @@
+.Searchbar-Result {
+    position: fixed;
+    width: 250px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-10px);
+    padding-block-start: 10px;
+}
+
+.Searchbar-Result-Item {
+    width: 91%;
+    text-align: center;
+}
+
+.Searchbar-Result-Item:nth-last-child(1) {
+    border-radius: 0 0 10px 10px;
+}
+
+.Searchbar-Result-Item:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    filter: brightness(0.95);
+    background-color: rgba(255, 255, 255, 0.9);
+}

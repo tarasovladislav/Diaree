@@ -1,7 +1,6 @@
-import './SearchResultComponent.css';
+import './SearchbarResult.css';
 import { useState } from "react";
 import { SearchResultsProps } from "../../Types/Types";
-import ExistingDay from "../ExistingDay/ExistingDay";
 import { useDiary } from "../../Utils/diary";
 
 
@@ -19,9 +18,9 @@ const SearchResultComponent: React.FC<SearchResultsProps> = ({ results }) => {
     //     setIsModalOpen(false);
     // };
     return (
-        <div className="search-result-container">
+        <div className="Searchbar-Result">
             {results.map((result, index) => (
-                <div key={index}>
+                <div className='Searchbar-Result-Item' key={index}>
                     <p onClick={()=>{handleClick(result.date)}}>{result.title}</p>
                 </div>
             ))}
