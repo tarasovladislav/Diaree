@@ -6,24 +6,24 @@ import { DiaryType, TagType } from '../Types/Types';
 
 type DiaryContextType = {
     diaries: DiaryType[];
-    setDiaries: (diaries: DiaryType[]) => void;
+    setDiaries: React.Dispatch<React.SetStateAction<DiaryType[]>>;
     isAddNewEvent: boolean;
-    setIsAddNewEvent: (value: boolean) => void;
+    setIsAddNewEvent: React.Dispatch<React.SetStateAction<boolean>>;
     isShowDayEvents: boolean;
-    setIsShowDayEvents: (value: boolean) => void;
+    setIsShowDayEvents: React.Dispatch<React.SetStateAction<boolean>>;
     selectedDate: string | undefined;
-    setSelectedDate: (date: string | undefined) => void;
+    setSelectedDate: React.Dispatch<React.SetStateAction<string | undefined>>;
     isEditEntry: boolean;
-    setIsEditEntry: (value: boolean) => void;
+    setIsEditEntry: React.Dispatch<React.SetStateAction<boolean>>;
     tagList: TagType[];
-    setTagList: (tags: TagType[]) => void;
+    setTagList: React.Dispatch<React.SetStateAction<TagType[]>>;
     selectedTag: string | undefined;
-    setSelectedTag: (tag: string | undefined) => void;
+    setSelectedTag: React.Dispatch<React.SetStateAction<string | undefined>>;
     diariesByDate: Record<string, DiaryType[]>;
-    setDiariesByDate: (diariesByDate: Record<string, DiaryType[]>) => void;
+    setDiariesByDate: React.Dispatch<React.SetStateAction<Record<string, DiaryType[]>>>;
     editableEntry: DiaryType | undefined;
-    setEditableEntry: (diary: DiaryType | undefined) => void;
-    deleteEntry: (id: string) => Promise<void>;
+    setEditableEntry: React.Dispatch<React.SetStateAction<DiaryType | undefined>>;
+    deleteEntry?: (id: string) => Promise<void>;
 }
 
 
@@ -73,21 +73,19 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
     const [editableEntry, setEditableEntry] = useState<DiaryType | undefined>(undefined)
 
 
-
-
-
-
     useEffect(() => {
         (async () => {
             if (!authenticated) return
-            const response = await getAllDiaryEntries(token);
-            setDiaries(response);
+            if (typeof token === 'string') {
+                const response = await getAllDiaryEntries(token)
+                setDiaries(response);
+            };
         })();
     }, [authenticated])
 
 
     useEffect(() => {
-        const newEventsMap = {};
+        const newEventsMap: { [date: string]: DiaryType[] } = {};
         diaries.forEach(event => {
             if (!newEventsMap[event.date]) {
                 newEventsMap[event.date] = [];
@@ -98,11 +96,11 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
     }, [diaries]);
 
     useEffect(() => {
-        const transformTags = (data) => {
-            const tagCounts = {};
+        const transformTags = (data: DiaryType[]) => {
+            const tagCounts: { [tag: string]: number } = {};
             data.forEach(item => {
                 item.tags.forEach(tag => {
-                    if (tag && tag.title) { // Check if tag and tag.title exist
+                    if (tag && tag.title) {
                         if (tag.title in tagCounts) {
                             tagCounts[tag.title]++;
                         } else {
@@ -120,11 +118,14 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
 
     //add funciton which delete from diaries
     const deleteEntry = async (_id: string): Promise<void> => {
-        console.log(_id, token)
-        await deleteDiaryEntry(_id, token)
-        setDiaries(diaries.filter(diary => {
-            return diary._id !== _id
-        }))
+
+        if (typeof token === 'string') {
+            await deleteDiaryEntry(_id, token)
+            setDiaries(diaries.filter(diary => {
+                return diary._id !== _id
+            }))
+        }
+
     }
     return (
         <DiaryContext.Provider value={{ diaries, setDiaries, selectedDate, setSelectedDate, isAddNewEvent, setIsAddNewEvent, isShowDayEvents, setIsShowDayEvents, diariesByDate, setDiariesByDate, tagList, setTagList, selectedTag, setSelectedTag, deleteEntry, isEditEntry, setIsEditEntry, editableEntry, setEditableEntry }} >

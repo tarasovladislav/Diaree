@@ -11,7 +11,7 @@ type AuthContextType = {
     login: () => Promise<void>;
     logout: () => void;
     token: string | null;
-    setToken: (token: string | null) => void;
+    setToken: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 
