@@ -1,13 +1,9 @@
 "use strict";
-//TODO remove unused libraries redundant
-import multer from 'multer'
-const upload = multer({ dest: "uploads/" });
+
 import { v2 as cloudinary } from 'cloudinary'
 import dotenv from "dotenv";
 dotenv.config({ path: '../.env' });
 import { Request, Response } from 'express';
-
-import Diary from "../models/diary.js"
 import { validateUser } from '../utils/userUtils.js';
 import User from '../models/user.js';
 
@@ -24,61 +20,6 @@ async function getAllDiaryEntries(req: Request, res: Response): Promise<any> {
     }
 }
 
-async function getRecentDiaryEntries(req: Request, res: Response): Promise<any> {
-    try {
-        const validatedUser = await validateUser(req, res);
-        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
-
-        const recentDiaryEntries = await Diary.find({}).sort({ date: -1 }).limit(3);
-
-        res.status(200).json(recentDiaryEntries);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Internal server error" });
-    }
-}
-
-async function getDiaryEntryById(req: Request, res: Response): Promise<any> {
-    try {
-        const validatedUser = await validateUser(req, res);
-        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
-        const { id } = req.params;
-        const oneDiaryEntry = await Diary.findById(id);
-
-        if (!oneDiaryEntry) {
-            res.status(404).json({ message: "Diary entry not found" });
-        }
-
-        res.status(200).json(oneDiaryEntry);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Internal server error" });
-    }
-}
-
-//change to get all
-async function getDiaryEntryByDate(req: Request, res: Response): Promise<any> {
-    try {
-        const validatedUser = await validateUser(req, res);
-        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
-        const { date } = req.params;
-        console.log(req.params)
-        // console.log(date)
-        const foundDiaryEntry = await Diary.find({ date });
-        // console.log(foundDiaryEntry)
-
-        if (!foundDiaryEntry) {
-            return res
-                .status(404)
-                .json({ message: "No diary entry found for the date" });
-        }
-
-        res.status(200).json(foundDiaryEntry);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Internal server error" });
-    }
-}
 
 
 async function postDiaryEntry(req: Request, res: Response): Promise<any> {
@@ -188,7 +129,7 @@ async function deleteDiaryEntry(req: Request, res: Response): Promise<any> {
         const validatedUser = await validateUser(req, res);
         if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
         const { id } = req.params;
-        const {user_id} = validatedUser
+        const { user_id } = validatedUser
         console.log(id)
         const updatedUser = await User.findOneAndUpdate(
             { user_id },
@@ -214,9 +155,6 @@ async function deleteDiaryEntry(req: Request, res: Response): Promise<any> {
 
 export default {
     getAllDiaryEntries,
-    getRecentDiaryEntries,
-    getDiaryEntryById,
-    getDiaryEntryByDate,
     postDiaryEntry,
     uploadImage,
     putDiaryEntry,

@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './Utils/auth';
-import Authenticate from './new/Authenticate/Authenticate';
-import Error from './new/Error/Error';
-import Home from './new/Home';
+import Authenticate from './Components/Authenticate/Authenticate';
+import Error from './Components/Error/Error';
+import Home from './Components/Home';
 
 const App = () => {
     const { authenticated, login } = useAuth();
