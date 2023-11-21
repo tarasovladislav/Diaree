@@ -1,11 +1,9 @@
-import React from 'react'
 import { useDiary } from '../../Utils/diary'
 import './ExistingDay.css';
 import DayEventListItem from '../DayEventListItem/DayEventListItem';
 import Modal from '../Modal/Modal';
-type Props = {}
 
-const ExistingDay = (props: Props) => {
+const ExistingDay = () => {
 
     const { isShowDayEvents, setIsShowDayEvents, selectedDate, diariesByDate, setIsAddNewEvent } = useDiary()
 

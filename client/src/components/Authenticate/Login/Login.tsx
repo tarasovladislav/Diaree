@@ -3,7 +3,7 @@ import React from 'react';
 import User from '../../../assets/user.png';
 import Lock from '../../../assets/lock.png';
 import { postLogin } from '../../../ApiService';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../Utils/auth';
 
 const Login: React.FC<{ isOnLogin: boolean, setIsOnLogin: (isOnLogin: boolean) => void }> = ({ isOnLogin, setIsOnLogin }) => {

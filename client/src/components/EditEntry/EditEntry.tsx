@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './EditEntry.css'
 import { putDiaryEntry } from '../../ApiService'
 import { useDiary } from '../../Utils/diary'
