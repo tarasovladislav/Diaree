@@ -108,7 +108,7 @@
     flex-direction: column
 }
 .Month-View {
-    max-height: calc(100vh - 115px);
+    max-height: calc(100vh - 153px);
 }
 
 /* try this */
