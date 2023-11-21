@@ -7,7 +7,7 @@ const checkResponse = (response: Response): void => {
     if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
 };
 
-// const getAllDiaryEntries = async (): Promise<[]> => {//TODO []type
+
 const getAllDiaryEntries = async (token: string): Promise<[]> => { 
     try {
         const response = await fetch(`${BASE_URL}/diary/entries`, {
@@ -42,7 +42,7 @@ const deleteDiaryEntry = async (_id: string, token: string): Promise<{ message: 
     }
 }
 
-const postDiaryEntry = async (data: DiaryType | DiaryTypeNoId, token: string): Promise<DiaryType> => { //TODO: FIX any
+const postDiaryEntry = async (data: DiaryTypeNoId, token: string): Promise<DiaryType> => { //TODO: FIX any
     try {
         const response = await fetch(`${BASE_URL}/diary/entries`, {
             method: 'POST',
@@ -60,10 +60,10 @@ const postDiaryEntry = async (data: DiaryType | DiaryTypeNoId, token: string): P
     }
 }
 
-//TODO: Do we need this function?
-const putDiaryEntry = async (data: DiaryType, token: string): Promise<DiaryType> => { //TODO: Fix any
+
+const putDiaryEntry = async (data: DiaryType, token: string): Promise<DiaryType> => { 
     try {
-        const response = await fetch(`${BASE_URL}/diary/entries/${data._id}`, { //TODO: Is this right?
+        const response = await fetch(`${BASE_URL}/diary/entries/${data._id}`, { 
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
