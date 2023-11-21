@@ -7,7 +7,7 @@ const OneEntry = (props: Props) => {
 
     const { isShowSingleEvent, setIsShowSingleEvent, selectedEntry } = useSingleEntry();
     return (
-        isShowSingleEvent && (
+        isShowSingleEvent && selectedEntry && (
             <Modal onClose={() => setIsShowSingleEvent(false)}>
                 <div className="oneEntryContent">
                     <div className="Header">

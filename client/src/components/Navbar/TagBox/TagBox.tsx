@@ -2,10 +2,7 @@ import { useDiary } from '../../../Utils/diary';
 import './TagBox.css';
 
 type TagBoxType = {
-    data: {
-        title: string,
-        count: number
-    }[]
+    data: TagBoxItemType[]
 }
 
 type TagBoxItemType = {
@@ -13,7 +10,7 @@ type TagBoxItemType = {
     count: number
 }
 
-const TagBoxItem: React.FC<TagBoxItemType> = ({ title, count }: TagBoxItemType) => {
+const TagBoxItem = ({ title, count }: TagBoxItemType) => {
     const { setSelectedTag, selectedTag } = useDiary()
 
     return (
@@ -29,7 +26,7 @@ const TagBoxItem: React.FC<TagBoxItemType> = ({ title, count }: TagBoxItemType) 
     );
 };
 
-const TagBox: React.FC<TagBoxType> = ({ data }: TagBoxType) => {
+const TagBox = ({ data }: TagBoxType) => {
     return (
         <div className="TagBox">
             {data && Array.isArray(data) && data.length > 0 ? (

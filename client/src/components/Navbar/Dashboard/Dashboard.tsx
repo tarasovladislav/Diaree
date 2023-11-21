@@ -6,14 +6,20 @@ import User from '../../../assets/user.png';
 import { useEffect, useState } from 'react';
 import { useDiary } from '../../../Utils/diary';
 import { useSingleEntry } from '../../../Utils/singleEntry';
+import { DiaryType } from '../../../Types/Types';
 
-const Dashboard: React.FC<{ isDashboardOpen: boolean, setIsDashboardOpen: (isDashboardOpen: boolean) => void }> = ({ isDashboardOpen, setIsDashboardOpen }) => {
+type Props = {
+    isDashboardOpen: boolean
+    setIsDashboardOpen: (isDashboardOpen: boolean) => void
+}
+
+const Dashboard = ({ isDashboardOpen, setIsDashboardOpen }: Props) => {
     const { diaries, tagList } = useDiary();
     const { setSelectedEntry, selectedEntry, setIsShowSingleEvent } = useSingleEntry();
-    const [recentEvents, setRecentEvents] = useState([]);
+    const [recentEvents, setRecentEvents] = useState<DiaryType[]>([]);
 
     useEffect(() => {
-        const recents = diaries.sort((a, b) => b._id - a._id)
+        const recents = diaries.sort((a, b) => Number(b._id) - Number(a._id))
         setRecentEvents(recents)
     }, [diaries])
 
@@ -25,11 +31,16 @@ const Dashboard: React.FC<{ isDashboardOpen: boolean, setIsDashboardOpen: (isDas
             setIsShowSingleEvent(true);
         } else {
             // Handle the case where there are no diary entries
-            setSelectedEntry({title: "Random Memory", text: "You have no diary entries.", imageURL: ""})
-            setIsShowSingleEvent(true);
-            console.log('You have no diary entries.');
+            // setSelectedEntry({ title: "Random Memory", text: "You have no diary entries.", imageURL: "" })
+            // setIsShowSingleEvent(true);
         }
     }
+
+
+//TODO wtf             setSelectedEntry({ title: "Random Memory", text: "You have no diary entries.", imageURL: "" })
+
+
+
 
     return (
         <div className="Dashboard" id={isDashboardOpen ? 'fadeIn' : 'fadeOut'}>

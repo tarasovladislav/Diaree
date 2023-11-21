@@ -64,7 +64,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 setAuthenticated(true);
                 const response = await getUser(token);
                 setUser(response);
-                console.log(response)
                 setLoading(false);
             }
         }
