@@ -4,6 +4,7 @@ import { putDiaryEntry } from '../../ApiService'
 import { useDiary } from '../../Utils/diary'
 import Modal from '../Modal/Modal';
 import { useAuth } from '../../Utils/auth';
+import { DiaryType } from '../../Types/Types';
 
 type Props = {}
 
@@ -12,7 +13,6 @@ const EditEntry = (props: Props) => {
     const { setDiaries, isEditEntry, setIsEditEntry, editableEntry } = useDiary();
     const [tagValue, setTagValue] = useState<string>('');
     const [tempTags, setTempTags] = useState<string[]>([]);
-
 
     const [newDiaryEntry, setNewDiaryEntry] = useState({
         title: '',
@@ -45,48 +45,43 @@ const EditEntry = (props: Props) => {
     const removeTag = (index: number): void => {
         const newTags2 = [...tempTags];
         newTags2.splice(index, 1);
-        console.log(newTags2)
         setTempTags(newTags2);
     };
 
 
-
     const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
-        const newTags = Array.from(new Set(tempTags)).map(tag => ({ title: tag }));
+        const newTags = Array.from(new Set(tempTags)).map(tag => ({ title: tag, }));
+        if (editableEntry && editableEntry.date) {
 
-        const newEntryData = {
-            ...editableEntry,
-            ...newDiaryEntry,
-            tags: newTags
-        };
+            const newEntryData: DiaryType = {
+                ...editableEntry,
+                ...newDiaryEntry,
+                tags: [...newTags]
+            };
 
-        await putDiaryEntry(newEntryData, token)
-            .then(data => {
-                setDiaries((prevDiaries) => {
-                    return prevDiaries.map((diary) => {
-                        if (diary._id === editableEntry._id) {
-                            console.log(diary)
-                            return {
-                                ...diary,
-                                ...newEntryData
+            token && await putDiaryEntry(newEntryData, token)
+                .then(data => {
+                    setDiaries((prevDiaries) => {
+                        return prevDiaries.map((diary) => {
+                            if (editableEntry && diary._id === editableEntry._id) {
+                                console.log(diary)
+                                return {
+                                    ...diary,
+                                    ...newEntryData
+                                }
+                            } else {
+                                return diary
                             }
-                        } else {
-                            return diary
-                        }
-                    })
-
-                });
-                setIsEditEntry(false);
-                // setTags([]);
-            })
-
+                        })
+                    });
+                    setIsEditEntry(false);
+                })
+        }
     }
     return (
 
-
-
-        isEditEntry && <Modal onClose={() => setIsEditEntry(false)}>
+        isEditEntry && editableEntry && <Modal onClose={() => setIsEditEntry(false)}>
             <div className="Title">
                 <h2>Editing Entry</h2>
             </div>
@@ -130,13 +125,7 @@ const EditEntry = (props: Props) => {
                     </div>
                 </form>
             </div>
-
         </Modal>
-
-
-
-
-
     )
 }
 

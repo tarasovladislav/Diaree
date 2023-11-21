@@ -1,7 +1,7 @@
 //TODO: Move to .env
 const BASE_URL = "http://localhost:3000";
 // const BASE_URL = process.env.REACT_APP_BASE_URL;
-import { DiaryType } from './Types/Types.js'
+import { DiaryType, DiaryTypeNoId } from './Types/Types.js'
 
 const checkResponse = (response: Response): void => {
     if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
@@ -42,7 +42,7 @@ const deleteDiaryEntry = async (_id: string, token: string): Promise<{ message: 
     }
 }
 
-const postDiaryEntry = async (data: DiaryType, token: string): Promise<DiaryType> => { //TODO: FIX any
+const postDiaryEntry = async (data: DiaryType | DiaryTypeNoId, token: string): Promise<DiaryType> => { //TODO: FIX any
     try {
         const response = await fetch(`${BASE_URL}/diary/entries`, {
             method: 'POST',
