@@ -74,7 +74,7 @@ describe('/user/account endpoint', () => {
         expect(data.status).toBe(200);
         expect(data.body).toBeTruthy();
 
-        const user_id = tokenToUserId(login.body.token);
+        const user_id = tokenToUserId(user.body.token);
 
         await User.findOneAndDelete({ user_id });
     });
