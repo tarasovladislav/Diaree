@@ -12,9 +12,9 @@ const SearchResultComponent: React.FC<SearchResultsProps> = ({ results }) => {
     };
 
     return (
-        <div className="search-result-container">
+        <div className="Searchbar-Result">
             {results.map((result, index) => (
-                <div key={index} onClick={() => { handleClick(result) }}>
+                <div className='Searchbar-Result-Item' key={index} onClick={() => { handleClick(result) }}>
                     <p >{result.title}</p>
                 </div>
             ))}
