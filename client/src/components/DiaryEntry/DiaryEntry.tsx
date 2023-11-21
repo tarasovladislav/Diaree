@@ -4,6 +4,7 @@ import './DiaryEntry.css';
 import { useDiary } from '../../Utils/diary';
 import Modal from '../Modal/Modal';
 import { useAuth } from '../../Utils/auth';
+import { DiaryTypeNoId } from '../../Types/Types';
 
 const DiaryEntry = () => {
     const { token } = useAuth();
@@ -67,28 +68,29 @@ const DiaryEntry = () => {
 
     const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
-        const newTags = Array.from(new Set(tags)).map(tag => ({ title: tag }));
-        const newEntryData = {
-            ...newDiaryEntry,
-            date: selectedDate,
-            tags: newTags
+        const newTags = Array.from(new Set(tags)).map(tag => ({ title: tag, }));
+        if (selectedDate && newTags) {
 
-        };
+            const newEntryData: DiaryTypeNoId = {
+                ...newDiaryEntry,
+                date: selectedDate,
+                tags: newTags
 
-        await postDiaryEntry(newEntryData, token)
-            .then(data => {
-                console.log(data);
+            };
 
-                setDiaries((prevDiaries) => [data, ...prevDiaries]);
-                setIsAddNewEvent(false);
-                setTags([]);
-                setNewDiaryEntry({
-                    title: "",
-                    text: "",
-                    imageUrl: "",
-                    tags: [],
+            token && await postDiaryEntry(newEntryData, token)
+                .then(data => {
+                    setDiaries((prevDiaries) => [data, ...prevDiaries]);
+                    setIsAddNewEvent(false);
+                    setTags([]);
+                    setNewDiaryEntry({
+                        title: "",
+                        text: "",
+                        imageUrl: "",
+                        tags: [],
+                    })
                 })
-            })
+        }
 
     }
 

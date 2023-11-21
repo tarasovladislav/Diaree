@@ -9,14 +9,13 @@ import { useDiary } from '../../Utils/diary';
 type Props = {
     currentYear: number,
     currentMonth: number,
-
     setCurrentMonth: React.Dispatch<React.SetStateAction<number>>,
     setCurrentYear: React.Dispatch<React.SetStateAction<number>>,
 }
 
 
 const MonthComponent = (props: Props) => {
-    const months = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    const months: string[] = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     const { setSelectedDate, diaries, setIsAddNewEvent, diariesByDate } = useDiary()
 
     const getDaysInMonth = (year: number, month: number): number => {
@@ -25,24 +24,19 @@ const MonthComponent = (props: Props) => {
 
     const getFirstDayOfMonth = (year: number, month: number): number => {
         const dayOfWeek = new Date(year, month, 1).getDay();
-        // Adjust day of the week so that Monday is 0, Sunday is 6
         return (dayOfWeek + 6) % 7;
     };
-    // Days in the current month
-    const daysInMonth = getDaysInMonth(props.currentYear, props.currentMonth);
-    // First day of the current month
-    const firstDayOfMonth = getFirstDayOfMonth(props.currentYear, props.currentMonth);
-    // Days in the previous month
-    const daysInPreviousMonth = getDaysInMonth(props.currentYear, props.currentMonth - 1);
-    const leadingDays = Array.from({ length: firstDayOfMonth }, (_, i) => daysInPreviousMonth - i).reverse();
-    const currentMonthDays = Array.from({ length: daysInMonth }, (_, i) => i + 1);
-    const totalDays = firstDayOfMonth + daysInMonth;
 
-    const totalCells = totalDays > 35 ? 42 : 35;
-
-    const trailingDaysCount = totalCells - (firstDayOfMonth + daysInMonth);
-    const trailingDays = Array.from({ length: trailingDaysCount }, (_, i) => i + 1);
-    const grid = [...leadingDays, ...currentMonthDays, ...trailingDays];
+    const daysInMonth: number = getDaysInMonth(props.currentYear, props.currentMonth);
+    const firstDayOfMonth: number = getFirstDayOfMonth(props.currentYear, props.currentMonth);
+    const daysInPreviousMonth: number = getDaysInMonth(props.currentYear, props.currentMonth - 1);
+    const leadingDays: number[] = Array.from({ length: firstDayOfMonth }, (_, i) => daysInPreviousMonth - i).reverse();
+    const currentMonthDays: number[] = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+    const totalDays: number = firstDayOfMonth + daysInMonth;
+    const totalCells: number = totalDays > 35 ? 42 : 35;
+    const trailingDaysCount: number = totalCells - (firstDayOfMonth + daysInMonth);
+    const trailingDays: number[] = Array.from({ length: trailingDaysCount }, (_, i) => i + 1);
+    const grid: number[] = [...leadingDays, ...currentMonthDays, ...trailingDays];
 
 
     // Helper function to create the date string in 'YYYY-MM-DD' format
@@ -56,21 +50,15 @@ const MonthComponent = (props: Props) => {
         return `${year}-${paddedMonth}-${paddedDay}`;
     };
 
-    const today = new Date();
-    const currentDate = today.toISOString().split('T')[0];
+    const today: Date = new Date();
+    const currentDate: string = today.toISOString().split('T')[0];
 
-    // console.log('currentdate', currentDate);
 
     return (
         <div className='Month'>
             <div className="Right-Container">
-
-
                 <div className="Month-Navbar">
-
                     <div className='Toggle'>
-
-
                         <img src={LeftArrow} onClick={() => {
                             let year = props.currentYear;
                             let month = props.currentMonth - 1;
@@ -100,7 +88,7 @@ const MonthComponent = (props: Props) => {
 
                     <h1>{months[props.currentMonth]}, {props.currentYear}</h1>
                     <div className='Searchbar'>
-                        <SearchComponent events={diaries} />
+                        <SearchComponent />
                     </div>
 
                 </div>
@@ -149,7 +137,7 @@ const MonthComponent = (props: Props) => {
                                     {day}
                                 </span>
                                 <div className="dayEventList">
-                                    {dayEvents.map(event => <DayComponent _id={event._id} dayEvents={dayEvents} title={event.title} imageUrl={event.imageUrl} tags={event.tags} />)}
+                                    {dayEvents.map(event => <DayComponent event={event} dayEvents={dayEvents} />)}
 
                                 </div>
 

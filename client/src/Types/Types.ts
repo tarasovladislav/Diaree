@@ -4,7 +4,15 @@ export type DiaryType = {
     text: string,
     date: string,
     imageUrl?: string,
-    tags: TagType[]
+    tags: TagType[] | { title: string }[]
+}
+
+export type DiaryTypeNoId = {
+    title: string,
+    text: string,
+    date: string,
+    imageUrl?: string,
+    tags: TagType[] | { title: string }[]
 }
 
 export type TagType = {
