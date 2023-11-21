@@ -26,6 +26,12 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
     const [tagList, setTagList] = useState([])
     const [selectedTag, setSelectedTag] = useState('')
 
+
+    //editgin
+    const [isEditEntry, setIsEditEntry] = useState(false)
+    const [editableEntry, setEditableEntry] = useState(undefined)
+
+
     useEffect(() => {
         (async () => {
             if (!authenticated) return
@@ -76,7 +82,7 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
         }))
     }
     return (
-        <DiaryContext.Provider value={{ diaries, setDiaries, selectedDate, setSelectedDate, isAddNewEvent, setIsAddNewEvent, isShowDayEvents, setIsShowDayEvents, diariesByDate, setDiariesByDate, tagList, selectedTag, setSelectedTag, deleteEntry }} >
+        <DiaryContext.Provider value={{ diaries, setDiaries, selectedDate, setSelectedDate, isAddNewEvent, setIsAddNewEvent, isShowDayEvents, setIsShowDayEvents, diariesByDate, setDiariesByDate, tagList, selectedTag, setSelectedTag, deleteEntry, isEditEntry, setIsEditEntry, editableEntry, setEditableEntry }} >
             {children}
         </DiaryContext.Provider>
     );

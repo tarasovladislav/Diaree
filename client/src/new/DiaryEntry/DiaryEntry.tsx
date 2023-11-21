@@ -63,10 +63,6 @@ const DiaryEntry = () => {
             })
     }
 
-    const createDiaryEntry = async () => {
-        console.log('Event triggered: Create diary entry; DiaryEntry.tsx');
-    }
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newTags = tags.map(tag => ({ title: tag }))
