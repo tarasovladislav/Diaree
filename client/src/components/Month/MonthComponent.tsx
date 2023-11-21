@@ -9,7 +9,7 @@ import { useDiary } from '../../Utils/diary';
 type Props = {
     currentYear: number,
     currentMonth: number,
-  
+
     setCurrentMonth: React.Dispatch<React.SetStateAction<number>>,
     setCurrentYear: React.Dispatch<React.SetStateAction<number>>,
 }
@@ -143,7 +143,8 @@ const MonthComponent = (props: Props) => {
                                 onClick={() => {
                                     setSelectedDate(dateKey)
                                 }}
-                                key={index} className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
+                                key={index} className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''} 
+                                ${((day > new Date().getDate() && month >= new Date().getMonth() && year >= new Date().getFullYear()) || (day <= new Date().getDate() && month > new Date().getMonth() && year >= new Date().getFullYear()) || (year > new Date().getFullYear())) ? 'future-days' : ''}`}>
                                 <span style={{ alignSelf: 'center' }}>
                                     {day}
                                 </span>
@@ -163,7 +164,8 @@ const MonthComponent = (props: Props) => {
                                     }
                                 }}
                                 key={index}
-                                className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
+                                className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''} 
+                                ${((day > new Date().getDate() && month >= new Date().getMonth() && year >= new Date().getFullYear()) || (day <= new Date().getDate() && month > new Date().getMonth() && year >= new Date().getFullYear()) || (year > new Date().getFullYear())) ? 'future-days' : ''}`}>
                                 <span style={{ alignSelf: 'center' }}>
                                     {day}
                                 </span>
