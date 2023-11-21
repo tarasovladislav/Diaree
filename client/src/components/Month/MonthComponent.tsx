@@ -8,6 +8,7 @@ import { useDiary } from '../../Utils/diary'
 type Props = {
     currentYear: number,
     currentMonth: number,
+  
 
     setCurrentMonth: React.Dispatch<React.SetStateAction<number>>,
     setCurrentYear: React.Dispatch<React.SetStateAction<number>>,
@@ -56,6 +57,11 @@ const MonthComponent = (props: Props) => {
         // Return the date string
         return `${year}-${paddedMonth}-${paddedDay}`;
     };
+
+    const today = new Date();
+    const currentDate = today.toISOString().split('T')[0];
+
+    // console.log('currentdate', currentDate);
 
     return (
         <div className='Month'>
@@ -134,8 +140,6 @@ const MonthComponent = (props: Props) => {
                         }
                         const dateKey = formatDateKey(year, month, day);
                         const dayEvents = diariesByDate[dateKey];
-                        setIsClickable(new Date(Date.now()) < new Date(dateKey))
-                        console.log('check', isClickable)
                         return (dayEvents ?
                             <div
                                 onClick={() => {
@@ -154,9 +158,11 @@ const MonthComponent = (props: Props) => {
                             :
                             <div
                                 onClick={() => {
-                                    setSelectedDate(dateKey)
-                                    setIsAddNewEvent(true);
-                                    console.log('dateKey',dateKey)
+                                    if (dateKey <= currentDate) {
+                                        setSelectedDate(dateKey)
+                                        setIsAddNewEvent(true);
+                                        console.log('dateKey', dateKey)
+                                    }
                                 }}
                                 key={index}
                                 className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
