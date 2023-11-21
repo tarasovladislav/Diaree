@@ -21,9 +21,6 @@ const userSchema = new mongoose.Schema({
     diary_entries: {
         type: [diarySchema],
     },
-    tags: {
-        type: [],
-    },
     __v: {
         type: String
     }

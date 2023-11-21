@@ -24,8 +24,8 @@ const EditEntry = (props: Props) => {
             const extractedTitles = editableEntry.tags.map((tag) => tag.title);
             // console.log(tags)
             // setTags(extractedTitles);
-            setNewDiaryEntry({title:editableEntry.title, text: editableEntry.text})
-            setTempTags(extractedTitles)
+            setNewDiaryEntry({ title: editableEntry.title, text: editableEntry.text })
+            setTempTags(extractedTitles) // maybe smth
         }
 
     }, [editableEntry])
@@ -48,13 +48,13 @@ const EditEntry = (props: Props) => {
     };
 
     const removeTag = (index: number): void => {
-        const newTags = [...tempTags];
-        newTags.splice(index, 1);
-        console.log(newTags)
-        setTempTags(newTags);
+        const newTags2 = [...tempTags];
+        newTags2.splice(index, 1);
+        console.log(newTags2)
+        setTempTags(newTags2);
     };
 
-  
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -126,9 +126,8 @@ const EditEntry = (props: Props) => {
                         />
                         <div className="tags">
                             {tempTags.map((tag, index) => (
-                                <div key={index} className="tag">
+                                <div key={index} className="TagBox-Item" onClick={() => removeTag(index)}>
                                     {tag}
-                                    <button onClick={() => removeTag(index)}>X</button>
                                 </div>
                             ))}
                         </div>
