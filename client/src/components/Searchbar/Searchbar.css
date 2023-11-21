@@ -6,11 +6,11 @@
     border-radius: 10px;
     outline: none;
     background-color: #b69de6;
-    color: #fff;
+    color: #6a2901;
     text-indent: 5px;
     z-index: 999;
 }
 
 .Searchbar input::placeholder {
-    color: #fff;
+    color: #6a2901;
 }
