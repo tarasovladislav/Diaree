@@ -1,8 +1,9 @@
-import React from 'react'
 import './MonthComponent.css'
+import LeftArrow from '../../Assets/left-arrow.png'
+import RightArrow from '../../Assets/right-arrow.png'
 import DayComponent from '../DayComponent/DayComponent'
 import SearchComponent from '../Searchbar/Searchbar'
-import { useDiary } from '../../Utils/diary'
+import { useDiary } from '../../Utils/diary';
 
 
 type Props = {
@@ -67,23 +68,23 @@ const MonthComponent = (props: Props) => {
 
                 <div className="Month-Navbar">
 
-                    <div className='Buttons'>
+                    <div className='Toggle'>
 
 
-                        <button onClick={() => {
+                        <img src={LeftArrow} onClick={() => {
                             let year = props.currentYear;
                             let month = props.currentMonth - 1;
                             if (month < 0) {
                                 year -= 1;
                                 month = 11;
                             }
-
                             props.setCurrentMonth(month)
                             props.setCurrentYear(year)
-                        }}>Previous Month</button >
+                        }}></img >
 
+                        <button>Today</button>
 
-                        <button onClick={
+                        <img src={RightArrow} onClick={
                             () => {
                                 let year = props.currentYear;
                                 let month = props.currentMonth + 1;
@@ -93,7 +94,7 @@ const MonthComponent = (props: Props) => {
                                 }
                                 props.setCurrentMonth(month)
                                 props.setCurrentYear(year)
-                            }}>Next Month</button>
+                            }}></img>
                     </div>
 
 

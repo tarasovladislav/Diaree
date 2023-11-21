@@ -4,14 +4,22 @@
     padding: 10px;
 }
 
-.Month .Month-Navbar .Buttons {
+.Month .Month-Navbar .Toggle {
     display: flex;
     gap: 10px;
+    align-items: center;
+    padding-block: 10px;
 }
 
-.Month .Month-Navbar .Buttons button {
+.Month .Month-Navbar .Toggle img {
+    height: 25px;
+    cursor: pointer;
+    filter: invert(25%);
+}
+
+.Month .Month-Navbar .Toggle button {
     height: 40px;
-    width: 120px;
+    width: 80px;
     border: 1px solid #b69de6;
     background-color: #b69de6;
     color: #fff;
@@ -19,7 +27,8 @@
     cursor: pointer;
 }
 
-.Month .Month-Navbar .Buttons button:hover {
+.Month .Month-Navbar .Toggle button:hover,
+.Month .Month-Navbar .Toggle img:hover {
     transform: scale(1.03);
     filter: brightness(0.95);
 }
