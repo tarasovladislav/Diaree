@@ -80,7 +80,7 @@ const putUpdate = async (req: Request, res: Response): Promise<any> => { //TODO:
         if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
         const { user_id, user } = validatedUser;
         const updatedUsername = username || user.username;
-        const updatedPassword = await bcrypt.hash(password, 10) || user.password;
+        const updatedPassword = password ? await bcrypt.hash(password, 10) : user.password;
 
         await User.updateOne(
             { user_id },

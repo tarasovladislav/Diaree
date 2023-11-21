@@ -1,7 +1,7 @@
+import './index.css';
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import './index.css';
 import { AuthProvider } from './Utils/auth.js';
 import { DiaryProvider } from './Utils/diary.js';
 import { SingleEntryProvider } from './Utils/singleEntry.js';

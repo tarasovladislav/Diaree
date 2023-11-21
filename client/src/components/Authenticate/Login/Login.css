@@ -22,12 +22,9 @@
     color: antiquewhite;
 }
 
-.Login .Login-Main .Switch .Button-Disabled {
-    color: rgba(255, 255, 255, 0.4);
-    opacity: 0.7;
+.Login .Login-Main .Switch .Button-Focused {
     height: 25px;
     margin-top: 7px;
-    cursor: not-allowed;
 }
 
 .Login-Main .Switch button:hover {

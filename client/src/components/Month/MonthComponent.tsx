@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './MonthComponent.css'
 import DayComponent from '../DayComponent/DayComponent'
 import SearchComponent from '../Searchbar/Searchbar'

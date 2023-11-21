@@ -23,12 +23,9 @@
     color: antiquewhite;
 }
 
-.Register .Register-Main .Switch .Button-Disabled {
-    color: rgba(255, 255, 255, 0.4);
-    opacity: 0.7;
+.Register .Register-Main .Switch .Button-Focused {
     height: 25px;
     margin-top: 7px;
-    cursor: not-allowed;
 }
 
 .Register-Main .Switch button:hover {

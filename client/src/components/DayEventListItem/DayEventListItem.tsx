@@ -1,4 +1,3 @@
-import React from 'react'
 import './DayEventListItem.css'
 import { MdDelete } from "react-icons/md";
 import { useDiary } from '../../Utils/diary';

@@ -65,8 +65,8 @@ const Register: React.FC<{ isOnLogin: boolean, setIsOnLogin: (isOnLogin: boolean
         <div className="Register" id={isOnLogin ? 'fadeIn' : 'fadeOut'}>
             <div className="Register-Main">
                 <div className="Switch">
-                    <button className='Button-Disabled'>Register</button>
-                    <button onClick={() => { setIsOnLogin(true) }}>Log In</button>
+                    <button>Register</button>
+                    <button onClick={() => { setIsOnLogin(true) }} className='Button-Focused'>Log In</button>
                 </div>
                 <form className="Register-Form" onSubmit={handleRegister}>
                     <div className="Title">

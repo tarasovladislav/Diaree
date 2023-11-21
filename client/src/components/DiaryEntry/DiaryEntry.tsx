@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { uploadImage, postDiaryEntry } from '../../ApiService';
+import { postDiaryEntry } from '../../ApiService';
 import './DiaryEntry.css';
 import { useDiary } from '../../Utils/diary';
 import Modal from '../Modal/Modal';

@@ -3,7 +3,7 @@ import React from 'react';
 import User from '../../../assets/user.png';
 import Lock from '../../../assets/lock.png';
 import { postLogin } from '../../../ApiService';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../Utils/auth';
 
 const Login: React.FC<{ isOnLogin: boolean, setIsOnLogin: (isOnLogin: boolean) => void }> = ({ isOnLogin, setIsOnLogin }) => {
@@ -34,8 +34,8 @@ const Login: React.FC<{ isOnLogin: boolean, setIsOnLogin: (isOnLogin: boolean) =
         <div className="Login" id={isOnLogin ? 'fadeIn' : 'fadeOut'}>
             <div className="Login-Main">
                 <div className="Switch">
-                    <button onClick={() => { setIsOnLogin(false) }}>Register</button>
-                    <button className='Button-Disabled'>Log In</button>
+                    <button onClick={() => { setIsOnLogin(false) }} className='Button-Focused'>Register</button>
+                    <button>Log In</button>
                 </div>
                 <form className="Login-Form" onSubmit={handleLogin}>
                     <div className="Title">
