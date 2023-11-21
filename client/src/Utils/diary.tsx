@@ -4,6 +4,7 @@ import { getAllDiaryEntries, deleteDiaryEntry } from '../ApiService';
 import { useAuth } from './auth';
 import { DiaryType, TagType } from '../Types/Types';
 
+
 type DiaryContextType = {
     diaries: DiaryType[];
     setDiaries: React.Dispatch<React.SetStateAction<DiaryType[]>>;
@@ -23,9 +24,8 @@ type DiaryContextType = {
     setDiariesByDate: React.Dispatch<React.SetStateAction<Record<string, DiaryType[]>>>;
     editableEntry: DiaryType | undefined;
     setEditableEntry: React.Dispatch<React.SetStateAction<DiaryType | undefined>>;
-    deleteEntry?: (id: string) => Promise<void>;
+    deleteEntry: (id: string) => Promise<void>;
 }
-
 
 
 const defaultDiaryContext: DiaryContextType = {
@@ -47,10 +47,8 @@ const defaultDiaryContext: DiaryContextType = {
     setDiariesByDate: () => { },
     editableEntry: undefined,
     setEditableEntry: () => { },
-    deleteEntry: function (id: string): Promise<void> {
-        throw new Error('Function not implemented.');
-    }
-    //TODO no idea how to do this
+    deleteEntry: async () => { },
+
 };
 
 const DiaryContext = createContext(defaultDiaryContext);
@@ -58,9 +56,9 @@ const DiaryContext = createContext(defaultDiaryContext);
 export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
     const { authenticated, token } = useAuth();
 
-    const [isAddNewEvent, setIsAddNewEvent] = useState(false);
-    const [isShowDayEvents, setIsShowDayEvents] = useState(false);
-    const [isEditEntry, setIsEditEntry] = useState(false)
+    const [isAddNewEvent, setIsAddNewEvent] = useState<boolean>(false);
+    const [isShowDayEvents, setIsShowDayEvents] = useState<boolean>(false);
+    const [isEditEntry, setIsEditEntry] = useState<boolean>(false)
 
     const [diaries, setDiaries] = useState<DiaryType[]>([]);
     const [tagList, setTagList] = useState<TagType[]>([])
@@ -72,7 +70,6 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
 
     const [editableEntry, setEditableEntry] = useState<DiaryType | undefined>(undefined)
 
-
     useEffect(() => {
         (async () => {
             if (!authenticated) return
@@ -82,7 +79,6 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
             };
         })();
     }, [authenticated])
-
 
     useEffect(() => {
         const newEventsMap: { [date: string]: DiaryType[] } = {};
@@ -108,7 +104,6 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
                         }
                     }
                 });
-
             });
             return Object.entries(tagCounts).map(([title, count]) => ({ title, count }));
         };
@@ -116,7 +111,6 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
         setTagList(transformedTags);
     }, [diaries])
 
-    //add funciton which delete from diaries
     const deleteEntry = async (_id: string): Promise<void> => {
 
         if (typeof token === 'string') {
@@ -125,8 +119,8 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
                 return diary._id !== _id
             }))
         }
-
     }
+    
     return (
         <DiaryContext.Provider value={{ diaries, setDiaries, selectedDate, setSelectedDate, isAddNewEvent, setIsAddNewEvent, isShowDayEvents, setIsShowDayEvents, diariesByDate, setDiariesByDate, tagList, setTagList, selectedTag, setSelectedTag, deleteEntry, isEditEntry, setIsEditEntry, editableEntry, setEditableEntry }} >
             {children}
