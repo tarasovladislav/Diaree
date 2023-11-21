@@ -12,19 +12,13 @@ type Props = {
     date: string,
     imageUrl: string,
     _id: string,
-    tags:[],
-    event:{}
+    tags: [],
+    event: {}
 }
 
 const DayEventListItem = (props: Props) => {
-    const { deleteEntry, editableEntry, setEditableEntry, setIsEditEntry, setIsShowDayEvents } = useDiary()
+    const { deleteEntry, setEditableEntry, setIsEditEntry, setIsShowDayEvents } = useDiary()
     const { setIsShowSingleEvent, setSelectedEntry } = useSingleEntry();
-
-    // const handleClick = (entry)=>{
-    //     console.log(entry);
-    //     setSelectedEntry(entry);
-    //     setIsShowSingleEvent(true);
-    // } //
     console.log(props)
     return (
         <>
@@ -40,20 +34,23 @@ const DayEventListItem = (props: Props) => {
                         <p>{props.text}</p>
                     </div>
                 </div>
+                <div className="controlContainer">
+                    <div className='controlButton'
+                        onClick={() => {
+                            deleteEntry(props._id)
+                        }}
+                    ><MdDelete size={24} /></div>
+                    <div className='controlButton'
+                        onClick={() => {
+                            setEditableEntry(props.event);
+                            setIsEditEntry(true)
+                            setIsShowDayEvents(false)
+                        }}
+                    ><MdEditCalendar size={24} /></div>
 
-                <div className='editButton'
-                    onClick={() => {
-                        setEditableEntry(props.event);
-                        setIsEditEntry(true)
-                        setIsShowDayEvents(false)
-                    }}
-                ><MdEditCalendar size={24} /></div>
 
-                <div className='deleteButton'
-                    onClick={() => {
-                        deleteEntry(props._id)
-                    }}
-                ><MdDelete size={24} /></div>
+
+                </div>
 
 
             </div>

@@ -122,9 +122,8 @@ const DiaryEntry = () => {
                             />
                             <div className="tags">
                                 {tags.map((tag, index) => (
-                                    <div key={index} className="tag">
+                                    <div key={index} className="TagBox-Item" onClick={() => removeTag(index)}>
                                         {tag}
-                                        <button onClick={() => removeTag(index)}>X</button>
                                     </div>
                                 ))}
                             </div>
