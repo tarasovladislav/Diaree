@@ -137,13 +137,14 @@ const MonthComponent = (props: Props) => {
                             day = index - (leadingDays.length + daysInMonth) + 1;
                         }
                         const dateKey = formatDateKey(year, month, day);
+                        // console.log('here',(day > new Date().getDate() && month >= new Date().getMonth()  &&  year >= new Date().getFullYear()) || (day <= new Date().getDate() && month > new Date().getMonth()  &&  year >= new Date().getFullYear()) || (year > new Date().getFullYear()))
                         const dayEvents = diariesByDate[dateKey];
                         return (dayEvents ?
                             <div
                                 onClick={() => {
                                     setSelectedDate(dateKey)
                                 }}
-                                key={index} className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
+                                key={index} className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth && ((day > new Date().getDate() && month >= new Date().getMonth()  &&  year >= new Date().getFullYear()) || (day <= new Date().getDate() && month > new Date().getMonth()  &&  year >= new Date().getFullYear()) || (year > new Date().getFullYear())) ? 'other-month' : ''}`}>
                                 <span style={{ alignSelf: 'center' }}>
                                     {day}
                                 </span>
@@ -163,7 +164,7 @@ const MonthComponent = (props: Props) => {
                                     }
                                 }}
                                 key={index}
-                                className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
+                                className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth || ((day > new Date().getDate() && month >= new Date().getMonth()  &&  year >= new Date().getFullYear()) || (day <= new Date().getDate() && month > new Date().getMonth()  &&  year >= new Date().getFullYear()) || (year > new Date().getFullYear()))  ? 'other-month' : ''}`}>
                                 <span style={{ alignSelf: 'center' }}>
                                     {day}
                                 </span>
