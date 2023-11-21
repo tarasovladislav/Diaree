@@ -8,7 +8,8 @@ export type DiaryType = {
 }
 
 export type TagType = {
-    title: string
+    title: string,
+    count: number
 }
 
 export type UserType = {

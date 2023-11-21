@@ -3,42 +3,34 @@ import { MdDelete } from "react-icons/md";
 import { useDiary } from '../../Utils/diary';
 import { useSingleEntry } from '../../Utils/singleEntry';
 import { MdEditCalendar } from "react-icons/md";
-
+import { DiaryType } from '../../Types/Types';
 
 type Props = {
-    title: string,
-    text: string,
-    date: string,
-    imageUrl: string,
-    _id: string,
-    tags: [],
-    event: {}
+    event: DiaryType
 }
 
 const DayEventListItem = (props: Props) => {
     const { deleteEntry, setEditableEntry, setIsEditEntry, setIsShowDayEvents } = useDiary()
     const { setIsShowSingleEvent, setSelectedEntry } = useSingleEntry();
-    console.log(props)
+
     return (
         <>
             <div className="eventListItem">
-
                 <div className='eventListContent' onClick={() => {
-                    setSelectedEntry(props);
+                    setSelectedEntry(props.event);
                     setIsShowSingleEvent(true);
                     setIsShowDayEvents(false)
-
                 }} >
-                    {props.imageUrl && <img src={props.imageUrl} alt={props.title} />}
+                    {props.event.imageUrl && <img src={props.event.imageUrl} alt={props.event.title} />}
                     <div className="eventData" >
-                        <h2>{props.title}</h2>
-                        <p>{props.text}</p>
+                        <h2>{props.event.title}</h2>
+                        <p>{props.event.text}</p>
                     </div>
                 </div>
                 <div className="controlContainer">
                     <div className='controlButton'
                         onClick={() => {
-                            deleteEntry(props._id)
+                            deleteEntry(props.event._id)
                         }}
                     ><MdDelete size={24} /></div>
                     <div className='controlButton'
@@ -49,8 +41,6 @@ const DayEventListItem = (props: Props) => {
                         }}
                     ><MdEditCalendar size={24} /></div>
                 </div>
-
-
             </div>
         </>
     )

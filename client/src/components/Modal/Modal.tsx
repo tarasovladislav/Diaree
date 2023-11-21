@@ -1,9 +1,13 @@
 import React, { useRef, useEffect, useState } from 'react'
 import './Modal.css'
+
 type Props = {
     children: React.ReactNode;
     onClose: () => void;
 }
+
+//TODO onChange: handleInputChange,
+
 const Modal = ({ children, onClose }: Props) => {
     const modalRef = useRef<HTMLDivElement | null>(null);
     const [isModified, setIsModified] = useState(false);

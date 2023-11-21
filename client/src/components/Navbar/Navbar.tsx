@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 
 const Navbar = () => {
-    const [isDashboardOpen, setIsDashboardOpen] = useState(true);
+    const [isDashboardOpen, setIsDashboardOpen] = useState<boolean>(true);
 
     return (
         <div className="Navbar">

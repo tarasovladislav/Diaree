@@ -5,53 +5,58 @@ import Lock from '../../../assets/lock.png';
 import { useAuth } from '../../../Utils/auth';
 import { useState } from 'react';
 import { postLogin, putUpdate } from '../../../ApiService';
-import { log } from 'console';
-import { MdPassword } from 'react-icons/md';
 
-const Account: React.FC<{ isDashboardOpen: boolean, setIsDashboardOpen: (isDashboardOpen: boolean) => void }> = ({ isDashboardOpen, setIsDashboardOpen }) => {
+type Props = {
+    isDashboardOpen: boolean,
+    setIsDashboardOpen: (isDashboardOpen: boolean) => void
+}
+
+const Account = ({ isDashboardOpen, setIsDashboardOpen }: Props) => {
     const { token, logout, user, setUser } = useAuth();
     const [isDisabled, setIsDisabled] = useState(true);
 
-    const handleLogout = () => {
+    const handleLogout = (): void => {
         const shouldReset = window.confirm('Are you sure you want to log out?');
         if (shouldReset) logout();
     }
 
-    const handleConfirmPassword = (e) => {
+    const handleConfirmPassword = (e:React.ChangeEvent<HTMLInputElement>): void => {
         const password = e.target.value;
         setIsDisabled(password.length === 0 ? true : false);
     }
 
-    const handleSave = async (e) => {
+    const handleSave = async (e: React.ChangeEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
         const newUsername = e.target.username.value;
         const newPassword = e.target.password.value;
         const currentPassword = e.target.currentPassword.value;
 
-        const resetFields = (e) => {
+        const resetFields = (e: React.ChangeEvent<HTMLFormElement>) => {
             e.target.username.value = '';
             e.target.password.value = '';
             e.target.currentPassword.value = '';
         }
-        
+
         if (newUsername === '' && newPassword === '') {
             resetFields(e);
-            return alert('Please provide a new username and/or password');
-
+            alert('Please provide a new username and/or password');
+            return
         }
 
         if (newUsername === user.username) {
             resetFields(e);
-            return alert('New username and current suername cannot be the same');
+            alert('New username and current username cannot be the same');
+            return
         }
 
         if (newPassword === currentPassword) {
             resetFields(e);
-            return alert('New password and current password cannot be the same');
+            alert('New password and current password cannot be the same');
+            return
         }
 
         const validUser = await postLogin(user.username, currentPassword);
-        if (validUser.token) {
+        if (validUser.token && typeof token === 'string') {
             const response = await putUpdate(newUsername === '' ? user.username : newUsername, newPassword === '' ? undefined : newPassword, token);
             if (response.status === 200) {
                 setUser({
@@ -59,13 +64,15 @@ const Account: React.FC<{ isDashboardOpen: boolean, setIsDashboardOpen: (isDashb
                     username: newUsername
                 })
                 resetFields(e);
-                return alert(response.message);
+                alert(response.message);
+                return
             }
         } else {
             resetFields(e);
-            return alert('Invalid password provided');
+            alert('Invalid password provided');
+            return
         }
-        
+
     }
 
     return (
