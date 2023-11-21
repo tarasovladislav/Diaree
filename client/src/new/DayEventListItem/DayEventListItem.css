@@ -7,7 +7,7 @@
     margin: 5px;
     border-radius: 8px;
     overflow: auto;
-    position: relative
+    position: relative;
 }
 
 .eventListItem img {
@@ -26,6 +26,9 @@
 
 .eventListContent {
     display: flex;
+    /* background-color: aqua; */
+    justify-content: stretch;
+    width: 100%
 }
 
 .controlContainer {
@@ -35,4 +38,5 @@
     top: 0;
     right: 0;
     padding: 5px;
+    /* background-color: aqua */
 }
