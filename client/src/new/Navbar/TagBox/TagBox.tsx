@@ -14,10 +14,16 @@ type TagBoxItemType = {
 }
 
 const TagBoxItem: React.FC<TagBoxItemType> = ({ title, count }: TagBoxItemType) => {
-    const { setSelectedTag } = useDiary()
+    const { setSelectedTag, selectedTag } = useDiary()
 
     return (
-        <div className="TagBox-Item" onClick={()=>setSelectedTag(title)}>
+        <div className={`TagBox-Item ${selectedTag === title ? "TagBox-Item-Selected" : ""}`} onClick={() => {
+            if (selectedTag === title) {
+                setSelectedTag(null)
+            } else {
+                setSelectedTag(title)
+            }
+        }}>
             <p>{title} ({count})</p>
         </div>
     );

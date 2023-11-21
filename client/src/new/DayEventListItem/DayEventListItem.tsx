@@ -27,6 +27,8 @@ const DayEventListItem = (props: Props) => {
                 <div className='eventListContent' onClick={() => {
                     setSelectedEntry(props);
                     setIsShowSingleEvent(true);
+                    setIsShowDayEvents(false)
+
                 }} >
                     {props.imageUrl && <img src={props.imageUrl} alt={props.title} />}
                     <div className="eventData" >
@@ -47,9 +49,6 @@ const DayEventListItem = (props: Props) => {
                             setIsShowDayEvents(false)
                         }}
                     ><MdEditCalendar size={24} /></div>
-
-
-
                 </div>
 
 

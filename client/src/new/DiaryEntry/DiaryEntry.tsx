@@ -70,7 +70,7 @@ const DiaryEntry = () => {
             ...newDiaryEntry,
             date: selectedDate,
             tags: newTags
-            // tags: selectedTags.map((tag) => tag.name),
+  
         };
 
         await postDiaryEntry(newEntryData, token)
