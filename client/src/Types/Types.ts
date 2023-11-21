@@ -1,7 +1,7 @@
 import React from "react"
 
 export type DiaryType = {
-    _id:string,
+    _id: string,
     title: string,
     text: string,
     date: string,
@@ -13,13 +13,17 @@ export type TagType = {
     title: string
 }
 
+export type UserType = {
+    user_id: string,
+    username: string,
+    diary_entries: DiaryType[]
+}
 
-
-export type SearchBarProps ={
+export type SearchBarProps = {
     onSearch: (query: string) => void;
 }
 
-export type SearchResult =  {
+export type SearchResult = {
     title: string;
 }
 
