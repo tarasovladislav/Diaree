@@ -9,7 +9,6 @@ type Props = {
     currentYear: number,
     currentMonth: number,
   
-
     setCurrentMonth: React.Dispatch<React.SetStateAction<number>>,
     setCurrentYear: React.Dispatch<React.SetStateAction<number>>,
 }
@@ -20,7 +19,6 @@ const MonthComponent = (props: Props) => {
     const months = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     const { setSelectedDate, diaries, setIsAddNewEvent, diariesByDate } = useDiary()
 
-    const [isClickable, setIsClickable] = useState(false);
     const getDaysInMonth = (year: number, month: number): number => {
         return new Date(year, month + 1, 0).getDate();
     };
