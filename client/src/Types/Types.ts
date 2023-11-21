@@ -1,5 +1,3 @@
-import React from "react"
-
 export type DiaryType = {
     _id: string,
     title: string,
@@ -18,26 +16,5 @@ export type UserType = {
     username: string,
     diary_entries: DiaryType[]
 }
-
-export type SearchBarProps = {
-    onSearch: (query: string) => void;
-}
-
-export type SearchResult = {
-    title: string;
-}
-
-export type SearchResultsProps = {
-    results: SearchResult[];
-}
-
-export type EventData = {
-    title: string,
-    text: string,
-    date: string,
-    imageUrl: string,
-}
-
-
 
 
