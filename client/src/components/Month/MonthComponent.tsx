@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './MonthComponent.css'
 import DayComponent from '../DayComponent/DayComponent'
 import SearchComponent from '../Searchbar/Searchbar'
@@ -19,6 +19,7 @@ const MonthComponent = (props: Props) => {
     const months = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     const { setSelectedDate, diaries, setIsAddNewEvent, diariesByDate } = useDiary()
 
+    const [isClickable, setIsClickable] = useState(false);
     const getDaysInMonth = (year: number, month: number): number => {
         return new Date(year, month + 1, 0).getDate();
     };
@@ -133,6 +134,8 @@ const MonthComponent = (props: Props) => {
                         }
                         const dateKey = formatDateKey(year, month, day);
                         const dayEvents = diariesByDate[dateKey];
+                        setIsClickable(new Date(Date.now()) < new Date(dateKey))
+                        console.log('check', isClickable)
                         return (dayEvents ?
                             <div
                                 onClick={() => {
@@ -153,6 +156,7 @@ const MonthComponent = (props: Props) => {
                                 onClick={() => {
                                     setSelectedDate(dateKey)
                                     setIsAddNewEvent(true);
+                                    console.log('dateKey',dateKey)
                                 }}
                                 key={index}
                                 className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
