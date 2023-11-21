@@ -8,6 +8,7 @@
     display: flex;
     gap: 10px;
     align-items: center;
+    padding-block: 10px;
 }
 
 .Month .Month-Navbar .Toggle img {
@@ -72,6 +73,15 @@
     flex: 1;
     display: flex;
 }
+
+.basic-day{
+    
+}
+
+.current-day{
+    border: 1px solid #ec6307;
+}
+
 
 .dayEventList {
     gap: 2px;

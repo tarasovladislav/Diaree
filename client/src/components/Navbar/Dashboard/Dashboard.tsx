@@ -29,18 +29,8 @@ const Dashboard = ({ isDashboardOpen, setIsDashboardOpen }: Props) => {
             const randomMemory = diaries[randomIndex];
             setSelectedEntry(randomMemory);
             setIsShowSingleEvent(true);
-        } else {
-            // Handle the case where there are no diary entries
-            // setSelectedEntry({ title: "Random Memory", text: "You have no diary entries.", imageURL: "" })
-            // setIsShowSingleEvent(true);
         }
     }
-
-
-//TODO wtf             setSelectedEntry({ title: "Random Memory", text: "You have no diary entries.", imageURL: "" })
-
-
-
 
     return (
         <div className="Dashboard" id={isDashboardOpen ? 'fadeIn' : 'fadeOut'}>
@@ -60,7 +50,8 @@ const Dashboard = ({ isDashboardOpen, setIsDashboardOpen }: Props) => {
                 </div>
                 <div className="Border"></div>
                 <div className="Random-Memorie">
-                    <button onClick={() => { handleRandomMemoryClick() }}>Random memory</button>
+                     <button className= {diaries.length ? 'btn-memory-active' : 'btn-memory-disable'} onClick={() => { handleRandomMemoryClick() }}>Random memory</button>
+
                 </div>
                 <div className="Border" style={{ paddingBlockStart: '0px' }}></div>
                 <div className="Tags">
