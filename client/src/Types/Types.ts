@@ -40,6 +40,4 @@ export type EventData = {
 
 
 
-export type SingleEntryContextType = {
-    entry: DiaryType
-}
+
