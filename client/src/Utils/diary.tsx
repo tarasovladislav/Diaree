@@ -3,7 +3,7 @@ import { getAllDiaryEntries, deleteDiaryEntry } from '../ApiService';
 
 import { useAuth } from './auth';
 import { DiaryType, TagType } from '../Types/Types';
-
+import React from 'react'
 
 type DiaryContextType = {
     diaries: DiaryType[];
@@ -120,7 +120,7 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
             }))
         }
     }
-    
+
     return (
         <DiaryContext.Provider value={{ diaries, setDiaries, selectedDate, setSelectedDate, isAddNewEvent, setIsAddNewEvent, isShowDayEvents, setIsShowDayEvents, diariesByDate, setDiariesByDate, tagList, setTagList, selectedTag, setSelectedTag, deleteEntry, isEditEntry, setIsEditEntry, editableEntry, setEditableEntry }} >
             {children}
