@@ -84,6 +84,11 @@
 
 .day.other-month {
     background-color: #e0e0e0;
+    /* cursor: not-allowed; */
+}
+
+.day.future-days {
+    background-color: #808080c8;
     cursor: not-allowed;
 }
 
