@@ -4,14 +4,14 @@ import { putDiaryEntry } from '../../ApiService'
 import { useDiary } from '../../Utils/diary'
 import Modal from '../Modal/Modal';
 import { useAuth } from '../../Utils/auth';
+
 type Props = {}
 
 const EditEntry = (props: Props) => {
     const { token } = useAuth();
-    const { setDiaries, isEditEntry, setIsEditEntry, editableEntry, setEditableEntry } = useDiary()
-    const [tagValue, setTagValue] = useState('');
-    const [tags, setTags] = useState([]);
-    const [tempTags, setTempTags] = useState([])
+    const { setDiaries, isEditEntry, setIsEditEntry, editableEntry } = useDiary();
+    const [tagValue, setTagValue] = useState<string>('');
+    const [tempTags, setTempTags] = useState<string[]>([]);
 
 
     const [newDiaryEntry, setNewDiaryEntry] = useState({
@@ -22,22 +22,17 @@ const EditEntry = (props: Props) => {
     useEffect(() => {
         if (editableEntry) {
             const extractedTitles = editableEntry.tags.map((tag) => tag.title);
-            // console.log(tags)
-            // setTags(extractedTitles);
             setNewDiaryEntry({ title: editableEntry.title, text: editableEntry.text })
-            setTempTags(extractedTitles) // maybe smth
+            setTempTags(extractedTitles)
         }
 
     }, [editableEntry])
 
-    console.log(tempTags)
-    // console.log(tags, 'TAGS')
-    // console.log(editableEntry, 'editable entry')
-    const handleTagChange = (e) => {
+    const handleTagChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setTagValue(e.target.value);
     };
 
-    const handleTagKeyPress = (e) => {
+    const handleTagKeyPress = (e: React.KeyboardEvent<HTMLInputElement>): void => {
         if (e.key === 'Enter' || e.key === ',') {
             e.preventDefault();
             if (tagValue.trim() !== '') {
@@ -56,9 +51,9 @@ const EditEntry = (props: Props) => {
 
 
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
-        const newTags = [...new Set(tempTags)].map(tag => ({ title: tag }));
+        const newTags = Array.from(new Set(tempTags)).map(tag => ({ title: tag }));
 
         const newEntryData = {
             ...editableEntry,
@@ -68,7 +63,6 @@ const EditEntry = (props: Props) => {
 
         await putDiaryEntry(newEntryData, token)
             .then(data => {
-                console.log(data);
                 setDiaries((prevDiaries) => {
                     return prevDiaries.map((diary) => {
                         if (diary._id === editableEntry._id) {

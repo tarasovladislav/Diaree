@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './Loading.css';
 
 const Loading = () => {
-    const [loading, setLoading] = useState('Loading');
+    const [loading, setLoading] = useState<string>('Loading');
 
     useEffect(() => {
         const interval = setInterval(() => {

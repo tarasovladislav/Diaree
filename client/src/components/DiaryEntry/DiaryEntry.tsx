@@ -7,16 +7,16 @@ import { useAuth } from '../../Utils/auth';
 
 const DiaryEntry = () => {
     const { token } = useAuth();
-    const [isUploading, setIsUploading] = useState(false);
+    const [isUploading, setIsUploading] = useState<boolean>(false);
     const { selectedDate, setDiaries, isAddNewEvent, setIsAddNewEvent } = useDiary()
-    const [tagValue, setTagValue] = useState('');
-    const [tags, setTags] = useState([]);
+    const [tagValue, setTagValue] = useState<string>('');
+    const [tags, setTags] = useState<string[]>([]);
 
-    const handleTagChange = (e) => {
+    const handleTagChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setTagValue(e.target.value);
     };
 
-    const handleTagKeyPress = (e) => {
+    const handleTagKeyPress = (e: React.KeyboardEvent<HTMLInputElement>): void => {
         if (e.key === 'Enter' || e.key === ',') {
             e.preventDefault();
             if (tagValue.trim() !== '') {
@@ -39,44 +39,46 @@ const DiaryEntry = () => {
         tags: [],
     })
 
-    const handleUploadImage = async (e: any) => {
-        const file = e.target.files[0];
-        const form = new FormData();
-        form.append('image', file);
+    const handleUploadImage = async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
+        if (e.target.files) {
+            const file = e.target.files[0];
+            const form = new FormData();
+            form.append('image', file);
 
-        setIsUploading(true);
+            setIsUploading(true);
 
-        // const uploadedImage = await uploadImage(form);
-        await fetch(`http://localhost:3000/diary/image/upload`, {
-            method: "POST",
-            body: form,
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Image upload failed: " + response.statusText);
-                }
-                return response.json();
+            // const uploadedImage = await uploadImage(form);
+            await fetch(`http://localhost:3000/diary/image/upload`, {
+                method: "POST",
+                body: form,
             })
-            .then(data => {
-                setIsUploading(false);
-                setNewDiaryEntry({ ...newDiaryEntry, imageUrl: data.imageUrl });
-            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Image upload failed: " + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    setIsUploading(false);
+                    setNewDiaryEntry({ ...newDiaryEntry, imageUrl: data.imageUrl });
+                })
+        }
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
-        const newTags = [...new Set(tags)].map(tag => ({ title: tag }))
+        const newTags = Array.from(new Set(tags)).map(tag => ({ title: tag }));
         const newEntryData = {
             ...newDiaryEntry,
             date: selectedDate,
             tags: newTags
-  
+
         };
 
         await postDiaryEntry(newEntryData, token)
             .then(data => {
                 console.log(data);
-                
+
                 setDiaries((prevDiaries) => [data, ...prevDiaries]);
                 setIsAddNewEvent(false);
                 setTags([]);
@@ -92,7 +94,6 @@ const DiaryEntry = () => {
 
     return (
         isAddNewEvent && (
-
             <Modal onClose={() => setIsAddNewEvent(false)}>
                 <div className="Title">
                     <h2>Create a new diary entry</h2>
@@ -108,6 +109,7 @@ const DiaryEntry = () => {
                                 })
                             } />
                         </div>
+
                         <div className="Information-Item">
                             <label htmlFor="description">Description</label>
                             <textarea name="description" cols={35} rows={7} placeholder='Enter a description' required={true} onChange={(e) =>
@@ -144,7 +146,6 @@ const DiaryEntry = () => {
                         </div>
                     </form>
                 </div>
-
             </Modal>
         )
     )

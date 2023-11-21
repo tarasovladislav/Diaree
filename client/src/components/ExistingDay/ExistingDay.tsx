@@ -8,8 +8,7 @@ const ExistingDay = () => {
     const { isShowDayEvents, setIsShowDayEvents, selectedDate, diariesByDate, setIsAddNewEvent } = useDiary()
 
     return (
-        isShowDayEvents && (
-
+        isShowDayEvents && selectedDate && (
             <Modal onClose={() => setIsShowDayEvents(false)}>
                 <div className="Header">
                     <h1>{selectedDate}</h1>
@@ -20,7 +19,7 @@ const ExistingDay = () => {
                 }}>Add New Event</button>
                 <div className='EventList'>
                     {diariesByDate[selectedDate] && diariesByDate[selectedDate].map((event) => {
-                        return <DayEventListItem _id={event._id} title={event.title} text={event.text} date={event.date} imageUrl={event.imageUrl} event={event} />
+                        return <DayEventListItem event={event} />
                     })}
                 </div>
             </Modal>
