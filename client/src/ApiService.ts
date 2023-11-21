@@ -95,7 +95,7 @@ const getUser = async (token: String) => {
     }
 }
 
-const postLogin = async (username: String, password: String) => {
+const postLogin = async (username: String, password: String) => {    
     try {
         const response = await fetch(`${BASE_URL}/user/account/login`, {
             method: 'POST',
@@ -122,6 +122,23 @@ const postRegister = async (username: String, password: String) => {
             body: JSON.stringify({ username, password })
         })
         //checkResponse(response);
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+const putUpdate = async (username: String, password: String, token: String) => {
+    try {
+        const response = await fetch(`${BASE_URL}/user/account/update`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `${token}`
+            },
+            body: JSON.stringify({ username, password })
+        })
         return await response.json();
     } catch (error) {
         console.error(error);
@@ -178,6 +195,7 @@ export {
     getUser,
     postLogin,
     postRegister,
+    putUpdate,
     getValidateToken,
     getAllDiaryEntriesByDate
 }

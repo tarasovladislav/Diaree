@@ -31,6 +31,69 @@
     transform: scale(1.03);
 }
 
+.Account-Main .Update .Credentials,
+.Account-Main .Update .Validation {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-block-start: 5px;
+    padding-inline: 10px;
+}
+
+.Account-Main .Update .Update-Item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.Account-Main .Update .Update-Item img {
+    height: 22px;
+    border-radius: 0;
+}
+
+.Account-Main .Update input {
+    font-size: 16px;
+    padding: 20px 0px;
+    height: 45px;
+    border: none;
+    outline: 0;
+    width: 80%;
+    transition: all 1s ease;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+}
+
+.Account-Main .Update input::placeholder {
+    font-size: 0.8rem;
+}
+
+.Account-Main button {
+    width: 95%;
+    height: 30px;
+    border-style: none;
+    border-radius: 5px;
+    transition: all .3s ease;
+    cursor: pointer;
+    color: #fff;
+}
+
+.Account-Main .Update .Validation button {
+    background-color: #b69de6;
+    margin-block-start: 10px;
+}
+
+.Account-Main .Update .Validation button:disabled {
+    background-color: #b69de6;
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+.Account-Main .Update .Validation button:hover:disabled {
+    transform: scale(1);
+    filter: brightness(1);
+}
+
 .Account-Main footer {
     display: flex;
     flex-direction: column;
@@ -40,25 +103,15 @@
     margin-top: auto;
 }
 
-.Account-Main footer button {
-    width: 95%;
-    height: 30px;
-    border-style: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.Account-Main footer button:hover {
+.Account-Main button:hover {
     transform: scale(1.03);
     filter: brightness(0.95);
 }
 
 .Account-Main footer button:nth-child(1) {
-    color: #fff;
     background-color: #5a65ea;
 }
 
-.Account-Main footer button:nth-child(2) {
-    color: #fff;
+.Account-Main footer button:nth-last-child(1) {
     background-color: #ea454b;
 }
