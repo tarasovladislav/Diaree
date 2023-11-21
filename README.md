@@ -2,10 +2,12 @@
 
 A simple diary react app
 
-Execute "node index.js" in the server folder and "npm run dev" in the client folder to run the app.
+## How to start the app
 
+1. Open a terminal and navigate into the root directory and run `npm run d` or `npm run dependencies` from there.
 
-if you want to use the cloudinary image upload, you have to create a cloudinary account and fill in the .env file in the server directory:
-CLOUDINARY_CLOUD_NAME=xxx
-CLOUDINARY_API_KEY=xxx
-CLOUDINARY_API_SECRET=xxx
+2. With the same terminal stay in the root directory and run `npm run server`.
+
+3. Open up another terminal and run `npm run client` from the root directory.
+
+4. Naviagte to http://localhost:5173
