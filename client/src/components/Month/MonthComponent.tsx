@@ -70,7 +70,12 @@ const MonthComponent = (props: Props) => {
                             props.setCurrentYear(year)
                         }}></img >
 
-                        <button>Today</button>
+                        <button onClick={
+                            () => {
+                                props.setCurrentMonth(new Date().getMonth());
+                                props.setCurrentYear(new Date().getFullYear());
+                            }
+                        }>Today</button>
 
                         <img src={RightArrow} onClick={
                             () => {
