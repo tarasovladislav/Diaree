@@ -80,7 +80,7 @@ const putUpdate = async (req: Request, res: Response): Promise<any> => { //TODO:
         if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
         const { user_id, user } = validatedUser;
         const updatedUsername = username || user.username;
-        const updatedPassword = await bcrypt.hash(password, 10) || password;
+        const updatedPassword = await bcrypt.hash(password, 10) || user.password;
 
         await User.updateOne(
             { user_id },
@@ -93,7 +93,7 @@ const putUpdate = async (req: Request, res: Response): Promise<any> => { //TODO:
             // { returnDocument: 'after' } //Testing purposes only (returns updated version) needs findOneAndUpdate
         );
 
-        res.status(200).send('Successfully updated credentials');
+        res.status(200).json({ status: 200, message: "Successfully changed credentials"  });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });
