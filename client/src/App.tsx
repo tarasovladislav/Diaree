@@ -6,13 +6,17 @@ import Error from './Components/Error/Error';
 import Home from './Components/Home';
 
 const App = () => {
-    const { authenticated, login } = useAuth();
+    const { authenticated, login, logout } = useAuth();
 
     useEffect(() => {
         (async () => {
             if (!authenticated) await login();
         })();
     }, [authenticated, login]);
+
+    window.addEventListener('storage', (event) => {
+        if (event.key === 'token' && !localStorage.getItem('token')) logout();
+    });
 
     return (
         <Router>
