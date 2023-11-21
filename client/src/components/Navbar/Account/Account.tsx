@@ -27,25 +27,26 @@ const Account: React.FC<{ isDashboardOpen: boolean, setIsDashboardOpen: (isDashb
         const newUsername = e.target.username.value;
         const newPassword = e.target.password.value;
         const currentPassword = e.target.currentPassword.value;
-        
-        if (newUsername === '' && newPassword === '') {
+
+        const resetFields = (e) => {
             e.target.username.value = '';
             e.target.password.value = '';
             e.target.currentPassword.value = '';
+        }
+        
+        if (newUsername === '' && newPassword === '') {
+            resetFields(e);
             return alert('Please provide a new username and/or password');
 
         }
 
         if (newUsername === user.username) {
-            e.target.username.value = '';
-            e.target.password.value = '';
-            e.target.currentPassword.value = '';
+            resetFields(e);
             return alert('New username and current suername cannot be the same');
         }
 
         if (newPassword === currentPassword) {
-            e.target.password.value = '';
-            e.target.currentPassword.value = '';
+            resetFields(e);
             return alert('New password and current password cannot be the same');
         }
 
@@ -57,15 +58,11 @@ const Account: React.FC<{ isDashboardOpen: boolean, setIsDashboardOpen: (isDashb
                     ...user,
                     username: newUsername
                 })
-                e.target.username.value = '';
-                e.target.password.value = '';
-                e.target.currentPassword.value = '';
+                resetFields(e);
                 return alert(response.message);
             }
         } else {
-            e.target.username.value = '';
-            e.target.password.value = '';
-            e.target.currentPassword.value = '';
+            resetFields(e);
             return alert('Invalid password provided');
         }
         
@@ -84,7 +81,7 @@ const Account: React.FC<{ isDashboardOpen: boolean, setIsDashboardOpen: (isDashb
                     </div>
                 </div>
                 <form className="Update" onSubmit={handleSave}>
-                    <h4>Settings</h4>
+                    <h4>{`${user.username}'s settings`}</h4>
                     <div className="Credentials">
                         <div className="Update-Item">
                             <img src={User} alt="User" />
