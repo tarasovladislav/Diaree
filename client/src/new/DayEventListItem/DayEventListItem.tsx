@@ -3,6 +3,7 @@ import './DayEventListItem.css'
 import { MdDelete } from "react-icons/md";
 import { useDiary } from '../../Utils/diary';
 import { useSingleEntry } from '../../Utils/singleEntry';
+import { MdEditCalendar } from "react-icons/md";
 
 
 type Props = {
@@ -10,11 +11,13 @@ type Props = {
     text: string,
     date: string,
     imageUrl: string,
-    _id: string
+    _id: string,
+    tags:[],
+    event:{}
 }
 
 const DayEventListItem = (props: Props) => {
-    const { deleteEntry } = useDiary()
+    const { deleteEntry, editableEntry, setEditableEntry, setIsEditEntry, setIsShowDayEvents } = useDiary()
     const { setIsShowSingleEvent, setSelectedEntry } = useSingleEntry();
 
     // const handleClick = (entry)=>{
@@ -37,6 +40,15 @@ const DayEventListItem = (props: Props) => {
                         <p>{props.text}</p>
                     </div>
                 </div>
+
+                <div className='editButton'
+                    onClick={() => {
+                        setEditableEntry(props.event);
+                        setIsEditEntry(true)
+                        setIsShowDayEvents(false)
+                    }}
+                ><MdEditCalendar size={24} /></div>
+
                 <div className='deleteButton'
                     onClick={() => {
                         deleteEntry(props._id)

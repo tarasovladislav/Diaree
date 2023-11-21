@@ -81,12 +81,13 @@ const postDiaryEntry = async (data: DiaryType, token: String): Promise<DiaryType
 }
 
 //TODO: Do we need this function?
-const putDiaryEntry = async (data: DiaryType): Promise<DiaryType> => { //TODO: Fix any
+const putDiaryEntry = async (data: DiaryType, token: String): Promise<DiaryType> => { //TODO: Fix any
     try {
         const response = await fetch(`${BASE_URL}/diary/entries/${data._id}`, { //TODO: Is this right?
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `${token}`
             },
             body: JSON.stringify(data),
         });

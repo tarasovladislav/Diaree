@@ -7,6 +7,7 @@ import DiaryEntry from "./DiaryEntry/DiaryEntry";
 import ExistingDay from "./ExistingDay/ExistingDay";
 import Modal from "./Modal/Modal";
 import OneEntry from "./SingleEntry/OneEntry";
+import EditEntry from "./EditEntry/EditEntry";
 function Home() {
     return (
         <>
@@ -16,6 +17,7 @@ function Home() {
                 <DiaryEntry />
                 <ExistingDay />
                 <OneEntry />
+                <EditEntry />
                 {/* <Modal>
                     THIS IS MHY CHILDER
                 </Modal> */}

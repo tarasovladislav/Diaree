@@ -78,21 +78,6 @@ async function getDiaryEntryByDate(req, res) {
         res.status(500).json({ error: "Internal server error" });
     }
 }
-// async function getDiaryEntryByDate(req: Request, res: Response) {
-//     try {
-//         const { date } = req.params;
-//         const foundDiaryEntry = await Diary.findOne({ date }).exec();
-//         if (!foundDiaryEntry) {
-//             return res
-//                 .status(404)
-//                 .json({ message: "No diary entry found for the date" });
-//         }
-//         res.status(200).json(foundDiaryEntry);
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ error: "Internal server error" });
-//     }
-// }
 async function postDiaryEntry(req, res) {
     try {
         const validatedUser = await (0, userUtils_js_1.validateUser)(req, res);
@@ -147,20 +132,30 @@ async function uploadImage(req, res) {
 }
 async function putDiaryEntry(req, res) {
     try {
-        const { id } = req.params;
-        const { title, text, date, imageUrl, tags } = req.body; // Include tags
-        const updatedDiaryEntry = await diary_js_1.default.findByIdAndUpdate(id, {
-            title,
-            text,
-            date,
-            imageUrl,
-            tags,
-        }, {
-            new: true,
-        });
-        if (!updatedDiaryEntry) {
-            res.status(404).json({ message: "Diary entry not found" });
+        const validatedUser = await (0, userUtils_js_1.validateUser)(req, res);
+        if (!validatedUser || !validatedUser.user_id || !validatedUser.user) {
+            return res.status(401).json({ error: validatedUser });
         }
+        const { id } = req.params;
+        const { user_id } = validatedUser;
+        const { title, text, date, imageUrl, tags } = req.body;
+        const updatedUser = await user_js_1.default.findOneAndUpdate({
+            user_id,
+            'diary_entries._id': id, // Assuming each diary entry has a unique ID
+        }, {
+            $set: {
+                'diary_entries.$.title': title,
+                'diary_entries.$.text': text,
+                'diary_entries.$.date': date,
+                'diary_entries.$.imageUrl': imageUrl,
+                'diary_entries.$.tags': tags,
+            },
+        }, { new: true } // To get the updated user data
+        );
+        if (!updatedUser) {
+            return res.status(404).json({ error: "Diary entry not found" });
+        }
+        const updatedDiaryEntry = updatedUser.diary_entries.find((entry) => entry._id?.toString() === id);
         res.status(200).json(updatedDiaryEntry);
     }
     catch (error) {
@@ -174,9 +169,9 @@ async function deleteDiaryEntry(req, res) {
         if (!validatedUser || !validatedUser.user_id || !validatedUser.user)
             return res.status(401).json({ error: validatedUser });
         const { id } = req.params;
-        const userId = validatedUser.user_id;
+        const { user_id } = validatedUser;
         console.log(id);
-        const updatedUser = await user_js_1.default.findOneAndUpdate({ user_id: userId }, {
+        const updatedUser = await user_js_1.default.findOneAndUpdate({ user_id }, {
             $pull: {
                 diary_entries: { _id: id }
             }
