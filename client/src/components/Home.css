@@ -1,13 +1,120 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900);
+
+html,
+body,
+html * {
+    font-family: 'Roboto', sans-serif;
+}
+
 .calendar-container input {
-  width: 250px !important;
-  margin-right: 20px;
+    width: 250px !important;
+    margin-right: 20px;
 }
 
 body {
-  background-color: blanchedalmond;
+    background-color: #EBF1F4;
+
+
 }
 
 .Home {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
+}
+
+.Dashboard,
+.Account,
+.day {
+    background-color: #FEFEFF;
+    border-radius: 8px;
+}
+
+.Right-Container {
+    background-color: #EBF1F4 !important;
+    border-radius: 8px;
+}
+
+.Navbar {
+    border: none !important;
+}
+
+.Calendar {
+    border: none !important;
+}
+
+.Month-View {
+    background-color: #EBF1F4;
+}
+
+.Month {
+    background-color: transparent !important;
+}
+
+.Month-Navbar {
+    background-color: #FEFEFF;
+    border-radius: 8px !important;
+    align-items: center;
+    margin: 0 10px;
+    padding: 0 10px !important;
+    /* padding: 5px; */
+}
+
+button,
+.TagBox-Item,
+.MemoryBox-Item {
+    background-color: #016a66 !important;
+    border: none;
+
+}
+
+.DayComponent {
+    background-color: #D4EBE7 !important;
+    border: none !important;
+    color: #016a66 !important;
+
+}
+
+.Searchbar input {
+    border: none !important;
+    background-color: #EADEDB !important;
+    color: #6a2901 !important;
+}
+
+.weekDay {
+    justify-items: center;
+    background-color: #FEFEFF;
+    margin: 10px;
+    /* padding: 10px; */
+    padding: 0 !important;
+    border-radius: 8px;
+    /* grid-gap: 10px; */
+}
+
+
+.weekDay h4 {
+    margin: 5px;
+    background-color: #EADEDB;
+    color: #6a2901 !important;
+    border-radius: 8px !important;
+    padding: 10px;
+    width: 90%
+        /* gap: 10px; */
+
+}
+
+h2 {
+    color: #6a2901 !important;
+    font-weight: 500;
+}
+
+/* .dayOfTheWeek{
+  width: 90%;
+} */
+
+.day span {
+    padding-top: 5px;
+}
+.button {
+    padding: 10px !important;
+    height: 37px !important
 }

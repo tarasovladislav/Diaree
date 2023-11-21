@@ -37,7 +37,7 @@ const Dashboard = ({ isDashboardOpen, setIsDashboardOpen }: Props) => {
             <div className="Dashboard-Main">
                 <div className="Title" style={{ paddingBlockEnd: '5px' }} >
                     <div className="Start">
-                        <h2 onClick={() => { window.location.reload() }}>Dιαɾҽҽ</h2>
+                        <h2 onClick={() => { window.location.reload() }}>Diaree</h2>
                     </div>
                     <div className="End">
                         <img src={DiaryLogo} alt="Logo" style={{ height: '32px', cursor: 'not-allowed' }} />

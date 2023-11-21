@@ -20,8 +20,8 @@
 .Month .Month-Navbar .Toggle button {
     height: 40px;
     width: 80px;
-    border: 1px solid #b69de6;
-    background-color: #b69de6;
+    border: 1px solid #3498DB;
+    background-color: #3498DB;
     color: #fff;
     border-radius: 10px;
     cursor: pointer;
@@ -79,7 +79,7 @@
 }
 
 .current-day{
-    border: 1px solid #ec6307;
+    border: 1px solid #E74C3C;
 }
 
 
@@ -108,7 +108,7 @@
     flex-direction: column
 }
 .Month-View {
-    max-height: calc(100vh - 115px);
+    max-height: calc(100vh - 153px);
 }
 
 /* try this */

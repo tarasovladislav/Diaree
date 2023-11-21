@@ -2,6 +2,7 @@ import './Navbar.css';
 import Dashboard from './Dashboard/Dashboard';
 import Account from './Account/Account';
 import { useState } from 'react';
+import React from 'react';
 
 
 const Navbar = () => {
