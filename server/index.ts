@@ -3,8 +3,7 @@ import cors from 'cors';
 import router from './router.js';
 
 import dotenv from "dotenv";
-dotenv.config();
-
+dotenv.config({ path: './.env' });
 import { v2 as cloudinary } from 'cloudinary'
 import db from './models/db.js';
 

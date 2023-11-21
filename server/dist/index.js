@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const router_js_1 = __importDefault(require("./router.js"));
 const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
+dotenv_1.default.config({ path: './.env' });
 const cloudinary_1 = require("cloudinary");
 const db_js_1 = __importDefault(require("./models/db.js"));
 cloudinary_1.v2.config({

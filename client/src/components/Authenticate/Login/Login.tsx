@@ -34,8 +34,8 @@ const Login: React.FC<{ isOnLogin: boolean, setIsOnLogin: (isOnLogin: boolean) =
         <div className="Login" id={isOnLogin ? 'fadeIn' : 'fadeOut'}>
             <div className="Login-Main">
                 <div className="Switch">
-                    <button onClick={() => { setIsOnLogin(false) }}>Register</button>
-                    <button className='Button-Disabled'>Log In</button>
+                    <button onClick={() => { setIsOnLogin(false) }} className='Button-Focused'>Register</button>
+                    <button>Log In</button>
                 </div>
                 <form className="Login-Form" onSubmit={handleLogin}>
                     <div className="Title">
