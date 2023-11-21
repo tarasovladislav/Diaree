@@ -2,7 +2,19 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { Navigate, redirect, useNavigate } from 'react-router-dom';
 import { getUser, getValidateToken } from '../ApiService';
 import Loading from '../Components/Loading/Loading';
-import { AuthContextType } from '../Types/Types';
+
+
+
+type AuthContextType = {
+    authenticated: boolean;
+    user: any; //User type (dont know how it looks) TODO: add
+    setUser: React.Dispatch<React.SetStateAction<any>>;
+    login: () => Promise<void>;
+    logout: () => void;
+    token: string | null;
+    setToken: (token: string | null) => void;
+}
+
 
 const defaultAuthContext: AuthContextType = {
     authenticated: false,
@@ -14,6 +26,7 @@ const defaultAuthContext: AuthContextType = {
     setToken: () => { },
 };
 
+
 const mockUser = {
     name: 'Bob',
     username: 'bob_the_destroyer'
@@ -24,7 +37,7 @@ const AuthContext = createContext(defaultAuthContext);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [authenticated, setAuthenticated] = useState(false);
     const [user, setUser] = useState(mockUser);
-    const [token, setToken] = useState(() => localStorage.getItem('token'));
+    const [token, setToken] = useState<string | null>(() => localStorage.getItem('token'));
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {

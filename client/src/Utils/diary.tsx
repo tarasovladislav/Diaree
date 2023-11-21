@@ -1,35 +1,80 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { getAllDiaryEntries, deleteDiaryEntry } from '../ApiService';
-import { DiaryContextType } from '../Types/Types';
+
 import { useAuth } from './auth';
+import { DiaryType, TagType } from '../Types/Types';
+
+type DiaryContextType = {
+    diaries: DiaryType[];
+    setDiaries: (diaries: DiaryType[]) => void;
+    isAddNewEvent: boolean;
+    setIsAddNewEvent: (value: boolean) => void;
+    isShowDayEvents: boolean;
+    setIsShowDayEvents: (value: boolean) => void;
+    selectedDate: string | undefined;
+    setSelectedDate: (date: string | undefined) => void;
+    isEditEntry: boolean;
+    setIsEditEntry: (value: boolean) => void;
+    tagList: TagType[];
+    setTagList: (tags: TagType[]) => void;
+    selectedTag: string | undefined;
+    setSelectedTag: (tag: string | undefined) => void;
+    diariesByDate: Record<string, DiaryType[]>;
+    setDiariesByDate: (diariesByDate: Record<string, DiaryType[]>) => void;
+    editableEntry: DiaryType | undefined;
+    setEditableEntry: (diary: DiaryType | undefined) => void;
+    deleteEntry: (id: string) => Promise<void>;
+}
+
+
 
 const defaultDiaryContext: DiaryContextType = {
     diaries: [],
     setDiaries: () => { },
+    isAddNewEvent: false,
+    setIsAddNewEvent: () => { },
+    isShowDayEvents: false,
+    setIsShowDayEvents: () => { },
     selectedDate: undefined,
     setSelectedDate: () => { },
-    isAddNewEvent: Boolean,
-    setIsAddNewEvent: () => { },
-    isShowDayEvents: Boolean,
-    setIsShowDayEvents: () => { },
+    isEditEntry: false,
+    setIsEditEntry: () => { },
+    tagList: [],
+    setTagList: () => { },
+    selectedTag: undefined,
+    setSelectedTag: () => { },
+    diariesByDate: {},
+    setDiariesByDate: () => { },
+    editableEntry: undefined,
+    setEditableEntry: () => { },
+    deleteEntry: function (id: string): Promise<void> {
+        throw new Error('Function not implemented.');
+    }
+    //TODO no idea how to do this
 };
 
 const DiaryContext = createContext(defaultDiaryContext);
 
 export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
     const { authenticated, token } = useAuth();
-    const [diaries, setDiaries] = useState([]);
+
     const [isAddNewEvent, setIsAddNewEvent] = useState(false);
     const [isShowDayEvents, setIsShowDayEvents] = useState(false);
-    const [selectedDate, setSelectedDate] = useState(undefined);
-    const [diariesByDate, setDiariesByDate] = useState({})
-    const [tagList, setTagList] = useState([])
-    const [selectedTag, setSelectedTag] = useState('')
-
-
-    //editgin
     const [isEditEntry, setIsEditEntry] = useState(false)
-    const [editableEntry, setEditableEntry] = useState(undefined)
+
+    const [diaries, setDiaries] = useState<DiaryType[]>([]);
+    const [tagList, setTagList] = useState<TagType[]>([])
+
+    const [selectedTag, setSelectedTag] = useState<string | undefined>(undefined)
+    const [selectedDate, setSelectedDate] = useState<string | undefined>(undefined);
+
+    const [diariesByDate, setDiariesByDate] = useState<Record<string, DiaryType[]>>({});
+
+    const [editableEntry, setEditableEntry] = useState<DiaryType | undefined>(undefined)
+
+
+
+
 
 
     useEffect(() => {
@@ -74,7 +119,7 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
     }, [diaries])
 
     //add funciton which delete from diaries
-    const deleteEntry = async (_id: string) => {
+    const deleteEntry = async (_id: string): Promise<void> => {
         console.log(_id, token)
         await deleteDiaryEntry(_id, token)
         setDiaries(diaries.filter(diary => {
@@ -82,7 +127,7 @@ export const DiaryProvider = ({ children }: { children: React.ReactNode }) => {
         }))
     }
     return (
-        <DiaryContext.Provider value={{ diaries, setDiaries, selectedDate, setSelectedDate, isAddNewEvent, setIsAddNewEvent, isShowDayEvents, setIsShowDayEvents, diariesByDate, setDiariesByDate, tagList, selectedTag, setSelectedTag, deleteEntry, isEditEntry, setIsEditEntry, editableEntry, setEditableEntry }} >
+        <DiaryContext.Provider value={{ diaries, setDiaries, selectedDate, setSelectedDate, isAddNewEvent, setIsAddNewEvent, isShowDayEvents, setIsShowDayEvents, diariesByDate, setDiariesByDate, tagList, setTagList, selectedTag, setSelectedTag, deleteEntry, isEditEntry, setIsEditEntry, editableEntry, setEditableEntry }} >
             {children}
         </DiaryContext.Provider>
     );

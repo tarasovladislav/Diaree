@@ -1,14 +1,14 @@
 //TODO: Move to .env
 const BASE_URL = "http://localhost:3000";
 // const BASE_URL = process.env.REACT_APP_BASE_URL;
-import { DiaryType, TagType } from './Types/Types.js'
+import { DiaryType } from './Types/Types.js'
 
 const checkResponse = (response: Response): void => {
     if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
 };
 
 // const getAllDiaryEntries = async (): Promise<[]> => {//TODO []type
-const getAllDiaryEntries = async (token: String): Promise<[]> => { 
+const getAllDiaryEntries = async (token: string): Promise<[]> => { 
     try {
         const response = await fetch(`${BASE_URL}/diary/entries`, {
             method: 'GET',
@@ -26,7 +26,7 @@ const getAllDiaryEntries = async (token: String): Promise<[]> => {
 
 
 
-const deleteDiaryEntry = async (_id: String, token: String): Promise<{ message: string }> => {
+const deleteDiaryEntry = async (_id: string, token: string): Promise<{ message: string }> => {
     try {
         const response = await fetch(`${BASE_URL}/diary/entries/${_id}`, {
             method: 'DELETE',
@@ -42,7 +42,7 @@ const deleteDiaryEntry = async (_id: String, token: String): Promise<{ message: 
     }
 }
 
-const postDiaryEntry = async (data: DiaryType, token: String): Promise<DiaryType> => { //TODO: FIX any
+const postDiaryEntry = async (data: DiaryType, token: string): Promise<DiaryType> => { //TODO: FIX any
     try {
         const response = await fetch(`${BASE_URL}/diary/entries`, {
             method: 'POST',
@@ -61,7 +61,7 @@ const postDiaryEntry = async (data: DiaryType, token: String): Promise<DiaryType
 }
 
 //TODO: Do we need this function?
-const putDiaryEntry = async (data: DiaryType, token: String): Promise<DiaryType> => { //TODO: Fix any
+const putDiaryEntry = async (data: DiaryType, token: string): Promise<DiaryType> => { //TODO: Fix any
     try {
         const response = await fetch(`${BASE_URL}/diary/entries/${data._id}`, { //TODO: Is this right?
             method: 'PUT',
@@ -79,7 +79,7 @@ const putDiaryEntry = async (data: DiaryType, token: String): Promise<DiaryType>
     }
 }
 
-const getUser = async (token: String) => {
+const getUser = async (token: string) => {
     try {
         const response = await fetch(`${BASE_URL}/user/account`, {
             method: 'GET',
@@ -95,7 +95,7 @@ const getUser = async (token: String) => {
     }
 }
 
-const postLogin = async (username: String, password: String) => {    
+const postLogin = async (username: string, password: string) => {    
     try {
         const response = await fetch(`${BASE_URL}/user/account/login`, {
             method: 'POST',
@@ -112,7 +112,7 @@ const postLogin = async (username: String, password: String) => {
     }
 }
 
-const postRegister = async (username: String, password: String) => {
+const postRegister = async (username: string, password: string) => {
     try {
         const response = await fetch(`${BASE_URL}/user/account/register`, {
             method: 'POST',

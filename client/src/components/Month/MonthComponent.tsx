@@ -15,7 +15,6 @@ type Props = {
 
 
 const MonthComponent = (props: Props) => {
-
     const months = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     const { setSelectedDate, diaries, setIsAddNewEvent, diariesByDate } = useDiary()
 
