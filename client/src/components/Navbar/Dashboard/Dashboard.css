@@ -38,7 +38,7 @@
     text-align: center;
 }
 
-.Dashboard-Main .Random-Memorie button {
+.Dashboard-Main .Random-Memorie .btn-memory-active {
     background-color: #b69de6;
     border: 1px solid #b69de6;
     border-radius: 10px;
@@ -64,4 +64,12 @@
 .Dashboard-Main footer {
     text-align: center;
     margin-top: auto;
+}
+
+.Random-Memorie  .btn-memory-disable {
+    background-color: #808080c8;
+    cursor: not-allowed;
+    border-radius: 10px;
+    color: #fff;
+    height: 40px;
 }

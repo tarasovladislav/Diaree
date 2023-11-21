@@ -137,7 +137,8 @@ const MonthComponent = (props: Props) => {
                                     setSelectedDate(dateKey)
                                 }}
                                 key={index} className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''} 
-                                ${((day > new Date().getDate() && month >= new Date().getMonth() && year >= new Date().getFullYear()) || (day <= new Date().getDate() && month > new Date().getMonth() && year >= new Date().getFullYear()) || (year > new Date().getFullYear())) ? 'future-days' : ''}`}>
+                                ${((day > new Date().getDate() && month >= new Date().getMonth() && year >= new Date().getFullYear()) || (day <= new Date().getDate() && month > new Date().getMonth() && year >= new Date().getFullYear()) || (year > new Date().getFullYear())) ? 'future-days' : ''}
+                                ${(day === new Date().getDate() && month === new Date().getMonth() && year === new Date().getFullYear())  ? 'current-day' : 'basic-day'}`}>
                                 <span style={{ alignSelf: 'center' }}>
                                     {day}
                                 </span>
@@ -158,7 +159,8 @@ const MonthComponent = (props: Props) => {
                                 }}
                                 key={index}
                                 className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''} 
-                                ${((day > new Date().getDate() && month >= new Date().getMonth() && year >= new Date().getFullYear()) || (day <= new Date().getDate() && month > new Date().getMonth() && year >= new Date().getFullYear()) || (year > new Date().getFullYear())) ? 'future-days' : ''}`}>
+                                ${((day > new Date().getDate() && month >= new Date().getMonth() && year >= new Date().getFullYear()) || (day <= new Date().getDate() && month > new Date().getMonth() && year >= new Date().getFullYear()) || (year > new Date().getFullYear())) ? 'future-days' : ''}
+                                    ${(day === new Date().getDate() && month === new Date().getMonth() && year === new Date().getFullYear())  ? 'current-day' : 'basic-day'}`}>
                                 <span style={{ alignSelf: 'center' }}>
                                     {day}
                                 </span>
