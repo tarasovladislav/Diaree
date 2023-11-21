@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Navigate, redirect, useNavigate } from 'react-router-dom';
 import { getUser, getValidateToken } from '../ApiService';
-import Loading from '../new/Loading/Loading';
+import Loading from '../Components/Loading/Loading';
 import { AuthContextType } from '../Types/Types';
 
 const defaultAuthContext: AuthContextType = {

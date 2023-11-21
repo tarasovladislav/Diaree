@@ -8,29 +8,19 @@ const router = (0, express_1.Router)();
 const multer_1 = __importDefault(require("multer"));
 const upload = (0, multer_1.default)({ dest: "uploads/" });
 const diaryController_js_1 = __importDefault(require("./controllers/diaryController.js"));
-const tagController_js_1 = __importDefault(require("./controllers/tagController.js"));
 const userController_js_1 = __importDefault(require("./controllers/userController.js"));
-//TODO: Change controller names
 //Diary
 router.get('/diary/entries', diaryController_js_1.default.getAllDiaryEntries);
-router.get('/diary/entries/:id', diaryController_js_1.default.getDiaryEntryById);
 router.post('/diary/entries', diaryController_js_1.default.postDiaryEntry);
-router.put('/diary/entries/:id', diaryController_js_1.default.putDiaryEntry); //INFO: edits the diary entry
+router.put('/diary/entries/:id', diaryController_js_1.default.putDiaryEntry);
 router.delete('/diary/entries/:id', diaryController_js_1.default.deleteDiaryEntry);
-router.get('/diary/entries/recent', diaryController_js_1.default.getRecentDiaryEntries);
-//Tags
-router.get('/diary/tags', tagController_js_1.default.getAllTags);
-router.post('/diary/tags', tagController_js_1.default.postTag);
-router.delete('/diary/tags/:id', tagController_js_1.default.deleteTag);
-//Date
-router.get('/diary/entries/date/:date', diaryController_js_1.default.getDiaryEntryByDate);
 //Image
 router.post('/diary/image/upload', upload.single('image'), diaryController_js_1.default.uploadImage);
-//TODO: Add user => router.post('/user/login', ...)
+//User
+router.get('/user/account', userController_js_1.default.getUser);
 router.post('/user/account/login', userController_js_1.default.postLogin);
 router.post('/user/account/register', userController_js_1.default.postRegister);
-router.get('/user/account', userController_js_1.default.getUser);
 router.put('/user/account/update', userController_js_1.default.putUpdate);
-//Vliadation
+//Validation
 router.get('/user/account/validate', userController_js_1.default.getValidateToken);
 exports.default = router;
