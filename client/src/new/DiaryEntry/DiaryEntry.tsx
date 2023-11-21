@@ -65,7 +65,7 @@ const DiaryEntry = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newTags = tags.map(tag => ({ title: tag }))
+        const newTags = [...new Set(tags)].map(tag => ({ title: tag }))
         const newEntryData = {
             ...newDiaryEntry,
             date: selectedDate,

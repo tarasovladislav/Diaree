@@ -58,7 +58,8 @@ const EditEntry = (props: Props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newTags = tempTags.map(tag => ({ title: tag }))
+        const newTags = [...new Set(tempTags)].map(tag => ({ title: tag }));
+
         const newEntryData = {
             ...editableEntry,
             ...newDiaryEntry,
