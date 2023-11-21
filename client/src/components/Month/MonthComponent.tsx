@@ -16,7 +16,7 @@ type Props = {
 
 const MonthComponent = (props: Props) => {
     const months: string[] = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    const { setSelectedDate, diaries, setIsAddNewEvent, diariesByDate } = useDiary()
+    const { setSelectedDate, setIsAddNewEvent, diariesByDate } = useDiary()
 
     const getDaysInMonth = (year: number, month: number): number => {
         return new Date(year, month + 1, 0).getDate();
@@ -137,7 +137,7 @@ const MonthComponent = (props: Props) => {
                                     {day}
                                 </span>
                                 <div className="dayEventList">
-                                    {dayEvents.map(event => <DayComponent event={event} dayEvents={dayEvents} />)}
+                                    {dayEvents.map((event, index) => <DayComponent key={index} event={event} dayEvents={dayEvents} />)}
 
                                 </div>
 

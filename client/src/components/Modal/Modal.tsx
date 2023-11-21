@@ -35,7 +35,7 @@ const Modal = ({ children, onClose }: Props) => {
         };
     }, [onClose, isModified]);
 
-    const handleInputChange = ():void => {
+    const handleInputChange = (): void => {
         setIsModified(true);
     };
 
@@ -66,7 +66,7 @@ const Modal = ({ children, onClose }: Props) => {
                             if (React.isValidElement(child)) {
                                 return React.cloneElement(child, {
                                     onChange: handleInputChange,
-                                });
+                                } as React.HTMLProps<HTMLInputElement>);
                             }
                             return child;
                         })}
