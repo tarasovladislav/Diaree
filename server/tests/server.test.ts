@@ -19,7 +19,7 @@ app.use(router);
 describe('/user/account endpoint', () => {
     const mockUser = { username: 'TEST', password: 'TEST' };
 
-    
+
     it('should be able to create a user', async () => {
         await User.findOneAndDelete({ username: 'TEST' });
         const response = await request(app)
@@ -74,6 +74,9 @@ describe('/user/account endpoint', () => {
         expect(data.status).toBe(200);
         expect(data.body).toBeTruthy();
 
+        const user_id = tokenToUserId(login.body.token);
+
+        await User.findOneAndDelete({ user_id });
     });
 });
 
