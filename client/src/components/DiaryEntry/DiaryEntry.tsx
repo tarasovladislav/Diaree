@@ -80,6 +80,12 @@ const DiaryEntry = () => {
                 setDiaries((prevDiaries) => [data, ...prevDiaries]);
                 setIsAddNewEvent(false);
                 setTags([]);
+                setNewDiaryEntry({
+                    title: "",
+                    text: "",
+                    imageUrl: "",
+                    tags: [],
+                })
             })
 
     }

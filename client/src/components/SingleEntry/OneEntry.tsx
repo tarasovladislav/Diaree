@@ -6,7 +6,6 @@ type Props = {}
 const OneEntry = (props: Props) => {
 
     const { isShowSingleEvent, setIsShowSingleEvent, selectedEntry } = useSingleEntry();
-    console.log('entry in modal', selectedEntry);
     return (
         isShowSingleEvent && (
             <Modal onClose={() => setIsShowSingleEvent(false)}>

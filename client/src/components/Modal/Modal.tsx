@@ -1,15 +1,16 @@
 import React, { useRef, useEffect, useState } from 'react'
 import './Modal.css'
 type Props = {
+    children: React.ReactNode;
     onClose: () => void;
 }
 const Modal = ({ children, onClose }: Props) => {
-    const modalRef = useRef(null);
+    const modalRef = useRef<HTMLDivElement | null>(null);
     const [isModified, setIsModified] = useState(false);
 
     useEffect(() => {
-        const handleOutsideClick = (event) => {
-            if (modalRef.current && !modalRef.current.contains(event.target)) {
+        const handleOutsideClick = (event: MouseEvent): void => {
+            if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
                 if (isModified) {
                     const confirmClose = window.confirm(
                         'You have unsaved changes. Are you sure you want to close?'
@@ -30,7 +31,7 @@ const Modal = ({ children, onClose }: Props) => {
         };
     }, [onClose, isModified]);
 
-    const handleInputChange = () => {
+    const handleInputChange = ():void => {
         setIsModified(true);
     };
 

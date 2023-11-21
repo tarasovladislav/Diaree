@@ -19,7 +19,7 @@ const TagBoxItem: React.FC<TagBoxItemType> = ({ title, count }: TagBoxItemType) 
     return (
         <div className={`TagBox-Item ${selectedTag === title ? "TagBox-Item-Selected" : ""}`} onClick={() => {
             if (selectedTag === title) {
-                setSelectedTag(null)
+                setSelectedTag(undefined)
             } else {
                 setSelectedTag(title)
             }
