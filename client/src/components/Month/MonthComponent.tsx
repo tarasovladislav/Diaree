@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './MonthComponent.css'
 import DayComponent from '../DayComponent/DayComponent'
 import SearchComponent from '../Searchbar/Searchbar'
@@ -8,7 +8,7 @@ import { useDiary } from '../../Utils/diary'
 type Props = {
     currentYear: number,
     currentMonth: number,
-
+  
     setCurrentMonth: React.Dispatch<React.SetStateAction<number>>,
     setCurrentYear: React.Dispatch<React.SetStateAction<number>>,
 }
@@ -55,6 +55,11 @@ const MonthComponent = (props: Props) => {
         // Return the date string
         return `${year}-${paddedMonth}-${paddedDay}`;
     };
+
+    const today = new Date();
+    const currentDate = today.toISOString().split('T')[0];
+
+    // console.log('currentdate', currentDate);
 
     return (
         <div className='Month'>
@@ -151,8 +156,11 @@ const MonthComponent = (props: Props) => {
                             :
                             <div
                                 onClick={() => {
-                                    setSelectedDate(dateKey)
-                                    setIsAddNewEvent(true);
+                                    if (dateKey <= currentDate) {
+                                        setSelectedDate(dateKey)
+                                        setIsAddNewEvent(true);
+                                        console.log('dateKey', dateKey)
+                                    }
                                 }}
                                 key={index}
                                 className={`day ${index < leadingDays.length || index >= leadingDays.length + daysInMonth ? 'other-month' : ''}`}>
