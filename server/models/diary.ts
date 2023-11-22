@@ -21,6 +21,6 @@ const diarySchema = new mongoose.Schema({
     tags: [tagSchema],
 });
 
-const Diary = mongoose.model("Diary", diarySchema);
+// const Diary = mongoose.model("Diary", diarySchema);
 export {diarySchema}
-export default Diary;
+// export default Diary;

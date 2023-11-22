@@ -26,5 +26,4 @@ const diarySchema = new mongoose_1.default.Schema({
     tags: [tag_1.tagSchema],
 });
 exports.diarySchema = diarySchema;
-const Diary = mongoose_1.default.model("Diary", diarySchema);
-exports.default = Diary;
+// export default Diary;
