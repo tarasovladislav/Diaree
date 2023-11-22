@@ -154,7 +154,6 @@ const MonthComponent = (props: Props) => {
                                     if (dateKey <= currentDate) {
                                         setSelectedDate(dateKey)
                                         setIsAddNewEvent(true);
-                                        console.log('dateKey', dateKey)
                                     }
                                 }}
                                 key={index}

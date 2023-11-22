@@ -19,8 +19,7 @@
     flex: 0 0 auto;
     height: 25px;
     margin-bottom: 5px;
-    border: 1px solid #b69de6;
-    background-color: #b69de6;
+    border: none;
     color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     cursor: pointer;
@@ -29,11 +28,16 @@
     align-items: center;
     justify-content: center;
     width: max-content;
+    border: none;
+    background-color: #D4EBE7;
+
+    color: #016a66;
+
 }
 
 .TagBox-Item-Selected {
-    background-color: #6d4bac;
-
+    background-color: #016a66;
+    color: white
 }
 
 .TagBox .TagBox-Item:hover {
