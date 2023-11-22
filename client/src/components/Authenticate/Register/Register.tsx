@@ -97,7 +97,7 @@ const Register: React.FC<{ isOnLogin: boolean, setIsOnLogin: (isOnLogin: boolean
                         <div className="Confirm-Password">
                             <img src={Lock} />
                             <input
-                                id='registerPass2'
+                                id='registerPassConfirm'
                                 type="password"
                                 name="confirmPassword"
                                 placeholder="Confirm password"
