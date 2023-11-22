@@ -3,7 +3,21 @@ const titleEdited = "My New Event Changed Title"
 const description = "Description ".repeat(3)
 const descriptionEdited = "Description ".repeat(7)
 
+import Chance from 'chance'
+const chance = new Chance()
+const newEmail = chance.email();
+const password = "1234";
 
+before(() => {
+    cy.clearLocalStorage()
+    cy.visit('/');
+    cy.url().should('include', '/authenticate');
+    cy.contains('register').click();
+    cy.get('#registerUser').type(newEmail);
+    cy.get('#registerPass').type(password);
+    cy.get('#registerPassConfirm').type(password).type('{enter}');
+    cy.url().should('include', '/home');
+});
 
 
 describe('Add/Remove Entry Test', () => {
@@ -33,15 +47,7 @@ describe('Add/Remove Entry Test', () => {
     })
 })
 
-before(() => {
-    cy.visit('/');
-    cy.url().should('include', '/authenticate');
-    cy.contains('log in');
-    cy.get('#loginUser').type('vlad');
-    cy.get('#loginPass').type('1234');
-    cy.contains('Log in').click();
-    cy.url().should('include', '/home');
-});
+
 
 describe('Add/Modify/Delete Entry Test', () => {
 
@@ -85,10 +91,7 @@ describe('Add/Modify/Delete Entry Test', () => {
     })
 
     it('It should remove created entry', () => {
-        cy.get('.DayComponent')
-            .within(() => {
-                cy.contains(titleEdited).click();
-            });
+        cy.get('.DayComponent').first().click();
         cy.contains(titleEdited);
         cy.contains(descriptionEdited);
         cy.get('.controlContainer')
@@ -102,7 +105,7 @@ describe('Add/Modify/Delete Entry Test', () => {
 })
 
 
-describe.only('Add more than one daily event', () => {
+describe('Add more than one daily event', () => {
     it('It should create entry', () => {
         cy.contains('22').click();
         cy.get('input[name="title"]').type(title);
@@ -112,8 +115,11 @@ describe.only('Add more than one daily event', () => {
         cy.contains(title).should('exist');
     })
 
-    it('It should create entry', () => {
-        cy.contains(title).click();
+    it('It should create one more entry', () => {
+        cy.get('.DayComponent')
+            .within(() => {
+                cy.contains(title).click();
+            });
         cy.contains('Add New Event').click();
         cy.get('input[name="title"]').type(title);
         cy.get('textarea[name="description"]').type(description);
@@ -122,30 +128,72 @@ describe.only('Add more than one daily event', () => {
         cy.contains(title).should('exist');
     })
 
+    it('Should be 2 entrances after adding', () => {
+        cy.get('.DayComponent').should('have.length', 2);
+    })
+    it('Removing entries', () => {
+
+        cy.get('.dayEventList').find('.DayComponent')
+            .eq(0).click();
+        cy.get('.dayEventList')
+            .find('.DayComponent ')
+            .eq(0).contains(title).click({ force: true });
+        cy.get('.controlButton').first().click();
+        cy.get('.controlButton').first().click();
+        cy.get('.close-button').click()
+
+
+    })
+
+
+
+})
+
+
+describe('Search Test', () => {
+    it('It should create entry', () => {
+        cy.contains('22').click();
+        cy.get('input[name="title"]').type(title);
+        cy.get('textarea[name="description"]').type(description);
+        cy.get('input[name="tags"]').type('Tag1, Tag2, Tag3,');
+        cy.get('#addEntry').click();
+        cy.contains(title).should('exist');
+    })
+
+    it('It should create one more entry', () => {
+        cy.contains('21').click();
+        cy.get('input[name="title"]').type("testingSearch");
+        cy.get('textarea[name="description"]').type(description);
+        cy.get('input[name="tags"]').type('Tag2, Tag3,');
+        cy.get('#addEntry').click();
+        cy.contains("testingSearch").should('exist');
+
+    })
+    
+    it('It should find entry in search', () => {
+        cy.get('.Searchbar > input').type("test")
+        cy.get('.Searchbar-Result-Item > p').should('have.length', 1)
+    })
+})
+
+describe('Tag Highlighting', () => {
+    it('After clicking on tag, it should change class', () => {
+        cy.get('.TagBox > :nth-child(3)').click()
+        cy.get('.TagBox > :nth-child(3)').should('have.class', 'TagBox-Item-Selected');
+    })
+    
+    it('Entries with tag should change class', () => {
+        cy.get('.current-day > .dayEventList > .DayComponent').should('have.class', 'tagIncluded');
+    })
 })
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 after(() => {
-    cy.get('.End').find('img').eq(1).click();
-    cy.contains('Log out').click()
+    cy.clearLocalStorage()
+
+    // cy.visit('/');
+    // cy.get('.End').find('img').eq(1).click();
+    // cy.contains('Log out').click()
 });     
