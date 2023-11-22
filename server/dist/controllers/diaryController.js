@@ -8,6 +8,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config({ path: '../.env' });
 const userUtils_js_1 = require("../utils/userUtils.js");
 const user_js_1 = __importDefault(require("../models/user.js"));
+const mongoose_1 = __importDefault(require("mongoose"));
 async function getAllDiaryEntries(req, res) {
     try {
         const validatedUser = await (0, userUtils_js_1.validateUser)(req, res);
@@ -113,15 +114,19 @@ async function deleteDiaryEntry(req, res) {
             return res.status(401).json({ error: validatedUser });
         const { id } = req.params;
         const { user_id } = validatedUser;
+        const userBeforeUpdate = await user_js_1.default.findOne({ user_id });
         const updatedUser = await user_js_1.default.findOneAndUpdate({ user_id }, {
             $pull: {
-                diary_entries: { _id: id }
+                diary_entries: { _id: new mongoose_1.default.mongo.ObjectId(id) }
             }
         }, { new: true } // To get the updated user data
         );
-        if (!updatedUser) {
-            res.status(404).json({ message: "Diary entry not found" });
-            return;
+        if (!updatedUser || !updatedUser.diary_entries) {
+            return res.status(404).json({ message: "Diary entry not found" });
+        }
+        // Check if the length of diary_entries is unchanged after the update
+        if (userBeforeUpdate?.diary_entries.length === updatedUser.diary_entries.length) {
+            return res.status(404).json({ message: "Diary entry not found" });
         }
         res.status(200).json({ message: "Diary entry deleted successfully" });
     }
