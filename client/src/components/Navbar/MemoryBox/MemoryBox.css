@@ -13,8 +13,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #b69de6;
-    background-color: #b69de6;
+    border: none;
+    background-color: #016a66;
     color: rgba(255, 255, 255, 0.9);
     height: 25%;
     border-radius: 10px;

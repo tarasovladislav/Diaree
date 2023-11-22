@@ -130,7 +130,6 @@ async function deleteDiaryEntry(req: Request, res: Response): Promise<any> {
         if (!validatedUser || !validatedUser.user_id || !validatedUser.user) return res.status(401).json({ error: validatedUser });
         const { id } = req.params;
         const { user_id } = validatedUser
-        console.log(id)
         const updatedUser = await User.findOneAndUpdate(
             { user_id },
             {

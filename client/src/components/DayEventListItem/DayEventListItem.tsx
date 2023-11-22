@@ -17,7 +17,6 @@ const DayEventListItem = (props: Props) => {
         <>
             <div className="eventListItem">
                 <div className='eventListContent' onClick={() => {
-                    console.log(props.event)
                     setSelectedEntry(props.event);
                     setIsShowSingleEvent(true);
                     setIsShowDayEvents(false)

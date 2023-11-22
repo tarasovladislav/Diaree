@@ -52,7 +52,7 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     padding: 0 10px;
-    
+
 }
 
 .dayOfTheWeek {
@@ -74,12 +74,8 @@
     display: flex;
 }
 
-.basic-day{
-    
-}
-
-.current-day{
-    border: 1px solid #E74C3C;
+.current-day {
+    border: 3px solid #016a66;
 }
 
 
@@ -107,6 +103,7 @@
     display: flex;
     flex-direction: column
 }
+
 .Month-View {
     max-height: calc(100vh - 153px);
 }

@@ -56,22 +56,21 @@ body {
     align-items: center;
     margin: 0 10px;
     padding: 0 10px !important;
-    /* padding: 5px; */
 }
 
-button,
-.TagBox-Item,
-.MemoryBox-Item {
+button {
     background-color: #016a66 !important;
     border: none;
 
 }
-
-.DayComponent {
-    background-color: #D4EBE7 !important;
-    border: none !important;
-    color: #016a66 !important;
-
+.Login .Login-Form .Credentials .Submit button, .Login-Main .Switch button {
+    color: #ffffff !important
+}
+.Login .Login-Form .Title span {
+    color: #016a66
+}
+.eventData h2 {
+    color: black !important
 }
 
 .Searchbar input {
@@ -84,10 +83,8 @@ button,
     justify-items: center;
     background-color: #FEFEFF;
     margin: 10px;
-    /* padding: 10px; */
     padding: 0 !important;
     border-radius: 8px;
-    /* grid-gap: 10px; */
 }
 
 
@@ -114,6 +111,7 @@ h2 {
 .day span {
     padding-top: 5px;
 }
+
 .button {
     padding: 10px !important;
     height: 37px !important
