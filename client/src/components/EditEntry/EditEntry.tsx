@@ -121,7 +121,7 @@ const EditEntry = (props: Props) => {
                                 </div>
                             ))}
                         </div>
-                        <button type='submit'>Save</button>
+                        <button id="saveChanges" type='submit'>Save</button>
                     </div>
                 </form>
             </div>

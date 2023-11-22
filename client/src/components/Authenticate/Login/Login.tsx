@@ -48,11 +48,11 @@ const Login: React.FC<{ isOnLogin: boolean, setIsOnLogin: (isOnLogin: boolean) =
                     <div className="Credentials">
                         <div className="Username">
                             <img src={User} />
-                            <input type="text" name='username' placeholder='Username' required={true} />
+                            <input id='loginUser' type="text" name='username' placeholder='Username' required={true} />
                         </div>
                         <div className="Password">
                             <img src={Lock} />
-                            <input type="password" name='password' placeholder='Password' required={true} />
+                            <input id='loginPass' type="password" name='password' placeholder='Password' required={true} />
                         </div>
                         <div className="Submit">
                             <a href='#' onClick={() => { setIsOnLogin(false) }}>or register</a>
