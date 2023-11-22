@@ -15,7 +15,7 @@
     height: 32px;
     padding-inline: 20px;
     background: #b69de6;
-    border: 1px solid #b69de6;
+    border: 1px solid #016a66;
     border-radius: 5px 5px 0 0;
     border-bottom: none;
     cursor: pointer;
@@ -59,7 +59,7 @@
 }
 
 .Register .Register-Form .Title span {
-    color: rgba(182, 157, 230);
+    color: #016a66;
 }
 
 .Register .Register-Form .Credentials {

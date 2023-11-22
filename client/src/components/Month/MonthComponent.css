@@ -18,10 +18,10 @@
 }
 
 .Month .Month-Navbar .Toggle button {
-    height: 40px;
-    width: 80px;
-    border: 1px solid #3498DB;
-    background-color: #3498DB;
+    margin-block: 10px;
+    height: 30px;
+    width: 70px;
+    border: 1px solid #016a66;
     color: #fff;
     border-radius: 10px;
     cursor: pointer;

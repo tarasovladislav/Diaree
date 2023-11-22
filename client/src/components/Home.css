@@ -61,14 +61,17 @@ body {
 button {
     background-color: #016a66 !important;
     border: none;
-
 }
-.Login .Login-Form .Credentials .Submit button, .Login-Main .Switch button {
+
+.Login .Login-Form .Credentials .Submit button,
+.Login-Main .Switch button {
     color: #ffffff !important
 }
+
 .Login .Login-Form .Title span {
     color: #016a66
 }
+
 .eventData h2 {
     color: black !important
 }

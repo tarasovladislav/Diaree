@@ -109,9 +109,9 @@
 }
 
 .Account-Main footer button:nth-child(1) {
-    background-color: #5a65ea;
+    background-color: #5a65ea !important;
 }
 
 .Account-Main footer button:nth-last-child(1) {
-    background-color: #ea454b;
+    background-color: #ea454b !important;
 }

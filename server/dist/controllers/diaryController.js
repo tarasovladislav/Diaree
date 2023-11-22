@@ -113,7 +113,6 @@ async function deleteDiaryEntry(req, res) {
             return res.status(401).json({ error: validatedUser });
         const { id } = req.params;
         const { user_id } = validatedUser;
-        console.log(id);
         const updatedUser = await user_js_1.default.findOneAndUpdate({ user_id }, {
             $pull: {
                 diary_entries: { _id: id }
