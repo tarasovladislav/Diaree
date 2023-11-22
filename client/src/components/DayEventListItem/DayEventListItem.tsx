@@ -24,7 +24,7 @@ const DayEventListItem = (props: Props) => {
                     {props.event.imageUrl && <img src={props.event.imageUrl} alt={props.event.title} />}
                     <div className="eventData" >
                         <h2>{props.event.title}</h2>
-                        <p>{props.event.text}</p>
+                        <p style={{ maxWidth: "95%" }}>{props.event.text}</p>
                     </div>
                 </div>
                 <div className="controlContainer">

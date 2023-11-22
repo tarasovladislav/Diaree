@@ -126,6 +126,7 @@ const DiaryEntry = () => {
                             <input
                                 type="text"
                                 placeholder="Enter tags"
+                                name='tags'
                                 value={tagValue}
                                 onChange={handleTagChange}
                                 onKeyDown={handleTagKeyPress}
@@ -142,7 +143,7 @@ const DiaryEntry = () => {
                         <div className="Information-Item">
                             <label htmlFor="image"></label>
                             <input type="file" accept='image/*' disabled={isUploading} onChange={handleUploadImage} />
-                            <button type='submit' disabled={isUploading} >
+                            <button type='submit' id='addEntry' disabled={isUploading} >
                                 {isUploading ? 'Uploading...' : 'Save'}
                             </button>
                         </div>

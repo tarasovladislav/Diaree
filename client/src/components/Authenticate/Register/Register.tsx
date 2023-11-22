@@ -79,11 +79,12 @@ const Register: React.FC<{ isOnLogin: boolean, setIsOnLogin: (isOnLogin: boolean
                     <div className="Credentials">
                         <div className="Username">
                             <img src={User} />
-                            <input type="text" name='username' placeholder='Username' required={true} />
+                            <input id='registerUser' type="text" name='username' placeholder='Username' required={true} />
                         </div>
                         <div className="Password">
                             <img src={Lock} />
                             <input
+                                id='registerPass'
                                 type="password"
                                 name="password"
                                 placeholder="Password"
@@ -96,6 +97,7 @@ const Register: React.FC<{ isOnLogin: boolean, setIsOnLogin: (isOnLogin: boolean
                         <div className="Confirm-Password">
                             <img src={Lock} />
                             <input
+                                id='registerPass2'
                                 type="password"
                                 name="confirmPassword"
                                 placeholder="Confirm password"
