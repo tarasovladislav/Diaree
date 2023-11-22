@@ -7,9 +7,10 @@ import User from '../models/user.js';
 import { tokenToUserId } from '../utils/userUtils.js';
 
 
-(async () => {
-    await mongoose.connect("mongodb://127.0.0.1:27017/diary");
-})()
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/diary';
+
+
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -17,6 +18,17 @@ app.use(router);
 
 
 describe('/user/account endpoint', () => {
+
+    // Establish MongoDB connection before running the tests
+    beforeAll(async () => {
+        await mongoose.connect(MONGO_URI);
+    });
+
+    // Close the MongoDB connection after all tests are done
+    afterAll(async () => {
+        await mongoose.connection.close();
+    });
+
     const mockUser = { username: 'TEST', password: 'TEST' };
 
 
@@ -80,6 +92,6 @@ describe('/user/account endpoint', () => {
     });
 });
 
-afterAll(async () => {
-    await mongoose.connection.close();
-})
+// afterAll(async () => {
+//     await mongoose.connection.close();
+// })

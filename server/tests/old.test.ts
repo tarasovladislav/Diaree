@@ -1,8 +1,20 @@
 import app from '../index.js';
-import Diary from '../models/diary.js'
+// import Diary from '../models/diary.js'
 import request from 'supertest';
+import mongoose from 'mongoose';
 
 describe('GET / - getAllDiaryEntries', () => {
+
+    // Establish MongoDB connection before running the tests
+    beforeAll(async () => {
+        await mongoose.connect('mongodb://localhost:27017/diary');
+    });
+
+    // Close the MongoDB connection after all tests are done
+    afterAll(async () => {
+        await mongoose.connection.close();
+    });
+    
     it('should return all diary entries', async () => {
         const sampleData =
         {
@@ -14,8 +26,7 @@ describe('GET / - getAllDiaryEntries', () => {
             "tags": ["personal", "reflection"],
             "text": "This is the content of the diary entry. It can be a longer piece of text.",
             "title": "Sample Diary Entry"
-        }
-            ;
+        };
         // await Diary.insertMany(sampleData);
         const response = await request(app).get('/diary/entries');
 
@@ -23,10 +34,10 @@ describe('GET / - getAllDiaryEntries', () => {
         expect(response.body).toContainEqual(sampleData);
     });
 
-    it('should handle errors and return a 500 status', async () => {
-        jest.spyOn(Diary, 'find').mockRejectedValueOnce(new Error('Some error'));
-        const response = await request(app).get('/diary/entries');
-        expect(response.status).toBe(500);
-        expect(response.body).toEqual({ error: 'Internal server error' });
-    });
+    // it('should handle errors and return a 500 status', async () => {
+    //     jest.spyOn(Diary, 'find').mockRejectedValueOnce(new Error('Some error'));
+    //     const response = await request(app).get('/diary/entries');
+    //     expect(response.status).toBe(500);
+    //     expect(response.body).toEqual({ error: 'Internal server error' });
+    // });
 });

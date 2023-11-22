@@ -9,9 +9,7 @@ const tagSchema = new mongoose_1.default.Schema({
     title: {
         type: String,
         required: false,
-        unique: true,
+        // unique: true,
     },
 });
 exports.tagSchema = tagSchema;
-const Tag = mongoose_1.default.model("Tag", tagSchema);
-exports.default = Tag;
