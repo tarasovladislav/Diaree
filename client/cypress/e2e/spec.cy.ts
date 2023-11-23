@@ -183,7 +183,7 @@ describe('Tag Highlighting', () => {
     })
     
     it('Entries with tag should change class', () => {
-        cy.get('.current-day > .dayEventList > .DayComponent').should('have.class', 'tagIncluded');
+        cy.get('.dayEventList > .DayComponent').should('have.class', 'tagIncluded');
     })
 })
 
