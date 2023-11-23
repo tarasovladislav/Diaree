@@ -1,5 +1,3 @@
-
-
 .oneEntryContent {
     display: flex;
     flex-direction: column;
@@ -18,5 +16,6 @@
 }
 
 .description-container img {
-    max-width: 40%;
+    max-height: 300px;
+    margin: 10px 0
 }
